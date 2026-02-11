@@ -5,7 +5,7 @@ const footerLinks = {
   Platform: [
     { label: "R3Bin Suite", href: "#" },
     { label: "Analytics Dashboard", href: "#" },
-    { label: "ROI Calculator", href: "#" },
+
     { label: "Technology", href: "#" },
   ],
   Solutions: [
@@ -21,7 +21,8 @@ const footerLinks = {
     { label: "Case Studies", href: "#" },
   ],
   Company: [
-    { label: "About Fostride", href: "https://www.fostride.com/about" },
+
+    { label: "Our Team", href: "/our-team" },
     { label: "Careers", href: "#" },
     { label: "Contact", href: "#" },
     { label: "Press", href: "#" },

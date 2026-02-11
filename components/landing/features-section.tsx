@@ -1,8 +1,8 @@
-import { 
-  Brain, 
-  BarChart3, 
-  Wifi, 
-  FileText, 
+import {
+  Brain,
+  BarChart3,
+  Wifi,
+  FileText,
   CheckCircle,
   ArrowRight
 } from "lucide-react"
@@ -76,8 +76,8 @@ export function FeaturesSection() {
 
         <div className="grid md:grid-cols-2 gap-6">
           {features.map((feature) => (
-            <Card 
-              key={feature.title} 
+            <Card
+              key={feature.title}
               className="bg-card border-border hover:border-primary/50 transition-all group"
             >
               <CardHeader>

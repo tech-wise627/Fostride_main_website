@@ -18,29 +18,49 @@ export function ImpactStats() {
   const [carbonOffset, setCarbonOffset] = useState(0)
 
   useEffect(() => {
+    let mounted = true
+
     async function fetchStats() {
-      const { data, error } = await supabase.rpc('get_public_impact_stats', { time_filter: 'live' })
+      try {
+        const { data, error } = await supabase.rpc('get_public_impact_stats', { time_filter: 'live' })
 
-      if (!error && data) {
-        setDeploymentCount(data.active_bins || 127)
+        if (!mounted) return
 
-        // Calculate Total Waste (Items)
-        const totalItems = (data.plastic || 0) + (data.metal || 0) + (data.paper || 0) + (data.mixed || 0)
-        setWasteSorted(totalItems)
+        if (error) {
+          console.error("Error fetching impact stats:", error)
+          return
+        }
 
-        // Calculate Carbon Offset
-        // Estimating average item weights: Plastic 20g, Metal 15g, Paper 10g
-        // Factors: Plastic 2.5kg CO2/kg, Metal 10kg CO2/kg, Paper 1kg CO2/kg
+        if (data) {
+          setDeploymentCount(data.active_bins || 127) // Keep fallback if 0 to avoid empty look in demo
 
-        // Offset = (Count * Weight_kg * Factor)
-        const plasticOffset = (data.plastic || 0) * 0.02 * 2.5  // 0.05 per item
-        const metalOffset = (data.metal || 0) * 0.015 * 10  // 0.15 per item
-        const paperOffset = (data.paper || 0) * 0.01 * 1    // 0.01 per item
+          // Calculate Total Waste (Items)
+          const totalItems = (data.plastic || 0) + (data.metal || 0) + (data.paper || 0) + (data.mixed || 0)
+          setWasteSorted(totalItems)
 
-        setCarbonOffset(plasticOffset + metalOffset + paperOffset)
+          // Calculate Carbon Offset
+          const plasticOffset = (data.plastic || 0) * 0.05
+          const metalOffset = (data.metal || 0) * 0.15
+          const paperOffset = (data.paper || 0) * 0.01
+
+          const totalOffset = plasticOffset + metalOffset + paperOffset
+          setCarbonOffset(totalOffset)
+        }
+      } catch (err) {
+        console.error("Exception in impact stats:", err)
       }
     }
+
+    // Initial fetch
     fetchStats()
+
+    // Poll every 5 seconds for "realtime" updates
+    const interval = setInterval(fetchStats, 5000)
+
+    return () => {
+      mounted = false
+      clearInterval(interval)
+    }
   }, [])
 
   const stats = [

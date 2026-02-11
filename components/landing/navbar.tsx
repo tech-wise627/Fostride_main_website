@@ -11,10 +11,10 @@ const navItems = [
   { label: "Home", href: "/" },
   { label: "R3Bin Suite", href: "/products" },
   { label: "Live Analytics", href: "/dashboard" },
-  { label: "ROI Calculator", href: "/calculator" },
-  { label: "Partners", href: "/partners" },
   { label: "Support", href: "/support" },
-  { label: "About", href: "https://www.fostride.com/about" },
+  { label: "Our Team", href: "/our-team" },
+
+
 ]
 
 export function Navbar() {

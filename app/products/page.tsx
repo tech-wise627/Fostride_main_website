@@ -1,14 +1,18 @@
+"use client"
+
+import { useState } from "react"
 import { Navbar } from "@/components/landing/navbar"
 import { Footer } from "@/components/landing/footer"
-import { 
-  Brain, 
-  Wifi, 
-  BarChart3, 
-  FileText, 
-  Cpu, 
-  Camera, 
-  Gauge, 
-  Shield, 
+import { ScheduleDemoModal } from "@/components/landing/schedule-demo-modal"
+import {
+  Brain,
+  Wifi,
+  BarChart3,
+  FileText,
+  Cpu,
+  Camera,
+  Gauge,
+  Shield,
   Cloud,
   Zap,
   ArrowRight,
@@ -124,10 +128,12 @@ const techSpecs = [
 ]
 
 export default function ProductsPage() {
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false)
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      
+
       <main className="pt-20">
         {/* Hero Section */}
         <section className="py-20 px-4 lg:px-8">
@@ -139,12 +145,12 @@ export default function ProductsPage() {
               R3Bin Product Suite
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 text-pretty">
-              From AI-powered smart bins to real-time analytics and automated ESG reporting, 
-              our integrated ecosystem delivers complete waste intelligence for campuses, 
+              From AI-powered smart bins to real-time analytics and automated ESG reporting,
+              our integrated ecosystem delivers complete waste intelligence for campuses,
               corporates, and smart cities.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <Button size="lg" onClick={() => setIsDemoModalOpen(true)} className="bg-primary text-primary-foreground hover:bg-primary/90">
                 Schedule Demo
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -160,14 +166,14 @@ export default function ProductsPage() {
           <div className="mx-auto max-w-7xl">
             <div className="grid gap-8">
               {products.map((product, index) => (
-                <Card 
-                  key={product.id} 
+                <Card
+                  key={product.id}
                   className="bg-card border-border overflow-hidden"
                 >
                   <div className={`grid lg:grid-cols-2 gap-0 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
                     {/* Content */}
                     <div className={`p-8 lg:p-12 ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-                      <div 
+                      <div
                         className="inline-flex items-center justify-center w-14 h-14 rounded-xl mb-6"
                         style={{ backgroundColor: `${product.color}20` }}
                       >
@@ -195,9 +201,9 @@ export default function ProductsPage() {
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
                     </div>
-                    
+
                     {/* Specs Panel */}
-                    <div 
+                    <div
                       className={`bg-secondary/50 p-8 lg:p-12 ${index % 2 === 1 ? 'lg:order-1' : ''}`}
                     >
                       <h3 className="text-lg font-semibold text-foreground mb-6">
@@ -205,7 +211,7 @@ export default function ProductsPage() {
                       </h3>
                       <div className="space-y-4">
                         {Object.entries(product.specs).map(([key, value]) => (
-                          <div 
+                          <div
                             key={key}
                             className="flex justify-between items-center py-3 border-b border-border last:border-0"
                           >
@@ -238,7 +244,7 @@ export default function ProductsPage() {
                 Built for Enterprise Scale
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Every component is engineered for reliability, security, and performance 
+                Every component is engineered for reliability, security, and performance
                 at scale across distributed deployments.
               </p>
             </div>
@@ -261,16 +267,11 @@ export default function ProductsPage() {
               Ready to Transform Your Waste Management?
             </h2>
             <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join leading universities, corporations, and municipalities using R3Bin 
+              Join leading universities, corporations, and municipalities using R3Bin
               to achieve measurable sustainability goals.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/calculator">
-                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-                  Calculate Your ROI
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
+
               <Link href="/dashboard">
                 <Button size="lg" variant="outline" className="border-border text-foreground hover:bg-secondary bg-transparent">
                   View Live Dashboard
@@ -281,6 +282,10 @@ export default function ProductsPage() {
         </section>
       </main>
 
+      <ScheduleDemoModal
+        open={isDemoModalOpen}
+        onOpenChange={setIsDemoModalOpen}
+      />
       <Footer />
     </div>
   )

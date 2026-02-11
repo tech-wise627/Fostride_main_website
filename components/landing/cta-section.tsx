@@ -15,7 +15,7 @@ export function CTASection() {
           {/* Background decoration */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/5 rounded-full blur-2xl" />
-          
+
           <div className="relative text-center max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl text-balance">
               Transform Waste into Measurable Environmental Impact
@@ -25,17 +25,15 @@ export function CTASection() {
               verified waste reduction, automated ESG reporting, and data-driven
               sustainability results.
             </p>
-            
+
             <div className="flex flex-wrap justify-center gap-4 mt-8">
               <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
                 Explore Live Dashboard
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              <Button size="lg" variant="outline" className="border-border text-foreground hover:bg-secondary bg-transparent">
-                Calculate Your ROI
-              </Button>
+
             </div>
-            
+
             {/* Benefits grid */}
             <div className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-border">
               {benefits.map((benefit) => (
@@ -48,7 +46,7 @@ export function CTASection() {
                 </div>
               ))}
             </div>
-            
+
             {/* Trust badges */}
             <div className="flex flex-wrap justify-center items-center gap-6 mt-8 pt-8 border-t border-border">
               <span className="text-sm text-muted-foreground">Trusted for ESG Standards:</span>

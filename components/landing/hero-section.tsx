@@ -73,9 +73,7 @@ export function HeroSection() {
                 View Live Dashboard
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
-              <Button size="lg" variant="outline" className="border-border text-foreground hover:bg-secondary bg-transparent">
-                Calculate Your Impact
-              </Button>
+
             </div>
 
             {/* Stats */}

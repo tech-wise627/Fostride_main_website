@@ -170,9 +170,7 @@ export function DashboardPreview() {
                     Explore Full Dashboard
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
-                  <Button variant="outline" className="w-full border-border text-foreground hover:bg-secondary bg-transparent">
-                    Calculate Your ROI
-                  </Button>
+
                 </div>
               </div>
             </div>
