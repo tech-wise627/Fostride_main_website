@@ -63,7 +63,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${unbounded.variable} font-sans antialiased`}>
+      <body className={unbounded.className} style={{ fontFamily: 'var(--font-unbounded), sans-serif' }}>
         {children}
         <Analytics />
       </body>
