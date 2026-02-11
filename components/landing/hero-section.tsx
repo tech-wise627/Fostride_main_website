@@ -47,8 +47,6 @@ export function HeroSection() {
       {/* Removed radial gradients to prevent color changes */}
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
-      {/* Animated grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(52,211,153,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(52,211,153,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
 
       <div className="relative mx-auto max-w-7xl px-4 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -70,13 +68,8 @@ export function HeroSection() {
               sustainability results and ESG accountability.
             </p>
 
-            <div className="flex flex-wrap gap-4">
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 group">
-                View Live Dashboard
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-
-            </div>
+            {/* Spacer to maintain layout */}
+            <div className="h-16"></div>
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-6 pt-8 border-t border-border">
