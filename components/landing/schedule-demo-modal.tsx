@@ -73,6 +73,26 @@ export function ScheduleDemoModal({ open, onOpenChange }: ScheduleDemoModalProps
             }
 
             console.log("✅ Form submitted successfully:", data)
+
+            // Send email notification
+            console.log("📧 Sending email notification...")
+            try {
+                const emailResponse = await fetch('/api/send-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData),
+                })
+
+                if (emailResponse.ok) {
+                    console.log("✅ Email sent successfully")
+                } else {
+                    console.error("❌ Failed to send email:", await emailResponse.text())
+                }
+            } catch (emailError) {
+                console.error("❌ Error sending email:", emailError)
+                // Don't fail the submission if email fails, just log it
+            }
+
             setLoading(false)
             setSubmitted(true)
 
