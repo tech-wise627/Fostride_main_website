@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+
 import Image from "next/image"
 import { ArrowRight, Brain, Wifi, BarChart3, Leaf, Sparkles, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -36,7 +36,6 @@ const features = [
 ]
 
 export function HeroSection() {
-  const [activeFeature, setActiveFeature] = useState<number | null>(null)
 
   return (
     <section className="relative min-h-screen pt-24 pb-16 overflow-hidden">
@@ -117,7 +116,7 @@ export function HeroSection() {
               </div>
 
               {/* Product image */}
-              <div className="relative w-64 h-80 sm:w-72 sm:h-96 lg:w-80 lg:h-[28rem] transition-transform duration-500">
+              <div className="relative w-64 h-80 sm:w-72 sm:h-96 lg:w-80 lg:h-[28rem] transition-transform duration-500 group-hover:scale-105">
                 <Image
                   src="/images/r3bin-product.svg"
                   alt="R3Bin Smart Waste Management System"
@@ -137,23 +136,17 @@ export function HeroSection() {
                   )}
                 >
                   <div className={cn(
-                    "flex items-center gap-3 rounded-xl border bg-card/80 backdrop-blur-md p-3 shadow-lg transition-all duration-300",
-                    activeFeature === index
-                      ? "border-primary bg-card shadow-primary/20"
-                      : "border-border hover:border-primary/50"
+                    "flex items-center gap-3 rounded-xl border bg-card/80 backdrop-blur-md p-3 shadow-lg transition-all duration-300 border-border"
                   )}>
                     <div className={cn(
-                      "h-10 w-10 rounded-lg flex items-center justify-center transition-colors",
-                      activeFeature === index ? "bg-primary" : "bg-primary/20"
+                      "h-10 w-10 rounded-lg flex items-center justify-center transition-colors bg-primary/20"
                     )}>
                       <feature.icon className={cn(
-                        "h-5 w-5 transition-colors",
-                        activeFeature === index ? "text-primary-foreground" : "text-primary"
+                        "h-5 w-5 transition-colors text-primary"
                       )} />
                     </div>
                     <div className={cn(
-                      "overflow-hidden transition-all duration-300",
-                      activeFeature === index ? "w-auto opacity-100" : "w-0 opacity-0 lg:w-auto lg:opacity-100"
+                      "overflow-hidden transition-all duration-300 w-auto opacity-100"
                     )}>
                       <div className="text-sm font-semibold text-foreground whitespace-nowrap">{feature.label}</div>
                       <div className="text-xs text-muted-foreground whitespace-nowrap">{feature.description}</div>
