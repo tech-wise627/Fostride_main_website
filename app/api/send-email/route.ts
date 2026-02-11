@@ -15,24 +15,35 @@ export async function POST(req: Request) {
 
     // Check environment variables
     const gmailUser = process.env.GMAIL_USER;
-    const gmailPass = process.env.GMAIL_PASS; // This must be an App Password
+    const gmailPass = process.env.GMAIL_PASS;
     const recipientEmail = process.env.RECIPIENT_EMAIL;
 
     if (!gmailUser || !gmailPass || !recipientEmail) {
-      console.error('Missing email configuration env vars');
+      const missing = [];
+      if (!gmailUser) missing.push('GMAIL_USER');
+      if (!gmailPass) missing.push('GMAIL_PASS');
+      if (!recipientEmail) missing.push('RECIPIENT_EMAIL');
+      
+      console.error(`Missing email configuration env vars: ${missing.join(', ')}`);
       return NextResponse.json(
-        { error: 'Server email configuration error' }, 
+        { error: `Server configuration error. Missing: ${missing.join(', ')}` }, 
         { status: 500 }
       );
     }
 
-    // Create a transporter using Gmail
+    // Create a transporter using Gmail with explicit settings for better compatibility
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      requireTLS: true,
       auth: {
         user: gmailUser,
-        pass: gmailPass,
+        pass: gmailPass.replace(/\s/g, ''), // Remove spaces if present
       },
+      tls: {
+          ciphers: 'SSLv3'
+      }
     });
 
     // Email content
