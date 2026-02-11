@@ -117,7 +117,7 @@ export function HeroSection() {
               </div>
 
               {/* Product image */}
-              <div className="relative w-64 h-80 sm:w-72 sm:h-96 lg:w-80 lg:h-[28rem] transition-transform duration-500 group-hover:scale-105">
+              <div className="relative w-64 h-80 sm:w-72 sm:h-96 lg:w-80 lg:h-[28rem] transition-transform duration-500">
                 <Image
                   src="/images/r3bin-product.svg"
                   alt="R3Bin Smart Waste Management System"
@@ -132,12 +132,9 @@ export function HeroSection() {
                 <div
                   key={feature.label}
                   className={cn(
-                    "absolute z-20 cursor-pointer transition-all duration-300",
-                    feature.position,
-                    activeFeature === index ? "scale-110" : "hover:scale-105"
+                    "absolute z-20 cursor-default transition-all duration-300",
+                    feature.position
                   )}
-                  onMouseEnter={() => setActiveFeature(index)}
-                  onMouseLeave={() => setActiveFeature(null)}
                 >
                   <div className={cn(
                     "flex items-center gap-3 rounded-xl border bg-card/80 backdrop-blur-md p-3 shadow-lg transition-all duration-300",
