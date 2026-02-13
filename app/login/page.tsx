@@ -47,11 +47,14 @@ export default function LoginPage() {
 
     const handleGoogleLogin = async () => {
         try {
+            // Store the current origin before OAuth redirect
+            if (typeof window !== 'undefined') {
+                sessionStorage.setItem('auth_origin', window.location.origin)
+            }
+
             const { error } = await supabase.auth.signInWithOAuth({
                 provider: 'google',
-                options: {
-                    redirectTo: `${window.location.origin}/dashboard`,
-                },
+                // Let Supabase use its configured Site URL
             })
             if (error) throw error
         } catch (err: any) {

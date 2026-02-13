@@ -7,14 +7,18 @@ import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { supabase } from "@/lib/supabase"
 
-const navItems = [
+// Navigation items for unauthenticated users (landing pages)
+const publicNavItems = [
   { label: "Home", href: "/" },
   { label: "R3Bin Suite", href: "/products" },
   { label: "Live Analytics", href: "/dashboard" },
   { label: "Support", href: "/support" },
   { label: "Our Team", href: "/our-team" },
+]
 
-
+// Navigation items for authenticated users (dashboard only)
+const authenticatedNavItems = [
+  { label: "Dashboard", href: "/dashboard" },
 ]
 
 export function Navbar() {
@@ -34,6 +38,9 @@ export function Navbar() {
 
     return () => subscription.unsubscribe()
   }, [])
+
+  // Choose which navigation items to display based on auth status
+  const navItems = session ? authenticatedNavItems : publicNavItems
 
   const handleSignOut = async () => {
     await supabase.auth.signOut()
@@ -67,14 +74,9 @@ export function Navbar() {
 
         <div className="hidden lg:flex lg:items-center lg:gap-4">
           {session ? (
-            <>
-              <Link href="/dashboard">
-                <Button variant="ghost">Dashboard</Button>
-              </Link>
-              <Button onClick={handleSignOut} variant="outline">
-                Sign out
-              </Button>
-            </>
+            <Button onClick={handleSignOut} variant="outline">
+              Sign out
+            </Button>
           ) : (
             <Link href="/login">
               <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
@@ -113,14 +115,9 @@ export function Navbar() {
             ))}
             <div className="pt-4 border-t border-border">
               {session ? (
-                <div className="space-y-3">
-                  <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                    <Button className="w-full" variant="ghost">Dashboard</Button>
-                  </Link>
-                  <Button onClick={handleSignOut} className="w-full" variant="outline">
-                    Sign out
-                  </Button>
-                </div>
+                <Button onClick={handleSignOut} className="w-full" variant="outline">
+                  Sign out
+                </Button>
               ) : (
                 <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
                   <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
