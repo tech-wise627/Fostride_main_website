@@ -23,26 +23,31 @@ export function Footer() {
 
           {/* Contact Cards - Horizontal Grid (Now Second) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-[#262626] rounded-3xl p-6 flex items-center justify-center gap-4 hover:bg-[#2d2d2d] transition-colors">
+            <Link href="mailto:fostride@gmail.com" className="bg-[#262626] rounded-3xl p-6 flex items-center justify-center gap-4 hover:bg-[#2d2d2d] transition-colors group">
               <div className="h-10 w-10 flex items-center justify-center">
-                <Mail className="text-[#0C8346]" size={24} />
+                <Mail className="text-[#0C8346] group-hover:scale-110 transition-transform" size={24} />
               </div>
-              <Link href="mailto:fostride@gmail.com" className="text-lg text-gray-200">fostride@gmail.com</Link>
-            </div>
+              <span className="text-lg text-gray-200 group-hover:text-white transition-colors">fostride@gmail.com</span>
+            </Link>
 
-            <div className="bg-[#262626] rounded-3xl p-6 flex items-center justify-center gap-4 hover:bg-[#2d2d2d] transition-colors">
+            <Link href="tel:+919818801050" className="bg-[#262626] rounded-3xl p-6 flex items-center justify-center gap-4 hover:bg-[#2d2d2d] transition-colors group">
               <div className="h-10 w-10 flex items-center justify-center">
-                <Phone className="text-[#0C8346]" size={24} />
+                <Phone className="text-[#0C8346] group-hover:scale-110 transition-transform" size={24} />
               </div>
-              <span className="text-lg text-gray-200">+91 9818801050</span>
-            </div>
+              <span className="text-lg text-gray-200 group-hover:text-white transition-colors">+91 9818801050</span>
+            </Link>
 
-            <div className="bg-[#262626] rounded-3xl p-6 flex items-center justify-center gap-4 hover:bg-[#2d2d2d] transition-colors">
+            <Link
+              href="https://maps.google.com/?q=Riidl+520,+Bhaskaracharya+building,+Somaiya+Vidyavihar+Campus,+Vidyavihar,+Mumbai+400077"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#262626] rounded-3xl p-6 flex items-center justify-center gap-4 hover:bg-[#2d2d2d] transition-colors group"
+            >
               <div className="h-10 w-10 flex items-center justify-center">
-                <MapPin className="text-[#0C8346]" size={24} />
+                <MapPin className="text-[#0C8346] group-hover:scale-110 transition-transform" size={24} />
               </div>
-              <span className="text-lg text-gray-200">Mumbai</span>
-            </div>
+              <span className="text-lg text-gray-200 group-hover:text-white transition-colors">Mumbai</span>
+            </Link>
           </div>
 
         </div>
