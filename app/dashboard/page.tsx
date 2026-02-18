@@ -53,7 +53,9 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { AnimatedNumber } from "@/components/ui/animated-number"
-import { supabase } from "@/lib/supabase"
+import { createClient } from "@/utils/supabase/client"
+import { ClaimBinDialog } from "@/components/dashboard/claim-bin-dialog"
+import { useRouter } from "next/navigation"
 import { formatDistanceToNow, format } from "date-fns"
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
@@ -158,6 +160,50 @@ export default function DashboardPage() {
   const [scatterData, setScatterData] = useState<any[]>([])
   const [binStatusData, setBinStatusData] = useState<UIBinStatus[]>([])
   const [alerts, setAlerts] = useState<UIAlert[]>([])
+
+  // Auth & Bins
+  const [user, setUser] = useState<any>(null)
+  const [userBins, setUserBins] = useState<any[]>([])
+  const [claimDialogOpen, setClaimDialogOpen] = useState(false)
+  const supabase = createClient()
+  const router = useRouter()
+
+  useEffect(() => {
+    checkUser()
+  }, [])
+
+  const checkUser = async () => {
+    const { data: { user }, error } = await supabase.auth.getUser()
+    if (error || !user) {
+      router.push('/login')
+      return
+    }
+    setUser(user)
+
+    // 1. Check Metadata for Bin ID (Primary method from Signup)
+    const metaBinId = user.user_metadata?.bin_id
+    if (metaBinId) {
+      setUserBins([{ bin_id: metaBinId }])
+      return
+    }
+
+    // 2. Fallback: Fetch from user_bins table (if used)
+    const { data: bins, error: binsError } = await supabase
+      .from('user_bins')
+      .select('bin_id')
+      .eq('user_id', user.id)
+
+    if (binsError) {
+      console.error('Error fetching user bins:', binsError)
+    }
+
+    if (bins && bins.length > 0) {
+      setUserBins(bins)
+    } else {
+      // No bins linked, prompt to claim
+      setClaimDialogOpen(true)
+    }
+  }
 
   useEffect(() => {
     console.log('DEBUG: scatterData', scatterData)
@@ -410,8 +456,10 @@ export default function DashboardPage() {
   }
 
   useEffect(() => {
-    fetchData()
-  }, [timeRange, dateRange])
+    if (user && (userBins.length > 0 || claimDialogOpen)) {
+      fetchData()
+    }
+  }, [timeRange, dateRange, userBins, user])
 
   const fetchData = async () => {
     console.log('DEBUG: Starting fetchData...')
@@ -420,10 +468,26 @@ export default function DashboardPage() {
     let activeCount = 0
     try {
       // 1. Collection Trends (Calculated from Logs)
-      const { data: rawLogs, error: logsError } = await supabase
+      // Filter by user bins if any
+      let query = supabase
         .from('r3bin_waste_logs')
-        .select('updated_at, waste_type')
+        .select('updated_at, waste_type, bin_id')
         .order('updated_at', { ascending: true })
+
+      if (userBins.length > 0) {
+        const binIds = userBins.map(b => b.bin_id)
+        // Manual filter since .in() might be tricky with empty array, but we check length > 0
+        query = query.in('bin_id', binIds)
+      } else {
+        // If no bins, return empty or handle gracefully
+        // For now, let's allow fetching empty if strictly controlled, 
+        // but to secure it, we should not fetch anything if no bins.
+        // However, for "Demo" purposes if user has no bins, maybe show empty?
+        setLoading(false)
+        return
+      }
+
+      const { data: rawLogs, error: logsError } = await query
 
       if (logsError) console.error('Error fetching logs:', logsError)
       else if (rawLogs) {
@@ -1630,6 +1694,11 @@ export default function DashboardPage() {
 
         </div>
       </div>
+      <ClaimBinDialog
+        open={claimDialogOpen}
+        onOpenChange={setClaimDialogOpen}
+        onBinClaimed={() => checkUser()}
+      />
     </div >
   )
 }
