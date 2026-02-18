@@ -1,89 +1,62 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { supabase } from "@/lib/supabase"
+import { cn } from "@/lib/utils"
 
-// Navigation items for unauthenticated users (landing pages)
-const publicNavItems = [
+// Navigation items
+const navItems = [
   { label: "Home", href: "/" },
-  { label: "R3Bin Suite", href: "/products" },
+  { label: "R3Bin", href: "/r3bin" },
   { label: "Live Analytics", href: "/dashboard" },
-  { label: "Support", href: "/support" },
+  { label: "Contact Us", href: "/contact" },
   { label: "Our Team", href: "/our-team" },
-]
-
-// Navigation items for authenticated users (dashboard only)
-const authenticatedNavItems = [
-  { label: "Dashboard", href: "/dashboard" },
 ]
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [session, setSession] = useState<any>(null)
-
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-    })
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-
-    return () => subscription.unsubscribe()
-  }, [])
-
-  // Choose which navigation items to display based on auth status
-  const navItems = session ? authenticatedNavItems : publicNavItems
-
-  const handleSignOut = async () => {
-    await supabase.auth.signOut()
-    setMobileMenuOpen(false)
-  }
+  const pathname = usePathname()
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-8">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/5 backdrop-blur-[10px] border-b border-white/10 h-[70px] flex items-center">
+      <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 lg:px-8">
         <Link href="/" className="flex items-center">
           <Image
-            src="/images/fostride-logo-new.svg"
+            src="/images/fostride-logo.png"
             alt="Fostride"
-            width={140}
-            height={36}
-            className="h-9 w-auto"
+            width={70}
+            height={70}
+            className="h-[70px] w-auto"
           />
         </Link>
 
-        <div className="hidden lg:flex lg:items-center lg:gap-8">
-          {navItems.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-            >
-              {item.label}
-            </Link>
-          ))}
+        {/* Desktop Navigation - Floating Pill Style */}
+        <div className="hidden lg:flex lg:items-center lg:gap-1 bg-[#0a0a0a] border border-white/10 rounded-full p-1.5 shadow-sm">
+          {navItems.map((item) => {
+            const isActive = pathname === item.href || pathname?.startsWith(item.href + "/")
+
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={cn(
+                  "text-sm font-medium transition-all duration-200 px-4 py-2 rounded-full",
+                  isActive
+                    ? "bg-white/10 text-primary shadow-sm ring-1 ring-white/5"
+                    : "text-white hover:text-white/80 hover:bg-white/10"
+                )}
+              >
+                {item.label}
+              </Link>
+            )
+          })}
         </div>
 
-        <div className="hidden lg:flex lg:items-center lg:gap-4">
-          {session ? (
-            <Button onClick={handleSignOut} variant="outline">
-              Sign out
-            </Button>
-          ) : (
-            <Link href="/login">
-              <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-                Sign in
-              </Button>
-            </Link>
-          )}
+        <div className="hidden lg:block w-[140px]">
+          {/* Empty spacer to balance the logo and keep nav centered */}
         </div>
 
         <button
@@ -103,29 +76,22 @@ export function Navbar() {
       {mobileMenuOpen && (
         <div className="lg:hidden bg-background border-b border-border">
           <div className="px-4 py-4 space-y-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="block text-sm font-medium text-muted-foreground hover:text-primary"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <div className="pt-4 border-t border-border">
-              {session ? (
-                <Button onClick={handleSignOut} className="w-full" variant="outline">
-                  Sign out
-                </Button>
-              ) : (
-                <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
-                  <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
-                    Sign in
-                  </Button>
+            {navItems.map((item) => {
+              const isActive = pathname === item.href || pathname?.startsWith(item.href + "/")
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={cn(
+                    "block text-sm font-medium transition-colors",
+                    isActive ? "text-primary" : "text-muted-foreground hover:text-primary"
+                  )}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.label}
                 </Link>
-              )}
-            </div>
+              )
+            })}
           </div>
         </div>
       )}

@@ -327,6 +327,108 @@ export default function OurTeam() {
 
                     </div>
 
+
+                    {/* Team Squad Section */}
+                    <div className="py-20 mb-20">
+                        {/* Header */}
+                        <div className="text-center mb-20 space-y-6">
+                            <div className="inline-block px-4 py-1.5 bg-[#111111] rounded-full border border-white/10">
+                                <span className="text-[#0C8346] text-[10px] font-bold tracking-widest uppercase">Team Members</span>
+                            </div>
+                            <h2 className="text-5xl md:text-7xl font-medium text-white tracking-tight leading-tight">
+                                Say Hello to Our<br />Squad
+                            </h2>
+                            <p className="text-gray-400 max-w-2xl mx-auto text-sm font-light leading-relaxed">
+                                Get ready to meet the faces behind the magic, the dreamers, the doers, and the unstoppable force driving our success.
+                            </p>
+                        </div>
+
+                        {/* Team Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {teamMembers.map((member, idx) => (
+                                <div
+                                    key={idx}
+                                    className="relative group h-[574px] w-full bg-white/5 backdrop-blur-[8px] rounded-[30px] overflow-hidden border border-white/5"
+                                >
+                                    {/* Text Background Layer */}
+                                    <div className={`absolute top-10 w-full z-10 leading-none select-none px-6 transition-transform duration-700 ease-out group-hover:-translate-y-6 ${member.align === 'split' ? '' :
+                                        member.align === 'right' ? 'text-right' :
+                                            member.align === 'left' ? 'text-left' : 'text-center'
+                                        }`}>
+                                        <h3 className={`font-bold text-[#0C8346] tracking-tighter mix-blend-screen ${member.align === 'split' ? 'text-left text-[50px] -ml-6' : 'scale-110 text-[60px]'}`}>
+                                            {member.bgText}
+                                        </h3>
+                                        <div
+                                            className={`text-white uppercase relative z-20 ${member.align === 'split' ? 'text-right mt-0 pr-0 -mr-6 font-light tracking-[-0.02em]' : '-mt-8 text-[13px] font-bold tracking-[0.2em]'}`}
+                                            style={member.align === 'split' ? { fontSize: '20px' } : undefined}
+                                        >
+                                            {member.smallText}
+                                        </div>
+                                    </div>
+
+                                    {/* Green Background Shape (Active State) */}
+                                    <div
+                                        className={`absolute bottom-0 left-0 right-0 h-[80%] bg-[#0C8346] rounded-t-[100%] z-15 transition-transform duration-700 ease-out ${activeMemberIndex === idx ? 'translate-y-0 scale-100' : 'translate-y-full scale-0'}`}
+                                        style={{ transformOrigin: 'bottom' }}
+                                    />
+
+                                    {/* Image Layer */}
+                                    <div className="absolute inset-0 z-20">
+                                        <Image
+                                            src={member.image}
+                                            alt={member.name}
+                                            fill
+                                            className={`object-cover object-bottom transition-all duration-700 ease-out 
+                                                ${activeMemberIndex === idx ? 'grayscale-0 translate-y-6' : 'grayscale contrast-125 group-hover:translate-y-14'}
+                                            `}
+                                        />
+                                    </div>
+
+                                    {/* Plus Button / Social Actions */}
+                                    <div className="absolute bottom-[76px] left-1/2 -translate-x-1/2 z-40 w-full flex justify-center">
+                                        {activeMemberIndex === idx ? (
+                                            <div className="flex items-center gap-3 animate-in fade-in zoom-in duration-300">
+                                                <button
+                                                    onClick={() => setActiveMemberIndex(null)}
+                                                    className="h-10 w-10 bg-[#e0e0e0] rounded-[14px] flex items-center justify-center hover:scale-110 transition-transform shadow-lg cursor-pointer text-black"
+                                                >
+                                                    <X size={20} />
+                                                </button>
+                                                <a
+                                                    href={member.linkedin}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="h-10 w-10 bg-[#e0e0e0] rounded-[14px] flex items-center justify-center hover:scale-110 transition-transform shadow-lg cursor-pointer text-black"
+                                                >
+                                                    <Linkedin size={20} />
+                                                </a>
+                                                <a
+                                                    href={member.mail}
+                                                    className="h-10 w-10 bg-[#e0e0e0] rounded-[14px] flex items-center justify-center hover:scale-110 transition-transform shadow-lg cursor-pointer text-black"
+                                                >
+                                                    <Mail size={20} />
+                                                </a>
+                                            </div>
+                                        ) : (
+                                            <button
+                                                onClick={() => setActiveMemberIndex(idx)}
+                                                className="h-10 w-10 bg-[#e0e0e0] rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-lg cursor-pointer"
+                                            >
+                                                <Plus className="text-black w-5 h-5" />
+                                            </button>
+                                        )}
+                                    </div>
+
+                                    {/* Name Card */}
+                                    <div className="absolute bottom-0 left-0 right-0 h-[96px] bg-[#111111] rounded-b-[30px] rounded-t-[20px] z-30 flex flex-col items-center justify-center border-t border-white/5">
+                                        <h4 className="text-white text-lg font-bold">{member.name}</h4>
+                                        <p className="text-gray-400 text-xs font-light tracking-wide">{member.role}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
                     {/* Values Section */}
                     <div className="relative w-full py-40 mb-32 flex items-center justify-center overflow-hidden">
                         <h2 className="text-[16.5vw] font-bold text-white tracking-widest leading-none select-none text-center">
@@ -465,106 +567,7 @@ export default function OurTeam() {
                         </div>
                     </div>
 
-                    {/* Team Squad Section */}
-                    <div className="py-20 mb-20">
-                        {/* Header */}
-                        <div className="text-center mb-20 space-y-6">
-                            <div className="inline-block px-4 py-1.5 bg-[#111111] rounded-full border border-white/10">
-                                <span className="text-[#0C8346] text-[10px] font-bold tracking-widest uppercase">Team Members</span>
-                            </div>
-                            <h2 className="text-5xl md:text-7xl font-medium text-white tracking-tight leading-tight">
-                                Say Hello to Our<br />Squad
-                            </h2>
-                            <p className="text-gray-400 max-w-2xl mx-auto text-sm font-light leading-relaxed">
-                                Get ready to meet the faces behind the magic, the dreamers, the doers, and the unstoppable force driving our success.
-                            </p>
-                        </div>
 
-                        {/* Team Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {teamMembers.map((member, idx) => (
-                                <div
-                                    key={idx}
-                                    className="relative group h-[574px] w-full bg-white/5 backdrop-blur-[8px] rounded-[30px] overflow-hidden border border-white/5"
-                                >
-                                    {/* Text Background Layer */}
-                                    <div className={`absolute top-10 w-full z-10 leading-none select-none px-6 transition-transform duration-700 ease-out group-hover:-translate-y-6 ${member.align === 'split' ? '' :
-                                        member.align === 'right' ? 'text-right' :
-                                            member.align === 'left' ? 'text-left' : 'text-center'
-                                        }`}>
-                                        <h3 className={`font-bold text-[#0C8346] tracking-tighter mix-blend-screen ${member.align === 'split' ? 'text-left text-[50px] -ml-6' : 'scale-110 text-[60px]'}`}>
-                                            {member.bgText}
-                                        </h3>
-                                        <div
-                                            className={`text-white uppercase relative z-20 ${member.align === 'split' ? 'text-right mt-0 pr-0 -mr-6 font-light tracking-[-0.02em]' : '-mt-8 text-[13px] font-bold tracking-[0.2em]'}`}
-                                            style={member.align === 'split' ? { fontSize: '20px' } : undefined}
-                                        >
-                                            {member.smallText}
-                                        </div>
-                                    </div>
-
-                                    {/* Green Background Shape (Active State) */}
-                                    <div
-                                        className={`absolute bottom-0 left-0 right-0 h-[80%] bg-[#0C8346] rounded-t-[100%] z-15 transition-transform duration-700 ease-out ${activeMemberIndex === idx ? 'translate-y-0 scale-100' : 'translate-y-full scale-0'}`}
-                                        style={{ transformOrigin: 'bottom' }}
-                                    />
-
-                                    {/* Image Layer */}
-                                    <div className="absolute inset-0 z-20">
-                                        <Image
-                                            src={member.image}
-                                            alt={member.name}
-                                            fill
-                                            className={`object-cover object-bottom transition-all duration-700 ease-out 
-                                                ${activeMemberIndex === idx ? 'grayscale-0 translate-y-6' : 'grayscale contrast-125 group-hover:translate-y-14'}
-                                            `}
-                                        />
-                                    </div>
-
-                                    {/* Plus Button / Social Actions */}
-                                    <div className="absolute bottom-[76px] left-1/2 -translate-x-1/2 z-40 w-full flex justify-center">
-                                        {activeMemberIndex === idx ? (
-                                            <div className="flex items-center gap-3 animate-in fade-in zoom-in duration-300">
-                                                <button
-                                                    onClick={() => setActiveMemberIndex(null)}
-                                                    className="h-10 w-10 bg-[#e0e0e0] rounded-[14px] flex items-center justify-center hover:scale-110 transition-transform shadow-lg cursor-pointer text-black"
-                                                >
-                                                    <X size={20} />
-                                                </button>
-                                                <a
-                                                    href={member.linkedin}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="h-10 w-10 bg-[#e0e0e0] rounded-[14px] flex items-center justify-center hover:scale-110 transition-transform shadow-lg cursor-pointer text-black"
-                                                >
-                                                    <Linkedin size={20} />
-                                                </a>
-                                                <a
-                                                    href={member.mail}
-                                                    className="h-10 w-10 bg-[#e0e0e0] rounded-[14px] flex items-center justify-center hover:scale-110 transition-transform shadow-lg cursor-pointer text-black"
-                                                >
-                                                    <Mail size={20} />
-                                                </a>
-                                            </div>
-                                        ) : (
-                                            <button
-                                                onClick={() => setActiveMemberIndex(idx)}
-                                                className="h-10 w-10 bg-[#e0e0e0] rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-lg cursor-pointer"
-                                            >
-                                                <Plus className="text-black w-5 h-5" />
-                                            </button>
-                                        )}
-                                    </div>
-
-                                    {/* Name Card */}
-                                    <div className="absolute bottom-0 left-0 right-0 h-[96px] bg-[#111111] rounded-b-[30px] rounded-t-[20px] z-30 flex flex-col items-center justify-center border-t border-white/5">
-                                        <h4 className="text-white text-lg font-bold">{member.name}</h4>
-                                        <p className="text-gray-400 text-xs font-light tracking-wide">{member.role}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
 
                     {/* FAQ Section */}
                     <div className="py-20 mb-20">

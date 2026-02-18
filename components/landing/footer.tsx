@@ -1,92 +1,66 @@
+"use client"
+
 import Link from "next/link"
-import Image from "next/image"
-
-const footerLinks = {
-  Platform: [
-    { label: "R3Bin Suite", href: "#" },
-    { label: "Analytics Dashboard", href: "#" },
-
-    { label: "Technology", href: "#" },
-  ],
-  Solutions: [
-    { label: "Universities", href: "#" },
-    { label: "Corporate Campuses", href: "#" },
-    { label: "Smart Cities", href: "#" },
-    { label: "Municipalities", href: "#" },
-  ],
-  Resources: [
-    { label: "Documentation", href: "#" },
-    { label: "Support Center", href: "#" },
-    { label: "API Reference", href: "#" },
-    { label: "Case Studies", href: "#" },
-  ],
-  Company: [
-
-    { label: "Our Team", href: "/our-team" },
-    { label: "Careers", href: "#" },
-    { label: "Contact", href: "#" },
-    { label: "Press", href: "#" },
-  ],
-}
+import { Mail, Phone, MapPin, Linkedin, Instagram } from "lucide-react"
 
 export function Footer() {
   return (
-    <footer className="bg-card border-t border-border">
-      <div className="mx-auto max-w-7xl px-4 lg:px-8 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
-          {/* Brand column */}
-          <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center mb-4">
-              <Image
-                src="/images/fostride-logo-new.svg"
-                alt="Fostride"
-                width={120}
-                height={32}
-                className="h-8 w-auto"
-              />
-            </Link>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              AI-powered waste intelligence platform combining
-              smart bins with real-time analytics for
-              measurable sustainability impact.
-            </p>
+    <footer className="py-12 w-full text-white relative z-10 transition-all duration-300">
+      <div className="w-full px-10 space-y-8">
+        {/* Top Section */}
+        <div className="bg-[#1A1A1A] rounded-[48px] p-8 md:p-12 border border-white/5 flex flex-col gap-12">
+
+          {/* Menu Options - Horizontal List (Now First) */}
+          <div className="flex flex-col items-center justify-center gap-8 border-b border-white/10 pb-10 w-full">
+            <ul className="flex flex-wrap justify-center gap-8 text-gray-400 text-lg font-medium">
+              <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
+              <li><Link href="/r3bin" className="hover:text-white transition-colors">R3Bin</Link></li>
+              <li><Link href="/dashboard" className="hover:text-white transition-colors">Live Analytics</Link></li>
+              <li><Link href="/our-team" className="hover:text-white transition-colors">Our Team</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
+            </ul>
           </div>
 
-          {/* Link columns */}
-          {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
-              <h4 className="text-sm font-semibold text-foreground mb-4">{category}</h4>
-              <ul className="space-y-3">
-                {links.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+          {/* Contact Cards - Horizontal Grid (Now Second) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-[#262626] rounded-3xl p-6 flex items-center justify-center gap-4 hover:bg-[#2d2d2d] transition-colors">
+              <div className="h-10 w-10 flex items-center justify-center">
+                <Mail className="text-[#0C8346]" size={24} />
+              </div>
+              <Link href="mailto:fostride@gmail.com" className="text-lg text-gray-200">fostride@gmail.com</Link>
             </div>
-          ))}
+
+            <div className="bg-[#262626] rounded-3xl p-6 flex items-center justify-center gap-4 hover:bg-[#2d2d2d] transition-colors">
+              <div className="h-10 w-10 flex items-center justify-center">
+                <Phone className="text-[#0C8346]" size={24} />
+              </div>
+              <span className="text-lg text-gray-200">+91 9818801050</span>
+            </div>
+
+            <div className="bg-[#262626] rounded-3xl p-6 flex items-center justify-center gap-4 hover:bg-[#2d2d2d] transition-colors">
+              <div className="h-10 w-10 flex items-center justify-center">
+                <MapPin className="text-[#0C8346]" size={24} />
+              </div>
+              <span className="text-lg text-gray-200">Mumbai</span>
+            </div>
+          </div>
+
         </div>
 
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 mt-8 border-t border-border">
-          <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} Fostride Inc. All rights reserved.
-          </p>
-          <div className="flex items-center gap-6">
-            <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Privacy Policy
+        {/* Bottom Section */}
+        <div className="bg-[#1A1A1A] rounded-[48px] p-8 border border-white/5 flex flex-col items-center justify-center space-y-6 text-center">
+          <h4 className="text-[#0C8346] font-bold text-lg">Follow us:</h4>
+          <div className="flex gap-4">
+            <Link href="https://www.linkedin.com/company/fostride/" target="_blank" rel="noopener noreferrer" className="bg-[#262626] p-3 rounded-xl hover:bg-[#0C8346] hover:text-white transition-all text-gray-400">
+              <Linkedin size={24} />
             </Link>
-            <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Terms of Service
-            </Link>
-            <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Cookie Policy
+            <Link href="https://www.instagram.com/fostride/" target="_blank" rel="noopener noreferrer" className="bg-[#262626] p-3 rounded-xl hover:bg-[#0C8346] hover:text-white transition-all text-gray-400">
+              <Instagram size={24} />
             </Link>
           </div>
+          <p className="text-sm font-semibold text-gray-400">
+            &copy; Copyright 2026 <span className="text-[#0C8346]">Fostride</span>. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

@@ -1,12 +1,17 @@
 import React from "react"
 import type { Metadata } from 'next'
-import { Unbounded } from 'next/font/google'
+import { Unbounded, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 const unbounded = Unbounded({
   subsets: ["latin"],
   variable: '--font-unbounded',
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: '--font-inter',
 });
 
 export const metadata: Metadata = {
@@ -29,7 +34,7 @@ export const metadata: Metadata = {
     siteName: 'Fostride R3Bin',
     images: [
       {
-        url: '/images/og-image.jpg', // Make sure to add this image later or use a generic one
+        url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Fostride R3Bin Dashboard',
@@ -63,7 +68,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={unbounded.className} style={{ fontFamily: 'var(--font-unbounded), sans-serif' }}>
+      <body className={`${inter.className} ${unbounded.variable}`} style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
         {children}
         <Analytics />
       </body>
