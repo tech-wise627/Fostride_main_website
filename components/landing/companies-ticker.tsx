@@ -15,6 +15,12 @@ const logos = [
         colorSrc: "/images/companies/riidl-hover.png",
         greySrc: "/images/companies/riidl-greyscale.png",
         width: "w-32"
+    },
+    {
+        name: "Somaiya Vidyavihar University",
+        colorSrc: "/images/companies/somaiya.png",
+        greySrc: "/images/companies/somaiya.png",
+        width: "w-40"
     }
 ]
 
@@ -22,9 +28,9 @@ export function CompaniesTicker() {
     return (
         <section className="w-full bg-[#0a0a0a] border-t border-white/5 pt-12 pb-0 overflow-hidden relative z-20">
             <div className="container mx-auto px-4 mb-8 text-center">
-                <p className="text-sm text-neutral-500 uppercase tracking-[0.2em] font-medium">
-                    Trusted by Industry Leaders
-                </p>
+                <h2 className="text-3xl md:text-5xl font-bold font-[family-name:var(--font-unbounded)] text-white text-center mb-4">
+                    Companies We Have <span className="text-[#0C8346]">Worked</span> With
+                </h2>
             </div>
 
             {/* Glass Strip Wrapper */}

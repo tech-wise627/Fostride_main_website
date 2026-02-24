@@ -43,9 +43,10 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser()
 
   // Protect dashboard routes
-  if (request.nextUrl.pathname.startsWith('/dashboard') && !user) {
-    return NextResponse.redirect(new URL('/login', request.url))
-  }
+  // Protect dashboard routes - REMOVED to allow guest view
+  // if (request.nextUrl.pathname.startsWith('/dashboard') && !user) {
+  //   return NextResponse.redirect(new URL('/login', request.url))
+  // }
   
   // Create middleware to handle auth logic
   return response

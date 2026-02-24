@@ -1,8 +1,8 @@
 
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect, Suspense } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/utils/supabase/client'
 import { Button } from '@/components/ui/button'
@@ -11,7 +11,7 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Loader2 } from 'lucide-react'
 
-export default function SignupPage() {
+function SignupContent() {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -21,7 +21,15 @@ export default function SignupPage() {
     const [error, setError] = useState<string | null>(null)
     const [success, setSuccess] = useState<string | null>(null)
     const router = useRouter()
+    const searchParams = useSearchParams()
     const supabase = createClient()
+
+    useEffect(() => {
+        const errorMsg = searchParams.get('error')
+        if (errorMsg) {
+            setError(errorMsg)
+        }
+    }, [searchParams])
 
     const handleSignup = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -209,5 +217,13 @@ export default function SignupPage() {
                 </CardFooter>
             </Card>
         </div>
+    )
+}
+
+export default function SignupPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-[#050505] flex items-center justify-center text-white">Loading...</div>}>
+            <SignupContent />
+        </Suspense>
     )
 }

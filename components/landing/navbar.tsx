@@ -44,7 +44,7 @@ export function Navbar() {
 
   const handleSignOut = async () => {
     await supabase.auth.signOut()
-    router.push('/login')
+    router.push('/')
     router.refresh()
   }
 
@@ -82,20 +82,17 @@ export function Navbar() {
             )
           })}
 
-          {/* Dashboard Link (if logged in) */}
-          {user && (
-            <Link
-              href="/dashboard"
-              className={cn(
-                "text-sm font-medium transition-all duration-200 px-4 py-2 rounded-full",
-                pathname === '/dashboard'
-                  ? "bg-white/10 text-primary shadow-sm ring-1 ring-white/5"
-                  : "text-white hover:text-white/80 hover:bg-white/10"
-              )}
-            >
-              Live Analytics
-            </Link>
-          )}
+          <Link
+            href="/dashboard"
+            className={cn(
+              "text-sm font-medium transition-all duration-200 px-4 py-2 rounded-full",
+              pathname === '/dashboard'
+                ? "bg-white/10 text-primary shadow-sm ring-1 ring-white/5"
+                : "text-white hover:text-white/80 hover:bg-white/10"
+            )}
+          >
+            Live Analytics
+          </Link>
         </div>
 
         <div className="hidden lg:flex items-center gap-4">
@@ -150,18 +147,18 @@ export function Navbar() {
               )
             })}
 
+            <Link
+              href="/dashboard"
+              className={cn(
+                "block text-sm font-medium transition-colors",
+                pathname === '/dashboard' ? "text-primary" : "text-muted-foreground hover:text-primary"
+              )}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Live Analytics
+            </Link>
             {user ? (
               <>
-                <Link
-                  href="/dashboard"
-                  className={cn(
-                    "block text-sm font-medium transition-colors",
-                    pathname === '/dashboard' ? "text-primary" : "text-muted-foreground hover:text-primary"
-                  )}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Live Analytics
-                </Link>
                 <button
                   onClick={() => {
                     handleSignOut()

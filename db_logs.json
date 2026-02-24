@@ -1,0 +1,413 @@
+{
+  "error": null,
+  "logs": [
+    {
+      "id": "ee633ae3-baac-4303-9d1d-87bc516743ad",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_19-52-44"
+    },
+    {
+      "id": "6287267b-faa6-4d6f-822f-3c7a54a0efe3",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_19-51-50"
+    },
+    {
+      "id": "1b0db482-715d-4b8b-8a89-bceaa3a392b8",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_19-47-23"
+    },
+    {
+      "id": "e75f1f6a-89b8-4140-b063-ae951eb4356d",
+      "bin_id": "Bin_001",
+      "waste_type": "plastic",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_19-46-58"
+    },
+    {
+      "id": "a0f18d97-d5fe-4c19-b962-f1a062d26d45",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_19-46-45"
+    },
+    {
+      "id": "de3f3a82-dd1f-4697-8a3a-4ca9956515c1",
+      "bin_id": "Bin_001",
+      "waste_type": "plastic",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_19-46-30"
+    },
+    {
+      "id": "4ec6e466-1c50-4d5b-8349-95f2db3ca6d0",
+      "bin_id": "Bin_001",
+      "waste_type": "plastic",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_19-46-16"
+    },
+    {
+      "id": "1f72a87e-cd8c-4328-a0c0-291baeb19530",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_19-46-04"
+    },
+    {
+      "id": "05a6adca-7abc-4d88-8492-9b68e126c566",
+      "bin_id": "Bin_001",
+      "waste_type": "mixed",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_19-34-55"
+    },
+    {
+      "id": "59eaa8f6-53f0-4aca-8c01-a8cd0405d554",
+      "bin_id": "Bin_001",
+      "waste_type": "plastic",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_19-34-41"
+    },
+    {
+      "id": "500c4b88-6749-4cbc-a4ed-9457e23393bf",
+      "bin_id": "Bin_001",
+      "waste_type": "plastic",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_19-14-04"
+    },
+    {
+      "id": "fb639ca9-64e4-4046-8dae-5e1aa411d1c6",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_19-11-04"
+    },
+    {
+      "id": "7428f49e-461e-4d20-83cc-a0b420849ae0",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_19-10-44"
+    },
+    {
+      "id": "3878c51e-9853-49c6-91e6-50ac8b30019c",
+      "bin_id": "Bin_001",
+      "waste_type": "mixed",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_19-01-38"
+    },
+    {
+      "id": "5a2d56e8-94ee-4d63-8841-08185b602fc2",
+      "bin_id": "Bin_001",
+      "waste_type": "plastic",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_19-01-33"
+    },
+    {
+      "id": "2a727080-6790-4b49-af8b-ce5177cb4e84",
+      "bin_id": "Bin_001",
+      "waste_type": "mixed",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_18-44-00"
+    },
+    {
+      "id": "329c76bd-9387-4dc8-b63b-06a0c6139205",
+      "bin_id": "Bin_001",
+      "waste_type": "plastic",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_18-43-36"
+    },
+    {
+      "id": "db740aeb-38a1-4d27-a413-a93d07afba00",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_18-12-18"
+    },
+    {
+      "id": "39140f30-de33-4fad-aa0f-98ce33709a4e",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_18-08-33"
+    },
+    {
+      "id": "9f392c4c-6353-4dec-beb2-8da3c1d86947",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_17-59-02"
+    },
+    {
+      "id": "5fe509f8-ef85-43fc-b5e8-297ab7a25c01",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_17-58-24"
+    },
+    {
+      "id": "586d4543-dee3-420b-8003-77f8bf26e4d4",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_17-57-52"
+    },
+    {
+      "id": "3deeb53a-11cb-444e-8d21-86993922b819",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_17-57-47"
+    },
+    {
+      "id": "4dc05df4-d11f-4dba-bd2b-d412e4f6e891",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_17-57-41"
+    },
+    {
+      "id": "ddd9d876-cbbb-4c52-891d-4caa143eddf8",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_17-54-01"
+    },
+    {
+      "id": "9b3d8adc-4f2f-4228-9181-5a9d5cdb6798",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_17-53-50"
+    },
+    {
+      "id": "f09ed6f1-ed98-466f-a60d-b91933d4b51f",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_17-41-40"
+    },
+    {
+      "id": "f58d448d-137b-496c-a1d3-63b968b946b6",
+      "bin_id": "Bin_001",
+      "waste_type": "plastic",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_17-33-06"
+    },
+    {
+      "id": "ab36c9e2-aab2-41a9-b8ae-b92dd503decd",
+      "bin_id": "Bin_001",
+      "waste_type": "plastic",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_16-55-11"
+    },
+    {
+      "id": "8fc09318-8b80-43fb-94e4-1a67e96e504d",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_16-52-00"
+    },
+    {
+      "id": "19bb6aa2-9626-4fba-90c0-bf3a2ba0b0aa",
+      "bin_id": "Bin_001",
+      "waste_type": "plastic",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_16-51-14"
+    },
+    {
+      "id": "ff28df25-9d63-4430-84dd-f0ee335df5d3",
+      "bin_id": "Bin_001",
+      "waste_type": "plastic",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_16-50-21"
+    },
+    {
+      "id": "a659b793-1e11-471f-a133-b7a0ffeb2be2",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_16-48-36"
+    },
+    {
+      "id": "332c0049-be4b-4353-a0e3-cbbb3a8e2d7e",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_16-33-21"
+    },
+    {
+      "id": "0fb23aa8-614c-4ada-ab1f-cfabfd744cce",
+      "bin_id": "Bin_001",
+      "waste_type": "mixed",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_16-22-59"
+    },
+    {
+      "id": "948672c3-2a7d-495d-974e-92a1579e01f4",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_16-19-48"
+    },
+    {
+      "id": "63eb53c0-a568-4850-bbeb-bad7d625fadd",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_16-18-37"
+    },
+    {
+      "id": "13d30d6e-87ac-442c-9b50-7a965c0a266e",
+      "bin_id": "Bin_001",
+      "waste_type": "mixed",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_16-17-18"
+    },
+    {
+      "id": "4dc82416-bea9-4fd6-9793-e8b93e0c112f",
+      "bin_id": "Bin_001",
+      "waste_type": "plastic",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_16-13-53"
+    },
+    {
+      "id": "4317dc65-0343-4093-82e3-618da3015201",
+      "bin_id": "Bin_001",
+      "waste_type": "plastic",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_16-13-23"
+    },
+    {
+      "id": "5b4c1421-c396-40f0-9fa2-50db0eb311b2",
+      "bin_id": "Bin_001",
+      "waste_type": "plastic",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_16-12-39"
+    },
+    {
+      "id": "294f7c9e-07c1-4f2d-8068-2aaec9d97465",
+      "bin_id": "Bin_001",
+      "waste_type": "plastic",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_16-04-17"
+    },
+    {
+      "id": "1b608924-f3c6-4c16-afa2-527b4ec67e19",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "metal",
+      "updated_at": "26-02-23_16-01-36"
+    },
+    {
+      "id": "667e3b32-6549-499f-928e-2b35a5c89f0c",
+      "bin_id": "Bin_001",
+      "waste_type": "plastic",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_16-01-30"
+    },
+    {
+      "id": "09ad3463-d0d5-4acd-b580-6807a373db0d",
+      "bin_id": "Bin_001",
+      "waste_type": "mixed",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_16-01-24"
+    },
+    {
+      "id": "c9bbff58-8e09-44ab-b330-869617b99d67",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_16-01-04"
+    },
+    {
+      "id": "c3779303-9292-4fd0-8df2-6d2571565402",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "yes",
+      "updated_at": "26-02-23_15-58-12"
+    },
+    {
+      "id": "547b0102-4ae0-4413-bbad-440d202341aa",
+      "bin_id": "Bin_001",
+      "waste_type": "plastic",
+      "weight": 0.75,
+      "response": "yes",
+      "updated_at": "26-02-23_15-58-00"
+    },
+    {
+      "id": "c7705a46-b70e-4955-b0df-a478257551a1",
+      "bin_id": "Bin_001",
+      "waste_type": "paper",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_15-24-42"
+    },
+    {
+      "id": "e8d2259f-a350-49f8-b656-7a021454f8ba",
+      "bin_id": "Bin_001",
+      "waste_type": "metal",
+      "weight": 0.75,
+      "response": "no",
+      "updated_at": "26-02-23_15-24-22"
+    }
+  ],
+  "registry": [
+    {
+      "bin_id": "Bin_001",
+      "location": "Test location : Riidl",
+      "installed_at": "2025-12-14T12:24:35+00:00",
+      "access_code": "DEMO-123"
+    }
+  ]
+}

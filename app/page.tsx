@@ -2,7 +2,7 @@ import { Navbar } from "@/components/landing/navbar"
 import { HomeLandingHero } from "@/components/landing/home-landing-hero"
 import { WhatWeWorkFor } from "@/components/landing/what-we-work-for"
 import { Testimonials } from "@/components/landing/testimonials"
-import { Companies } from "@/components/landing/companies"
+import { CompaniesTicker } from "@/components/landing/companies-ticker"
 
 import { Footer } from "@/components/landing/footer"
 
@@ -41,7 +41,7 @@ export default function Home() {
         <HomeLandingHero />
         <WhatWeWorkFor />
         <Testimonials />
-        <Companies />
+        <CompaniesTicker />
         <Footer />
       </div>
     </main>

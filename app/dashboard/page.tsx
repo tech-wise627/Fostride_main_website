@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
+import Image from "next/image"
 import { Navbar } from "@/components/landing/navbar"
 import { Footer } from "@/components/landing/footer"
 import {
@@ -55,11 +56,12 @@ import {
 import { AnimatedNumber } from "@/components/ui/animated-number"
 import { createClient } from "@/utils/supabase/client"
 import { ClaimBinDialog } from "@/components/dashboard/claim-bin-dialog"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { formatDistanceToNow, format } from "date-fns"
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 import { Calendar as CalendarComponent } from "@/components/ui/calendar"
+import { useToast } from "@/hooks/use-toast"
 import {
   Popover,
   PopoverContent,
@@ -145,7 +147,7 @@ const COLORS: Record<string, string> = {
 
 const FALLBACK_COLORS = ["#34d399", "#60a5fa", "#fbbf24", "#a78bfa", "#f472b6"]
 
-export default function DashboardPage() {
+function DashboardContent() {
   const [timeRange, setTimeRange] = useState("7d")
   const [dateRange, setDateRange] = useState<DateRange | undefined>()
   const [selectedLocation, setSelectedLocation] = useState("all")
@@ -165,17 +167,32 @@ export default function DashboardPage() {
   const [user, setUser] = useState<any>(null)
   const [userBins, setUserBins] = useState<any[]>([])
   const [claimDialogOpen, setClaimDialogOpen] = useState(false)
+  const [isGuest, setIsGuest] = useState(false)
   const supabase = createClient()
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const { toast } = useToast()
 
   useEffect(() => {
     checkUser()
+
+    // Show verification success message
+    if (searchParams.get('verified') === 'true') {
+      toast({
+        title: "Email Verified",
+        description: "Your email has been successfully verified. Welcome to the dashboard!",
+        variant: "default",
+      })
+      // Clean up the URL
+      router.replace('/dashboard')
+    }
   }, [])
 
   const checkUser = async () => {
     const { data: { user }, error } = await supabase.auth.getUser()
     if (error || !user) {
-      router.push('/login')
+      setIsGuest(true)
+      setLoading(false)
       return
     }
     setUser(user)
@@ -459,6 +476,42 @@ export default function DashboardPage() {
     if (user && (userBins.length > 0 || claimDialogOpen)) {
       fetchData()
     }
+
+    // Set up real-time subscription for immediate dashboard reflection
+    let channel: any = null
+    if (userBins.length > 0) {
+      const binIdsLower = userBins.map(b => String(b.bin_id).toLowerCase())
+
+      channel = supabase
+        .channel('realtime_waste_logs')
+        .on(
+          'postgres_changes',
+          {
+            event: 'INSERT',
+            schema: 'public',
+            table: 'r3bin_waste_logs',
+          },
+          (payload) => {
+            if (payload.new && payload.new.bin_id) {
+              if (binIdsLower.includes(String(payload.new.bin_id).toLowerCase())) {
+                console.log('Live data received:', payload.new)
+                fetchData()
+                toast({
+                  title: "Live Data Received",
+                  description: "A new item was just added to your bin!",
+                })
+              }
+            }
+          }
+        )
+        .subscribe()
+    }
+
+    return () => {
+      if (channel) {
+        supabase.removeChannel(channel)
+      }
+    }
   }, [timeRange, dateRange, userBins, user])
 
   const fetchData = async () => {
@@ -474,20 +527,20 @@ export default function DashboardPage() {
         .select('updated_at, waste_type, bin_id')
         .order('updated_at', { ascending: true })
 
-      if (userBins.length > 0) {
-        const binIds = userBins.map(b => b.bin_id)
-        // Manual filter since .in() might be tricky with empty array, but we check length > 0
-        query = query.in('bin_id', binIds)
-      } else {
-        // If no bins, return empty or handle gracefully
-        // For now, let's allow fetching empty if strictly controlled, 
-        // but to secure it, we should not fetch anything if no bins.
-        // However, for "Demo" purposes if user has no bins, maybe show empty?
+      if (userBins.length === 0) {
         setLoading(false)
         return
       }
 
-      const { data: rawLogs, error: logsError } = await query
+      const { data: rawLogsFromDb, error: logsError } = await query
+
+      let rawLogs = null
+      if (rawLogsFromDb) {
+        const binIdsLower = userBins.map(b => String(b.bin_id).toLowerCase())
+        rawLogs = rawLogsFromDb.filter((log: any) =>
+          binIdsLower.includes(String(log.bin_id).toLowerCase())
+        )
+      }
 
       if (logsError) console.error('Error fetching logs:', logsError)
       else if (rawLogs) {
@@ -760,8 +813,13 @@ export default function DashboardPage() {
         const scatterPoints: any[] = []
         const dateMap = new Map<string, number>() // Date string -> Y index
 
-        // Helper to get consistent date keys
-        const getDateKey = (d: Date) => d.toISOString().split('T')[0]
+        // Helper to get consistent date keys using local time to avoid UTC shift
+        const getDateKey = (d: Date) => {
+          const y = d.getFullYear();
+          const m = String(d.getMonth() + 1).padStart(2, '0');
+          const day = String(d.getDate()).padStart(2, '0');
+          return `${y}-${m}-${day}`;
+        }
 
         // Initialize Y-axis indices based on time range (0 = Today/Newest)
         // We'll build this dynamically from the logs or pre-fill based on range? 
@@ -784,8 +842,9 @@ export default function DashboardPage() {
         rawLogs.forEach((log: any) => {
           const dateObj = getLogDate(log.updated_at)
           if (!dateObj) return
-          // Filter Future Dates
-          if (dateObj > today) return
+          // Filter Future Dates (allow 24h drift for misconfigured hardware RTC)
+          const tomorrow = new Date(today.getTime() + 86400000)
+          if (dateObj > tomorrow) return
           if (cutoffDate && dateObj < cutoffDate) return
 
           const dKey = getDateKey(dateObj)
@@ -896,7 +955,7 @@ export default function DashboardPage() {
                         h = parseInt(tParts[0]); min = parseInt(tParts[1]); s = parseInt(tParts[2]);
                       }
                     }
-                    dateObj = new Date(Date.UTC(y, m, d, h, min, s))
+                    dateObj = new Date(y, m, d, h, min, s)
                   }
                 }
 
@@ -1022,6 +1081,83 @@ export default function DashboardPage() {
       color: "#a78bfa"
     },
   ]
+
+  if (isGuest) {
+    return (
+      <div className="min-h-screen bg-[#050505] text-foreground relative">
+        {/* Geometric Background Pattern */}
+        <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern
+                id="pill-pattern-dark"
+                x="0"
+                y="0"
+                width="0.111111111"
+                height="0.333333333"
+                patternUnits="objectBoundingBox"
+                viewBox="0 0 80 140"
+                preserveAspectRatio="none"
+              >
+                <path d="M 36 5 L 36 85 Q 36 135 4 135 L 4 45 A 35 35 0 0 1 36 5 Z" fill="#1a1a1a" style={{ fill: '#1a1a1a' }} />
+                <path d="M 44 5 A 35 35 0 0 1 76 45 L 76 135 Q 44 135 44 85 L 44 5 Z" fill="#1a1a1a" style={{ fill: '#1a1a1a' }} />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#pill-pattern-dark)" />
+          </svg>
+        </div>
+
+        {/* Dark Overlay Gradient */}
+        <div className="fixed inset-0 z-0 pointer-events-none bg-gradient-to-b from-[#050505]/90 via-[#050505]/60 to-[#050505]/90" />
+
+        <div className="relative z-10">
+          <Navbar />
+          <main className="flex-1 flex items-center justify-center min-h-[calc(100vh-70px)] px-4 lg:px-8">
+            <div className="mx-auto max-w-7xl w-full grid lg:grid-cols-2 gap-12 items-center">
+
+              {/* Left: Text Content */}
+              <div className="text-center lg:text-left space-y-8">
+                <div className="inline-flex items-center justify-center p-4 rounded-full bg-primary/10 mb-4 animate-pulse">
+                  <BarChart3 className="h-10 w-10 text-primary" />
+                </div>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
+                  Unlock Live <br className="hidden lg:block" />
+                  <span className="text-primary">Waste Analytics</span>
+                </h1>
+                <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                  Sign in to access real-time data, carbon footprint tracking, and bin status monitoring for your R3Bin ecosystem.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                  <Button size="lg" className="text-lg px-8 h-14 w-full sm:w-auto shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all" onClick={() => router.push('/login')}>
+                    Sign In to Dashboard
+                  </Button>
+                  <Button variant="outline" size="lg" className="text-lg px-8 h-14 w-full sm:w-auto border-border bg-card hover:bg-white/10 text-white hover:text-white" onClick={() => router.push('/')}>
+                    Back Home
+                  </Button>
+                </div>
+              </div>
+
+              {/* Right: Mascot Image */}
+              <div className="relative flex justify-center lg:justify-end">
+                <div className="relative w-[300px] h-[300px] lg:w-[500px] lg:h-[500px]">
+                  {/* Gradient Blob Background */}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/10 rounded-full blur-3xl -z-10" />
+                  <Image
+                    src="/images/wise-robot.png"
+                    alt="R3Bin Mascot"
+                    fill
+                    className="object-contain drop-shadow-2xl animate-float"
+                    priority
+                  />
+                </div>
+              </div>
+
+            </div>
+          </main>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -1700,5 +1836,13 @@ export default function DashboardPage() {
         onBinClaimed={() => checkUser()}
       />
     </div >
+  )
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background flex items-center justify-center">Loading...</div>}>
+      <DashboardContent />
+    </Suspense>
   )
 }

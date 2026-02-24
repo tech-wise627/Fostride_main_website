@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Unbounded, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
+import { Toaster } from "@/components/ui/toaster"
 
 const unbounded = Unbounded({
   subsets: ["latin"],
@@ -71,6 +72,7 @@ export default function RootLayout({
       <body className={`${inter.className} ${unbounded.variable}`} style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
         {children}
         <Analytics />
+        <Toaster />
       </body>
     </html>
   )
