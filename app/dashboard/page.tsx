@@ -525,7 +525,8 @@ function DashboardContent() {
       let query = supabase
         .from('r3bin_waste_logs')
         .select('updated_at, waste_type, bin_id')
-        .order('updated_at', { ascending: true })
+        .order('updated_at', { ascending: false })
+        .limit(3000)
 
       if (userBins.length === 0) {
         setLoading(false)
@@ -917,9 +918,7 @@ function DashboardContent() {
         // Map registry to UI model, creating a lookup for last activity from logs
         const mappedBins = registryData.map((bin: any) => {
           // Find last log for this bin
-          // We can use the already fetched 'rawLogs' which are sorted by date ascending.
-          // So reverse finding or finding last occurrence is better? 
-          // Since rawLogs is sorted ASC, the LAST matching entry is the most recent.
+          // Since rawLogs is sorted DESC, the FIRST matching entry is the most recent.
 
           let lastActive = 'Never'
           let fillLevel = 0 // Default since registry doesn't track fill yet
@@ -929,7 +928,7 @@ function DashboardContent() {
           if (rawLogs && rawLogs.length > 0) {
             const binLogs = rawLogs.filter((l: any) => l.bin_id === bin.bin_id)
             if (binLogs.length > 0) {
-              const lastLog = binLogs[binLogs.length - 1]
+              const lastLog = binLogs[0]
               // Parse date for display
               // We reuse our robust parser or just use the raw string if it's display-only?
               // Let's rely on formatDistanceToNow but we need a valid JS Date.

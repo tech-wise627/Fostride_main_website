@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { ArrowRight, Brain, Wifi, BarChart3, Leaf, Sparkles, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -71,7 +72,7 @@ export function HeroSection() {
               </p>
 
               {/* CTA Button */}
-              <div className="flex gap-4 relative z-50">
+              <div className="flex flex-col sm:flex-row gap-4 relative z-50">
                 <Button
                   size="lg"
                   onClick={() => {
@@ -83,6 +84,16 @@ export function HeroSection() {
                   Schedule Demo
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
+                <Link href="/dashboard">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="w-full sm:w-auto border-border text-foreground hover:bg-secondary/50 bg-background pointer-events-auto cursor-pointer"
+                  >
+                    Live Analytics
+                    <BarChart3 className="ml-2 h-4 w-4 text-primary" />
+                  </Button>
+                </Link>
               </div>
 
               {/* Stats */}

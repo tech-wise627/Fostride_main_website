@@ -7,11 +7,6 @@ import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-import { createClient } from "@/utils/supabase/client"
-import { User } from "@supabase/supabase-js"
-import { useEffect } from "react"
-import { useRouter } from "next/navigation"
-
 // Navigation items
 const navItems = [
   { label: "Home", href: "/" },
@@ -23,30 +18,7 @@ const navItems = [
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [user, setUser] = useState<User | null>(null)
   const pathname = usePathname()
-  const supabase = createClient()
-  const router = useRouter()
-
-  useEffect(() => {
-    const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
-      setUser(user)
-    }
-    getUser()
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null)
-    })
-
-    return () => subscription.unsubscribe()
-  }, [])
-
-  const handleSignOut = async () => {
-    await supabase.auth.signOut()
-    router.push('/')
-    router.refresh()
-  }
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/5 backdrop-blur-[10px] border-b border-white/10 h-[70px] flex items-center">
@@ -82,35 +54,6 @@ export function Navbar() {
             )
           })}
 
-          <Link
-            href="/dashboard"
-            className={cn(
-              "text-sm font-medium transition-all duration-200 px-4 py-2 rounded-full",
-              pathname === '/dashboard'
-                ? "bg-white/10 text-primary shadow-sm ring-1 ring-white/5"
-                : "text-white hover:text-white/80 hover:bg-white/10"
-            )}
-          >
-            Live Analytics
-          </Link>
-        </div>
-
-        <div className="hidden lg:flex items-center gap-4">
-          {user ? (
-            <button
-              onClick={handleSignOut}
-              className="text-sm font-medium text-white hover:text-primary transition-colors px-4 py-2"
-            >
-              Log Out
-            </button>
-          ) : (
-            <Link
-              href="/login"
-              className="text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-full transition-colors"
-            >
-              Sign In
-            </Link>
-          )}
         </div>
 
         <button
@@ -146,38 +89,6 @@ export function Navbar() {
                 </Link>
               )
             })}
-
-            <Link
-              href="/dashboard"
-              className={cn(
-                "block text-sm font-medium transition-colors",
-                pathname === '/dashboard' ? "text-primary" : "text-muted-foreground hover:text-primary"
-              )}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Live Analytics
-            </Link>
-            {user ? (
-              <>
-                <button
-                  onClick={() => {
-                    handleSignOut()
-                    setMobileMenuOpen(false)
-                  }}
-                  className="block w-full text-left text-sm font-medium text-red-500 hover:text-red-400 transition-colors"
-                >
-                  Log Out
-                </button>
-              </>
-            ) : (
-              <Link
-                href="/login"
-                className="block text-sm font-medium text-primary hover:text-primary/80 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Sign In
-              </Link>
-            )}
           </div>
         </div>
       )}
