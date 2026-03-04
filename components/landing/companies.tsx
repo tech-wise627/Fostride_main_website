@@ -8,10 +8,6 @@ const companies = [
         logo: "/images/companies/riidl.png",
     },
     {
-        name: "Brookfield Properties",
-        logo: "/images/companies/brookfield-properties.png",
-    },
-    {
         name: "Somaiya Vidyavihar University",
         logo: "/images/companies/somaiya.png",
     },

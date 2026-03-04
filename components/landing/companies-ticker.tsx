@@ -5,21 +5,13 @@ import Image from "next/image"
 
 const logos = [
     {
-        name: "Brookfield Properties",
-        colorSrc: "/images/companies/brookfield-properties.png",
-        greySrc: "/images/companies/brookfield-properties-greyscale.png",
-        width: "w-48"
-    },
-    {
         name: "riidl",
-        colorSrc: "/images/companies/riidl-hover.png",
-        greySrc: "/images/companies/riidl-greyscale.png",
+        src: "/images/companies/riidl.png",
         width: "w-32"
     },
     {
         name: "Somaiya Vidyavihar University",
-        colorSrc: "/images/companies/somaiya.png",
-        greySrc: "/images/companies/somaiya.png",
+        src: "/images/companies/somaiya.png",
         width: "w-40"
     }
 ]
@@ -46,20 +38,12 @@ export function CompaniesTicker() {
                             {Array.from({ length: 8 }).map((_, i) => (
                                 <React.Fragment key={`t1-${i}`}>
                                     {logos.map((logo, idx) => (
-                                        <div key={`${i}-${idx}`} className={`relative ${logo.width} h-10 cursor-pointer group/item`}>
-                                            {/* Color Image (Detailed, bottom layer) */}
+                                        <div key={`${i}-${idx}`} className={`relative ${logo.width} h-10 cursor-pointer`}>
                                             <Image
-                                                src={logo.colorSrc}
+                                                src={logo.src}
                                                 alt={logo.name}
                                                 fill
                                                 className="object-contain"
-                                            />
-                                            {/* Grayscale Image (Top layer, fades out on hover) */}
-                                            <Image
-                                                src={logo.greySrc}
-                                                alt={`${logo.name} Grayscale`}
-                                                fill
-                                                className="object-contain transition-opacity duration-300 opacity-100 group-hover/item:opacity-0"
                                             />
                                         </div>
                                     ))}
@@ -71,20 +55,12 @@ export function CompaniesTicker() {
                             {Array.from({ length: 8 }).map((_, i) => (
                                 <React.Fragment key={`t2-${i}`}>
                                     {logos.map((logo, idx) => (
-                                        <div key={`${i}-${idx}`} className={`relative ${logo.width} h-10 cursor-pointer group/item`}>
-                                            {/* Color Image (Detailed, bottom layer) */}
+                                        <div key={`${i}-${idx}`} className={`relative ${logo.width} h-10 cursor-pointer`}>
                                             <Image
-                                                src={logo.colorSrc}
+                                                src={logo.src}
                                                 alt={logo.name}
                                                 fill
                                                 className="object-contain"
-                                            />
-                                            {/* Grayscale Image (Top layer, fades out on hover) */}
-                                            <Image
-                                                src={logo.greySrc}
-                                                alt={`${logo.name} Grayscale`}
-                                                fill
-                                                className="object-contain transition-opacity duration-300 opacity-100 group-hover/item:opacity-0"
                                             />
                                         </div>
                                     ))}

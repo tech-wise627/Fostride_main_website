@@ -278,7 +278,7 @@ export default function ProductsPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
 
-                <Link href="/dashboard">
+                <Link href="/dashboard?from=/r3bin">
                   <Button size="lg" variant="outline" className="border-border text-foreground hover:bg-secondary bg-transparent">
                     View Live Dashboard
                   </Button>

@@ -22,7 +22,7 @@ export function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/5 backdrop-blur-[10px] border-b border-white/10 h-[70px] flex items-center">
-      <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 lg:px-8">
+      <nav className="relative mx-auto flex w-full max-w-7xl items-center justify-between px-4 lg:px-8">
         <Link href="/" className="flex items-center">
           <Image
             src="/images/fostride-logo.png"
@@ -34,7 +34,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Navigation - Floating Pill Style */}
-        <div className="hidden lg:flex lg:items-center lg:gap-1 bg-[#0a0a0a] border border-white/10 rounded-full p-1.5 shadow-sm">
+        <div className="hidden lg:flex lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:items-center lg:gap-1 bg-[#0a0a0a] border border-white/10 rounded-full p-1.5 shadow-sm">
           {navItems.map((item) => {
             const isActive = pathname === item.href || pathname?.startsWith(item.href + "/")
 

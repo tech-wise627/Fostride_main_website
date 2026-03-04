@@ -1,8 +1,8 @@
 
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, Suspense } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/utils/supabase/client'
 import { Button } from '@/components/ui/button'
@@ -12,12 +12,26 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Loader2 } from 'lucide-react'
 
 export default function LoginPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-[#050505] flex items-center justify-center p-4">
+                <Loader2 className="h-8 w-8 animate-spin text-green-500" />
+            </div>
+        }>
+            <LoginContent />
+        </Suspense>
+    )
+}
+
+function LoginContent() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const router = useRouter()
     const supabase = createClient()
+
+    const searchParams = useSearchParams()
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -32,7 +46,8 @@ export default function LoginPage() {
 
             if (error) throw error
 
-            router.push('/dashboard')
+            const from = searchParams.get('from')
+            router.push(from ? from : '/dashboard')
             router.refresh()
         } catch (err: any) {
             setError(err.message)

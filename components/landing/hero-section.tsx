@@ -88,7 +88,7 @@ export function HeroSection() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="w-full sm:w-auto border-border text-foreground hover:bg-secondary/50 bg-background pointer-events-auto cursor-pointer"
+                    className="w-full sm:w-auto border-border text-foreground hover:text-foreground hover:bg-secondary/50 bg-background pointer-events-auto cursor-pointer"
                   >
                     Live Analytics
                     <BarChart3 className="ml-2 h-4 w-4 text-primary" />

@@ -16,7 +16,8 @@ import {
   Download,
   Filter,
   Calendar,
-  ChevronDown
+  ChevronDown,
+  Loader2
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -1127,7 +1128,7 @@ function DashboardContent() {
                   Sign in to access real-time data, carbon footprint tracking, and bin status monitoring for your R3Bin ecosystem.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
-                  <Button size="lg" className="text-lg px-8 h-14 w-full sm:w-auto shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all" onClick={() => router.push('/login')}>
+                  <Button size="lg" className="text-lg px-8 h-14 w-full sm:w-auto shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all" onClick={() => router.push('/login?from=/dashboard')}>
                     Sign In to Dashboard
                   </Button>
                   <Button variant="outline" size="lg" className="text-lg px-8 h-14 w-full sm:w-auto border-border bg-card hover:bg-white/10 text-white hover:text-white" onClick={() => router.push('/')}>
@@ -1166,6 +1167,16 @@ function DashboardContent() {
         {/* Header */}
         <div className="px-4 lg:px-8 py-8">
           <div className="mx-auto max-w-7xl">
+            <div className="mb-6">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => router.push('/r3bin')}
+                className="border-border bg-transparent hover:bg-white/5 text-muted-foreground hover:text-foreground"
+              >
+                ← Go Back
+              </Button>
+            </div>
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-8">
               <div>
                 <Badge className="mb-2 bg-primary/10 text-primary border-primary/20">
@@ -1518,7 +1529,7 @@ function DashboardContent() {
             </div>
 
             {/* Second Row */}
-            <div className="grid lg:grid-cols-2 gap-6 mb-8">
+            <div className="mb-8">
               {/* Hourly Activity */}
               <Card className="bg-card border-border">
                 <CardHeader>
@@ -1626,42 +1637,7 @@ function DashboardContent() {
                 </CardContent>
               </Card>
 
-              {/* Live Alerts */}
-              < Card className="bg-card border-border" >
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <CardTitle className="text-foreground">Live Alerts</CardTitle>
-                      <CardDescription>Real-time system notifications</CardDescription>
-                    </div>
-                    <Badge className="bg-red-500/10 text-red-400 border-red-500/20">
-                      {alerts.filter(a => a.type === 'critical').length} Critical
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {alerts.length > 0 ? (
-                      alerts.map((alert) => (
-                        <div
-                          key={alert.id}
-                          className={`p-3 rounded-lg border ${getAlertStyle(alert.type)}`}
-                        >
-                          <div className="flex items-start justify-between gap-3">
-                            <div className="flex items-start gap-3">
-                              <AlertTriangle className="h-4 w-4 mt-0.5 shrink-0" />
-                              <p className="text-sm">{alert.message}</p>
-                            </div>
-                            <span className="text-xs opacity-70 whitespace-nowrap">{alert.time}</span>
-                          </div>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="text-center text-muted-foreground py-4">No alerts found</div>
-                    )}
-                  </div>
-                </CardContent>
-              </Card >
+
             </div >
 
             {/* Bin Status Table */}
@@ -1840,7 +1816,12 @@ function DashboardContent() {
 
 export default function DashboardPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-background flex items-center justify-center">Loading...</div>}>
+    <Suspense fallback={
+      <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
+        <Loader2 className="h-8 w-8 animate-spin text-primary mb-4" />
+        <p className="text-muted-foreground">Loading dashboard...</p>
+      </div>
+    }>
       <DashboardContent />
     </Suspense>
   )
