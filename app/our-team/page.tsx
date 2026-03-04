@@ -99,10 +99,10 @@ export default function OurTeam() {
             <div className="relative z-10">
                 <Navbar />
 
-                <main className="pt-32 pb-20 px-[40px]">
+                <main className="pt-32 pb-20 px-4 md:px-8 lg:px-[40px]">
                     {/* Header Section */}
                     {/* Hero Section */}
-                    <div className="relative w-full h-[500px] mb-24 rounded-3xl overflow-hidden animate-in fade-in slide-in-from-bottom-8 duration-700">
+                    <div className="relative w-full h-[300px] md:h-[500px] mb-16 md:mb-24 rounded-3xl overflow-hidden animate-in fade-in slide-in-from-bottom-8 duration-700">
                         {/* Background Image */}
                         <Image
                             src="/images/our-team-hero.png"
@@ -117,7 +117,7 @@ export default function OurTeam() {
 
                         {/* Bottom Aligned Text Content */}
                         <div className="absolute inset-0 flex flex-col items-center justify-end text-center pb-[16px]">
-                            <h1 className="text-[50px] font-normal tracking-tight text-white drop-shadow-lg">
+                            <h1 className="text-3xl sm:text-4xl lg:text-[50px] font-normal tracking-tight text-white drop-shadow-lg">
                                 Hey There! Welcome to<br />
                                 <span className="text-[#0C8346]">Fostride!</span>
                             </h1>
@@ -125,12 +125,12 @@ export default function OurTeam() {
                     </div>
 
                     {/* About Company Section */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-[60px] py-32 items-start">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-[60px] py-16 lg:py-32 items-start">
                         <div className="space-y-[60px] sticky top-32">
-                            <h2 className="text-[40px] font-bold text-white">
+                            <h2 className="text-3xl md:text-[40px] font-bold text-white">
                                 About our Company
                             </h2>
-                            <p className="text-white text-[24px] font-light leading-[1.5]">
+                            <p className="text-white text-lg md:text-[24px] font-light leading-[1.5]">
                                 Let's get acquainted! At Fostride, we're passionate about sustainability and innovation. Our mission is to redefine waste, transforming it into opportunities for a greener tomorrow. From AI-powered solutions to grassroots initiatives, we're creating a cleaner planet—because sustainability isn't just a goal, it's an exciting journey. Join us as we revolutionize waste management and build a better future, one solution at a time.
                             </p>
                         </div>
@@ -181,7 +181,7 @@ export default function OurTeam() {
                                     <div
                                         key={index}
                                         onClick={() => setActiveAboutIndex(isExpanded ? null : index)}
-                                        className={`group flex flex-col w-[600px] bg-[#111111] border border-white/10 overflow-hidden transition-all duration-500 ease-in-out cursor-pointer
+                                        className={`group flex flex-col w-full lg:w-[600px] bg-[#111111] border border-white/10 overflow-hidden transition-all duration-500 ease-in-out cursor-pointer
                                             ${isExpanded ? 'rounded-[30px] border-transparent' : 'rounded-[37px] hover:border-transparent'}
                                         `}
                                     >
@@ -230,15 +230,15 @@ export default function OurTeam() {
 
                     {/* Founder Section */}
                     <div className="py-20 mb-20">
-                        <h2 className="text-[40px] font-bold text-white mb-12">
+                        <h2 className="text-3xl md:text-[40px] font-bold text-white mb-8 md:mb-12">
                             Meet The Founder
                         </h2>
 
-                        <p className="text-[24px] text-gray-400 font-light leading-relaxed mb-20">
+                        <p className="text-xl md:text-[24px] text-gray-400 font-light leading-relaxed mb-12 md:mb-20">
                             <span className="text-white font-normal">Gavi Kothari</span>, the <span className="text-white font-normal">founder of Fostride</span>, is passionate about <span className="text-white font-normal">leveraging technology</span> for <span className="text-white font-normal">sustainability</span>. His <span className="text-white font-normal">innovative vision</span> and <span className="text-white font-normal">dedication</span> drive Fostride's mission to <span className="text-white font-normal">revolutionize waste management</span> and create a <span className="text-white font-normal">greener future</span>.
                         </p>
 
-                        <div className="grid grid-cols-1 lg:grid-cols-[450px_1fr] gap-[60px] items-start">
+                        <div className="grid grid-cols-1 lg:grid-cols-[450px_1fr] gap-10 lg:gap-[60px] items-start">
                             {/* Founder Image */}
                             <div className="relative h-[604px] w-full max-w-md mx-auto lg:mx-0">
                                 {/* Green Shape Background */}
@@ -477,7 +477,7 @@ export default function OurTeam() {
                                 </div>
 
                                 {/* Content Card */}
-                                <div className="bg-white/5 backdrop-blur-[8px] border border-white/5 rounded-[40px] pt-[20px] px-[30px] pb-[30px] h-[220px] w-[600px]">
+                                <div className="bg-white/5 backdrop-blur-[8px] border border-white/5 rounded-[40px] p-6 md:pt-[20px] md:px-[30px] md:pb-[30px] h-auto md:h-[220px] w-full max-w-[600px]">
                                     <div className="flex items-center justify-center h-[28px] w-[66px] rounded-full bg-[#0C8346]/10 border border-[#0C8346]/20 mb-3">
                                         <span className="text-[#0C8346] text-[10px] font-bold tracking-wide uppercase">Step 01</span>
                                     </div>
@@ -502,7 +502,7 @@ export default function OurTeam() {
                                 </div>
 
                                 {/* Content Card */}
-                                <div className="bg-white/5 backdrop-blur-[8px] border border-white/5 rounded-[40px] pt-[20px] px-[30px] pb-[30px] h-[220px] w-[600px]">
+                                <div className="bg-white/5 backdrop-blur-[8px] border border-white/5 rounded-[40px] p-6 md:pt-[20px] md:px-[30px] md:pb-[30px] h-auto md:h-[220px] w-full max-w-[600px]">
                                     <div className="flex items-center justify-center h-[28px] w-[66px] rounded-full bg-[#0C8346]/10 border border-[#0C8346]/20 mb-3">
                                         <span className="text-[#0C8346] text-[10px] font-bold tracking-wide uppercase">Step 02</span>
                                     </div>
@@ -527,7 +527,7 @@ export default function OurTeam() {
                                 </div>
 
                                 {/* Content Card */}
-                                <div className="bg-white/5 backdrop-blur-[8px] border border-white/5 rounded-[40px] pt-[20px] px-[30px] pb-[30px] h-[220px] w-[600px]">
+                                <div className="bg-white/5 backdrop-blur-[8px] border border-white/5 rounded-[40px] p-6 md:pt-[20px] md:px-[30px] md:pb-[30px] h-auto md:h-[220px] w-full max-w-[600px]">
                                     <div className="flex items-center justify-center h-[28px] w-[66px] rounded-full bg-[#0C8346]/10 border border-[#0C8346]/20 mb-3">
                                         <span className="text-[#0C8346] text-[10px] font-bold tracking-wide uppercase">Step 03</span>
                                     </div>
@@ -552,7 +552,7 @@ export default function OurTeam() {
                                 </div>
 
                                 {/* Content Card */}
-                                <div className="bg-white/5 backdrop-blur-[8px] border border-white/5 rounded-[40px] pt-[20px] px-[30px] pb-[30px] h-[220px] w-[600px]">
+                                <div className="bg-white/5 backdrop-blur-[8px] border border-white/5 rounded-[40px] p-6 md:pt-[20px] md:px-[30px] md:pb-[30px] h-auto md:h-[220px] w-full max-w-[600px]">
                                     <div className="flex items-center justify-center h-[28px] w-[66px] rounded-full bg-[#0C8346]/10 border border-[#0C8346]/20 mb-3">
                                         <span className="text-[#0C8346] text-[10px] font-bold tracking-wide uppercase">Step 04</span>
                                     </div>

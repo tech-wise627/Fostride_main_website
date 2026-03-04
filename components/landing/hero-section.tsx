@@ -97,7 +97,7 @@ export function HeroSection() {
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-6 pt-8 border-t border-border">
+              <div className="grid grid-cols-3 gap-2 sm:gap-6 pt-8 border-t border-border">
                 <div>
                   <div className="text-2xl font-bold text-primary flex items-baseline">
                     <AnimatedNumber value={8.1} decimalPlaces={1} />k
@@ -184,7 +184,7 @@ export function HeroSection() {
               </div>
 
               {/* Bottom badges */}
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex items-center gap-4">
+              <div className="absolute -bottom-4 sm:bottom-0 left-1/2 -translate-x-1/2 flex items-center gap-2 sm:gap-4 w-full justify-center px-2">
                 <div className="flex items-center gap-2 rounded-full border border-border bg-card/80 backdrop-blur-md px-4 py-2">
                   <Sparkles className="h-4 w-4 text-primary" />
                   <span className="text-xs text-muted-foreground">AI-Powered</span>

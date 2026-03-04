@@ -34,7 +34,7 @@ export function CompaniesTicker() {
 
                     {/* Seamless Loop Structure */}
                     <div className="flex overflow-hidden w-full group">
-                        <div className="flex animate-marquee shrink-0 items-center justify-around gap-20 min-w-full px-8 group-hover:[animation-play-state:paused]">
+                        <div className="flex animate-marquee shrink-0 items-center justify-around gap-10 md:gap-20 min-w-full px-4 md:px-8 group-hover:[animation-play-state:paused]">
                             {Array.from({ length: 8 }).map((_, i) => (
                                 <React.Fragment key={`t1-${i}`}>
                                     {logos.map((logo, idx) => (
@@ -51,7 +51,7 @@ export function CompaniesTicker() {
                             ))}
                         </div>
                         {/* Duplicate Track */}
-                        <div className="flex animate-marquee shrink-0 items-center justify-around gap-20 min-w-full px-8 group-hover:[animation-play-state:paused]">
+                        <div className="flex animate-marquee shrink-0 items-center justify-around gap-10 md:gap-20 min-w-full px-4 md:px-8 group-hover:[animation-play-state:paused]">
                             {Array.from({ length: 8 }).map((_, i) => (
                                 <React.Fragment key={`t2-${i}`}>
                                     {logos.map((logo, idx) => (

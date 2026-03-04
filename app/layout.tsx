@@ -69,7 +69,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} ${unbounded.variable}`} style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
+      <body className={`${inter.className} ${unbounded.variable} overflow-x-hidden`} style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
         {children}
         <Analytics />
         <Toaster />

@@ -21,8 +21,8 @@ export function Navbar() {
   const pathname = usePathname()
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/5 backdrop-blur-[10px] border-b border-white/10 h-[70px] flex items-center">
-      <nav className="relative mx-auto flex w-full max-w-7xl items-center justify-between px-4 lg:px-8">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/80 backdrop-blur-[10px] border-b border-white/10">
+      <nav className="relative mx-auto flex w-full max-w-7xl items-center justify-between px-4 lg:px-8 h-[70px]">
         <Link href="/" className="flex items-center">
           <Image
             src="/images/fostride-logo.png"
@@ -71,25 +71,23 @@ export function Navbar() {
       </nav>
 
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-background border-b border-border">
-          <div className="px-4 py-4 space-y-4">
-            {navItems.map((item) => {
-              const isActive = pathname === item.href || pathname?.startsWith(item.href + "/")
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className={cn(
-                    "block text-sm font-medium transition-colors",
-                    isActive ? "text-primary" : "text-muted-foreground hover:text-primary"
-                  )}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              )
-            })}
-          </div>
+        <div className="lg:hidden bg-[#050505]/95 border-b border-white/10 absolute top-[70px] left-0 right-0 w-full z-40 px-4 py-4 space-y-4">
+          {navItems.map((item) => {
+            const isActive = pathname === item.href || pathname?.startsWith(item.href + "/")
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={cn(
+                  "block text-sm font-medium transition-colors",
+                  isActive ? "text-primary" : "text-muted-foreground hover:text-primary"
+                )}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            )
+          })}
         </div>
       )}
     </header>

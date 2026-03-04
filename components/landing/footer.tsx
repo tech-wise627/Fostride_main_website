@@ -6,9 +6,9 @@ import { Mail, Phone, MapPin, Linkedin, Instagram } from "lucide-react"
 export function Footer() {
   return (
     <footer className="py-12 w-full text-white relative z-10 transition-all duration-300">
-      <div className="w-full px-10 space-y-8">
+      <div className="w-full px-4 md:px-10 space-y-8">
         {/* Top Section */}
-        <div className="bg-[#1A1A1A] rounded-[48px] p-8 md:p-12 border border-white/5 flex flex-col gap-12">
+        <div className="bg-[#1A1A1A] rounded-3xl md:rounded-[48px] p-6 md:p-12 border border-white/5 flex flex-col gap-8 md:gap-12">
 
           {/* Menu Options - Horizontal List (Now First) */}
           <div className="flex flex-col items-center justify-center gap-8 border-b border-white/10 pb-10 w-full">
@@ -53,7 +53,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <div className="bg-[#1A1A1A] rounded-[48px] p-8 border border-white/5 flex flex-col items-center justify-center space-y-6 text-center">
+        <div className="bg-[#1A1A1A] rounded-3xl md:rounded-[48px] p-6 md:p-8 border border-white/5 flex flex-col items-center justify-center space-y-6 text-center">
           <h4 className="text-[#0C8346] font-bold text-lg">Follow us:</h4>
           <div className="flex gap-4">
             <Link href="https://www.linkedin.com/company/fostride/" target="_blank" rel="noopener noreferrer" className="bg-[#262626] p-3 rounded-xl hover:bg-[#0C8346] hover:text-white transition-all text-gray-400">

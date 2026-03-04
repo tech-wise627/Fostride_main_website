@@ -33,7 +33,7 @@ const testimonials = [
 
 export function Testimonials() {
     return (
-        <section className="relative w-full h-screen flex flex-col justify-center overflow-hidden">
+        <section className="relative w-full min-h-[60vh] py-20 flex flex-col justify-center overflow-hidden">
             <div className="text-center mb-16 z-10 relative px-4">
                 <h2 className="text-4xl md:text-6xl font-bold font-[family-name:var(--font-unbounded)] text-white tracking-tight">
                     Testimonials

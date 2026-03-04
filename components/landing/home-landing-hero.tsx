@@ -23,7 +23,7 @@ export function HomeLandingHero() {
                             </h1>
 
                             <h2 className="text-3xl md:text-5xl lg:text-[36px] xl:text-[50px] font-normal tracking-tight text-white leading-[1.1]">
-                                <span className="whitespace-nowrap">One-Step Solution towards</span>
+                                <span className="block sm:inline whitespace-normal sm:whitespace-nowrap">One-Step Solution towards</span>
                                 <span className="block mt-2 text-[#0C8346]">Waste Management</span>
                             </h2>
                         </div>
