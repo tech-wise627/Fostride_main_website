@@ -1,6 +1,7 @@
 import { BackgroundPattern } from "@/components/landing/background-pattern"
 import { Navbar } from "@/components/landing/navbar"
 import { HomeLandingHero } from "@/components/landing/home-landing-hero"
+import { ScrollGuide } from "@/components/landing/scroll-guide"
 import dynamic from "next/dynamic"
 
 const SectionLoader = () => (
@@ -65,16 +66,17 @@ export default function Home() {
 
       <div className="relative z-10">
         <Navbar />
-        <HomeLandingHero />
-        <ImpactStatsStrip />
-        <HowItWorks />
-        <DataFlywheel />
-        <PilotsTimeline />
-        <WhatWeWorkFor />
+        <div id="section-hero"><HomeLandingHero /></div>
+        <div id="section-impact"><ImpactStatsStrip /></div>
+        <div id="section-how"><HowItWorks /></div>
+        <div id="section-flywheel"><DataFlywheel /></div>
+        <div id="section-pilots"><PilotsTimeline /></div>
+        <div id="section-sectors"><WhatWeWorkFor /></div>
         <Testimonials />
         <CompaniesTicker />
-        <BoldCTA />
+        <div id="section-cta"><BoldCTA /></div>
         <Footer />
+        <ScrollGuide />
       </div>
     </main>
   )
