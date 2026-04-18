@@ -20,8 +20,8 @@ const HowItWorks = dynamic(
 )
 
 const DataFlywheel = dynamic(
-  () => import("@/components/landing/data-flywheel").then((m) => m.DataFlywheel),
-  { loading: () => <SectionLoader />, ssr: false } // canvas needs client-only
+  () => import("@/components/landing/data-flywheel-client").then((m) => m.DataFlywheelClient),
+  { loading: () => <SectionLoader />, ssr: true }
 )
 
 const PilotsTimeline = dynamic(
