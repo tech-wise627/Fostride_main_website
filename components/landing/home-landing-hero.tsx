@@ -111,7 +111,7 @@ export function HomeLandingHero() {
                 transition: "opacity 0.7s ease 0.55s, transform 0.7s ease 0.55s",
               }}
             >
-              R3Bin automatically sorts, tracks, and reports your waste in real time. From toss to insight — in milliseconds.
+              W.I.S.E. — Waste Intelligence &amp; Sorting Engine — classifies, tracks, and reports waste in real time. From toss to insight — in milliseconds.
             </p>
 
             {/* CTA Buttons */}
@@ -127,7 +127,7 @@ export function HomeLandingHero() {
                 href="/r3bin"
                 className="group relative inline-flex items-center justify-center gap-2 bg-[#0C8346] text-white font-semibold px-8 py-4 rounded-full overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(12,131,70,0.55)] hover:scale-[1.04] active:scale-100"
               >
-                <span className="relative z-10">Explore R3Bin</span>
+                <span className="relative z-10">Discover W.I.S.E.</span>
                 <ArrowRight className="relative z-10 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
                 {/* shine sweep */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500" />

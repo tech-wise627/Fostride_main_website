@@ -19,6 +19,16 @@ const HowItWorks = dynamic(
   { loading: () => <SectionLoader />, ssr: true }
 )
 
+const DataFlywheel = dynamic(
+  () => import("@/components/landing/data-flywheel").then((m) => m.DataFlywheel),
+  { loading: () => <SectionLoader />, ssr: false } // canvas needs client-only
+)
+
+const PilotsTimeline = dynamic(
+  () => import("@/components/landing/pilots-timeline").then((m) => m.PilotsTimeline),
+  { loading: () => <SectionLoader />, ssr: true }
+)
+
 const WhatWeWorkFor = dynamic(
   () => import("@/components/landing/what-we-work-for").then((m) => m.WhatWeWorkFor),
   { loading: () => <SectionLoader />, ssr: true }
@@ -58,6 +68,8 @@ export default function Home() {
         <HomeLandingHero />
         <ImpactStatsStrip />
         <HowItWorks />
+        <DataFlywheel />
+        <PilotsTimeline />
         <WhatWeWorkFor />
         <Testimonials />
         <CompaniesTicker />
