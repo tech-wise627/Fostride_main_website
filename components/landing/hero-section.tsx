@@ -97,24 +97,12 @@ export function HeroSection() {
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-2 sm:gap-6 pt-8 border-t border-border">
+              <div className="pt-8 border-t border-border">
                 <div>
                   <div className="text-2xl font-bold text-primary flex items-baseline">
                     <AnimatedNumber value={8.1} decimalPlaces={1} />k
                   </div>
                   <div className="text-sm text-muted-foreground">Items Scanned</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-foreground flex items-baseline">
-                    <AnimatedNumber value={2.4} decimalPlaces={1} />M
-                  </div>
-                  <div className="text-sm text-muted-foreground">kg Waste Sorted</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-foreground flex items-baseline">
-                    <AnimatedNumber value={850} decimalPlaces={0} />+
-                  </div>
-                  <div className="text-sm text-muted-foreground">Active Bins</div>
                 </div>
               </div>
             </div>

@@ -1,37 +1,42 @@
+import { BackgroundPattern } from "@/components/landing/background-pattern";
 import { Navbar } from "@/components/landing/navbar"
 import { HomeLandingHero } from "@/components/landing/home-landing-hero"
-import { WhatWeWorkFor } from "@/components/landing/what-we-work-for"
-import { Testimonials } from "@/components/landing/testimonials"
-import { CompaniesTicker } from "@/components/landing/companies-ticker"
+import dynamic from "next/dynamic"
 
-import { Footer } from "@/components/landing/footer"
+// Loading Skeleton
+const SectionLoader = () => (
+  <div className="w-full py-20 min-h-[40vh] flex flex-col items-center justify-center gap-4 text-[#0C8346]/50">
+    <div className="w-10 h-10 border-4 border-[#0C8346]/20 border-t-[#0C8346] rounded-full animate-spin"></div>
+    <span className="text-sm font-medium tracking-wide">Loading content...</span>
+  </div>
+)
+
+const WhatWeWorkFor = dynamic(() => import('@/components/landing/what-we-work-for').then(mod => mod.WhatWeWorkFor), {
+  loading: () => <SectionLoader />,
+  ssr: true
+})
+
+const Testimonials = dynamic(() => import('@/components/landing/testimonials').then(mod => mod.Testimonials), {
+  loading: () => <SectionLoader />,
+  ssr: true
+})
+
+const CompaniesTicker = dynamic(() => import('@/components/landing/companies-ticker').then(mod => mod.CompaniesTicker), {
+  loading: () => <SectionLoader />,
+  ssr: true
+})
+
+const Footer = dynamic(() => import('@/components/landing/footer').then(mod => mod.Footer), {
+  loading: () => <SectionLoader />,
+  ssr: true
+})
+
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#050505] text-foreground relative">
-      {/* Geometric Background Pattern - Exact 9x3 Grid */}
-      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern
-              id="pill-pattern-dark-home"
-              x="0"
-              y="0"
-              width="0.111111111"
-              height="0.333333333"
-              patternUnits="objectBoundingBox"
-              viewBox="0 0 80 140"
-              preserveAspectRatio="none"
-            >
-              {/* Left Half - Fuller body, narrower gap, sharp flare */}
-              <path d="M 36 5 L 36 85 Q 36 135 4 135 L 4 45 A 35 35 0 0 1 36 5 Z" fill="#1a1a1a" style={{ fill: '#1a1a1a' }} />
-              {/* Right Half - Fuller body, narrower gap, sharp flare */}
-              <path d="M 44 5 A 35 35 0 0 1 76 45 L 76 135 Q 44 135 44 85 L 44 5 Z" fill="#1a1a1a" style={{ fill: '#1a1a1a' }} />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#pill-pattern-dark-home)" />
-        </svg>
-      </div>
+      {/* Geometric Background Pattern Component */}
+            <BackgroundPattern />
 
       {/* Dark Overlay Gradient */}
       <div className="fixed inset-0 z-0 pointer-events-none bg-gradient-to-b from-[#050505]/90 via-[#050505]/60 to-[#050505]/90" />

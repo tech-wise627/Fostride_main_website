@@ -1,161 +1,43 @@
 "use client"
+import { BackgroundPattern } from "@/components/landing/background-pattern";
 
 
 import { Navbar } from "@/components/landing/navbar"
 import { HeroSection } from "@/components/landing/hero-section"
 import { Footer } from "@/components/landing/footer"
 
-import {
-  Brain,
-  Wifi,
-  BarChart3,
-  FileText,
-  Cpu,
-  Camera,
-  Gauge,
-  Shield,
-  Cloud,
-  Zap,
-  ArrowRight,
-  Check
-} from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 
-const products = [
-  {
-    id: "r3bin-core",
-    name: "R3Bin Core",
-    tagline: "AI-Powered Smart Bin Hardware",
-    description: "Next-generation waste bins with embedded AI for real-time waste classification and segregation at the source.",
-    icon: Brain,
-    color: "#34d399",
-    features: [
-      "On-device AI classification with 94%+ accuracy",
-      "Multi-stream segregation (recyclables, organics, general)",
-      "Ultrasonic fill-level sensors",
-      "Solar-powered with backup battery",
-      "Weather-resistant industrial design",
-      "Capacitive touch user interface"
-    ],
-    specs: {
-      "AI Engine": "Edge TPU, 4 TOPS",
-      "Camera": "12MP with night vision",
-      "Connectivity": "4G LTE / WiFi / LoRaWAN",
-      "Capacity": "120L / 240L / 360L options",
-      "Power": "Solar + 72hr battery backup"
-    }
-  },
-  {
-    id: "sensor-network",
-    name: "IoT Sensor Network",
-    tagline: "Connected Intelligence Infrastructure",
-    description: "Comprehensive sensor ecosystem that transforms your waste infrastructure into a connected, intelligent network.",
-    icon: Wifi,
-    color: "#60a5fa",
-    features: [
-      "Real-time fill level monitoring",
-      "Temperature and humidity sensors",
-      "Weight measurement for accurate tracking",
-      "GPS location tracking",
-      "Tamper detection alerts",
-      "Mesh networking capability"
-    ],
-    specs: {
-      "Range": "Up to 10km (LoRaWAN)",
-      "Battery Life": "5+ years",
-      "Update Frequency": "Every 15 min",
-      "Sensors": "Ultrasonic, load cell, temp",
-      "Protocol": "LoRaWAN / NB-IoT"
-    }
-  },
-  {
-    id: "analytics-platform",
-    name: "Analytics Dashboard",
-    tagline: "Real-Time Waste Intelligence",
-    description: "Powerful analytics platform that transforms raw sensor data into actionable insights for sustainability teams.",
-    icon: BarChart3,
-    color: "#f59e0b",
-    features: [
-      "Live waste composition analysis",
-      "Predictive collection scheduling",
-      "Route optimization algorithms",
-      "Custom KPI dashboards",
-      "Anomaly detection alerts",
-      "Historical trend analysis"
-    ],
-    specs: {
-      "Data Refresh": "Real-time streaming",
-      "Retention": "Unlimited historical",
-      "API Access": "REST & GraphQL",
-      "Integrations": "50+ platforms",
-      "Export": "CSV, PDF, Excel"
-    }
-  },
-  {
-    id: "esg-reporting",
-    name: "ESG Compliance Suite",
-    tagline: "Automated Sustainability Reporting",
-    description: "Comprehensive ESG reporting tools that automatically generate compliance documentation for regulatory bodies.",
-    icon: FileText,
-    color: "#a78bfa",
-    features: [
-      "GRI Standards compliance",
-      "CDP reporting automation",
-      "Carbon offset calculations",
-      "Waste diversion tracking",
-      "Audit trail documentation",
-      "Stakeholder report generation"
-    ],
-    specs: {
-      "Frameworks": "GRI, CDP, SASB, TCFD",
-      "Reports": "Monthly, Quarterly, Annual",
-      "Verification": "Third-party audit ready",
-      "Languages": "20+ languages",
-      "Customization": "White-label available"
-    }
-  }
-]
 
-const techSpecs = [
-  { icon: Cpu, label: "Edge AI Processing", value: "4 TOPS neural engine" },
-  { icon: Camera, label: "Vision System", value: "12MP + depth sensing" },
-  { icon: Gauge, label: "Classification Speed", value: "<500ms per item" },
-  { icon: Shield, label: "Data Security", value: "AES-256 encryption" },
-  { icon: Cloud, label: "Cloud Platform", value: "99.99% uptime SLA" },
-  { icon: Zap, label: "Power Efficiency", value: "Solar self-sufficient" },
-]
+
+import dynamic from "next/dynamic"
+
+// Loading Skeleton
+const SectionLoader = () => (
+  <div className="w-full py-20 min-h-[40vh] flex flex-col items-center justify-center gap-4 text-[#0C8346]/50">
+    <div className="w-10 h-10 border-4 border-[#0C8346]/20 border-t-[#0C8346] rounded-full animate-spin"></div>
+    <span className="text-sm font-medium tracking-wide">Loading component...</span>
+  </div>
+)
+
+const R3binProducts = dynamic(() => import('@/components/landing/r3bin-products'), {
+  loading: () => <SectionLoader />,
+  ssr: true
+})
+
+const R3binTechSpecs = dynamic(() => import('@/components/landing/r3bin-tech-specs'), {
+  loading: () => <SectionLoader />,
+  ssr: true
+})
 
 export default function ProductsPage() {
 
 
   return (
     <div className="min-h-screen bg-[#050505] text-foreground relative">
-      {/* Geometric Background Pattern - Exact 9x3 Grid */}
-      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern
-              id="pill-pattern-dark-r3bin"
-              x="0"
-              y="0"
-              width="0.111111111"
-              height="0.333333333"
-              patternUnits="objectBoundingBox"
-              viewBox="0 0 80 140"
-              preserveAspectRatio="none"
-            >
-              {/* Left Half - Fuller body, narrower gap, sharp flare */}
-              <path d="M 36 5 L 36 85 Q 36 135 4 135 L 4 45 A 35 35 0 0 1 36 5 Z" fill="#1a1a1a" style={{ fill: '#1a1a1a' }} />
-              {/* Right Half - Fuller body, narrower gap, sharp flare */}
-              <path d="M 44 5 A 35 35 0 0 1 76 45 L 76 135 Q 44 135 44 85 L 44 5 Z" fill="#1a1a1a" style={{ fill: '#1a1a1a' }} />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#pill-pattern-dark-r3bin)" />
-        </svg>
-      </div>
+      {/* Geometric Background Pattern Component */}
+            <BackgroundPattern />
 
       {/* Dark Overlay Gradient */}
       <div className="fixed inset-0 z-0 pointer-events-none bg-gradient-to-b from-[#050505]/90 via-[#050505]/60 to-[#050505]/90" />
@@ -167,104 +49,9 @@ export default function ProductsPage() {
           {/* Hero Section */}
           <HeroSection />
 
-          {/* Products Grid */}
-          <section className="py-20 px-4 lg:px-8 bg-card/50">
-            <div className="mx-auto max-w-7xl">
-              <div className="grid gap-8">
-                {products.map((product, index) => (
-                  <Card
-                    key={product.id}
-                    className="bg-card border-border overflow-hidden"
-                  >
-                    <div className={`grid lg:grid-cols-2 gap-0 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
-                      {/* Content */}
-                      <div className={`p-8 lg:p-12 ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-                        <div
-                          className="inline-flex items-center justify-center w-14 h-14 rounded-xl mb-6"
-                          style={{ backgroundColor: `${product.color}20` }}
-                        >
-                          <product.icon className="h-7 w-7" style={{ color: product.color }} />
-                        </div>
-                        <Badge className="mb-3 bg-secondary text-secondary-foreground border-border">
-                          {product.tagline}
-                        </Badge>
-                        <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                          {product.name}
-                        </h2>
-                        <p className="text-muted-foreground mb-6 text-pretty">
-                          {product.description}
-                        </p>
-                        <ul className="space-y-3 mb-8">
-                          {product.features.map((feature) => (
-                            <li key={feature} className="flex items-start gap-3">
-                              <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                              <span className="text-sm text-foreground">{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-                        <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-                          Learn More
-                          <ArrowRight className="ml-2 h-4 w-4" />
-                        </Button>
-                      </div>
-
-                      {/* Specs Panel */}
-                      <div
-                        className={`bg-secondary/50 p-8 lg:p-12 ${index % 2 === 1 ? 'lg:order-1' : ''}`}
-                      >
-                        <h3 className="text-lg font-semibold text-foreground mb-6">
-                          Technical Specifications
-                        </h3>
-                        <div className="space-y-4">
-                          {Object.entries(product.specs).map(([key, value]) => (
-                            <div
-                              key={key}
-                              className="flex justify-between items-center py-3 border-b border-border last:border-0"
-                            >
-                              <span className="text-sm text-muted-foreground">{key}</span>
-                              <span className="text-sm font-medium text-foreground">{value}</span>
-                            </div>
-                          ))}
-                        </div>
-                        <div className="mt-8 p-4 rounded-lg bg-primary/10 border border-primary/20">
-                          <p className="text-sm text-primary font-medium">
-                            Available for enterprise deployment
-                          </p>
-                          <p className="text-xs text-muted-foreground mt-1">
-                            Contact sales for volume pricing and customization
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* Tech Specs Overview */}
-          <section className="py-20 px-4 lg:px-8">
-            <div className="mx-auto max-w-7xl">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                  Built for Enterprise Scale
-                </h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto">
-                  Every component is engineered for reliability, security, and performance
-                  at scale across distributed deployments.
-                </p>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                {techSpecs.map((spec) => (
-                  <Card key={spec.label} className="bg-card border-border text-center p-6">
-                    <spec.icon className="h-8 w-8 text-primary mx-auto mb-3" />
-                    <p className="text-xs text-muted-foreground mb-1">{spec.label}</p>
-                    <p className="text-sm font-semibold text-foreground">{spec.value}</p>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </section>
+          {/* Lazily load below-the-fold content */}
+          <R3binProducts />
+          <R3binTechSpecs />
 
           {/* CTA Section */}
           <section className="py-20 px-4 lg:px-8 bg-gradient-to-br from-primary/10 via-background to-primary/5">
