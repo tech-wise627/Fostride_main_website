@@ -1,477 +1,691 @@
 "use client"
-import { useState } from "react"
 
-import { Navbar } from "@/components/landing/navbar"
-import { Footer } from "@/components/landing/footer"
-
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
-import { Linkedin, Twitter, Mail, ArrowUpRight, Plus, Atom, Users, Lightbulb, Heart, X } from "lucide-react"
+import {
+  LinkedinIcon, Mail, ArrowUpRight, Plus, X,
+  Atom, Users, Lightbulb, Heart,
+  Leaf, Cpu, TrendingUp, RefreshCw, Shield, Star, Zap, Handshake,
+} from "lucide-react"
 
-
+/* ─────────────────────────────────────────────── */
+/*  DATA                                            */
+/* ─────────────────────────────────────────────── */
 
 const teamMembers = [
-    {
-        name: "Mayank Verma",
-        role: "Chief Technology Officer",
-        bgText: "Tech",
-        smallText: "SPECIALIZED COMPUTING",
-        image: "/images/team/mayank-verma.png",
-        align: "split",
-        linkedin: "https://www.linkedin.com/in/mayank-verma-3a459b306/",
-        mail: "mailto:tech@fostride.com"
-    },
-    {
-        name: "Aryan Jain",
-        role: "Chief Financial Officer",
-        bgText: "Finance",
-        smallText: "FINANCIAL FORECASTING",
-        image: "/images/team/aryan-jain.png",
-        align: "split",
-        linkedin: "https://www.linkedin.com/in/aryan-jain-4357241b9/",
-        mail: "mailto:fostride@gmail.com"
-    },
-    {
-        name: "Aryan Nair",
-        role: "Chief Strategy Officer",
-        bgText: "Practical",
-        smallText: "INGENIUS STRATEGY",
-        image: "/images/team/aryan-nair.png",
-        align: "split",
-        linkedin: "https://www.linkedin.com/in/aryan-nair-b70248317/",
-        mail: "mailto:fostride@gmail.com"
-    },
-    {
-        name: "Piyush Tanwar",
-        role: "Chief Marketing Officer",
-        bgText: "Strategic",
-        smallText: "MARKETING GENIUS",
-        image: "/images/team/piyush-tanwar.png",
-        align: "split", // Custom alignment: Big text Left, Small text Right
-        linkedin: "https://www.linkedin.com/",
-        mail: "mailto:fostride@gmail.com"
-    }
+  {
+    name: "Mayank Verma",
+    role: "Chief Technology Officer",
+    bgText: "Tech",
+    smallText: "SPECIALIZED COMPUTING",
+    image: "/images/team/mayank-verma.png",
+    linkedin: "https://www.linkedin.com/in/mayank-verma-3a459b306/",
+    mail: "mailto:tech@fostride.com",
+    bio: "Leads the W.I.S.E. AI stack — from model training pipelines to embedded hardware deployment on R3Bin.",
+  },
+  {
+    name: "Aryan Jain",
+    role: "Chief Financial Officer",
+    bgText: "Finance",
+    smallText: "FINANCIAL FORECASTING",
+    image: "/images/team/aryan-jain.png",
+    linkedin: "https://www.linkedin.com/in/aryan-jain-4357241b9/",
+    mail: "mailto:fostride@gmail.com",
+    bio: "Builds the financial architecture that turns waste data into investor confidence and sustainable unit economics.",
+  },
+  {
+    name: "Aryan Nair",
+    role: "Chief Strategy Officer",
+    bgText: "Practical",
+    smallText: "INGENIUS STRATEGY",
+    image: "/images/team/aryan-nair.png",
+    linkedin: "https://www.linkedin.com/in/aryan-nair-b70248317/",
+    mail: "mailto:fostride@gmail.com",
+    bio: "Maps Fostride's path from campus pilots to enterprise scale — connecting the dots between data, partners, and opportunity.",
+  },
+  {
+    name: "Piyush Tanwar",
+    role: "Chief Marketing Officer",
+    bgText: "Strategic",
+    smallText: "MARKETING GENIUS",
+    image: "/images/team/piyush-tanwar.png",
+    linkedin: "https://www.linkedin.com/",
+    mail: "mailto:fostride@gmail.com",
+    bio: "Shapes the Fostride brand voice — translating deep-tech sustainability into stories that resonate and convert.",
+  },
 ]
 
-export default function OurTeamBody() {
-    const [activeMemberIndex, setActiveMemberIndex] = useState<number | null>(null);
-    const [activeAboutIndex, setActiveAboutIndex] = useState<number | null>(null);
-    const [activeFaqIndex, setActiveFaqIndex] = useState<number | null>(null);
+const VALUES = [
+  {
+    n: "01", icon: Leaf, title: "Sustainability",
+    tagline: "Planet-first decisions.",
+    desc: "Every Fostride decision — from hardware choice to cloud provider — is weighed against its environmental cost. We build for the planet, not just the market.",
+  },
+  {
+    n: "02", icon: Cpu, title: "Innovation",
+    tagline: "Question everything.",
+    desc: "W.I.S.E. exists because we asked: what if waste could think? We challenge assumptions constantly and believe the best solution hasn't been built yet.",
+  },
+  {
+    n: "03", icon: TrendingUp, title: "Impact",
+    tagline: "Metrics over optics.",
+    desc: "We measure success in kilograms diverted, CO₂ saved, and communities empowered — not press mentions. Real numbers, on a live dashboard.",
+  },
+  {
+    n: "04", icon: RefreshCw, title: "Circularity",
+    tagline: "Close every loop.",
+    desc: "Nothing is waste until you stop thinking. We connect generators, sorters, recyclers, and upcyclers into one closed system that leaves nothing behind.",
+  },
+  {
+    n: "05", icon: Shield, title: "Integrity",
+    tagline: "No greenwashing.",
+    desc: "Transparent data, honest claims, real pilots. Every stat we publish comes from a live deployment — we'll never inflate a number to look better.",
+  },
+  {
+    n: "06", icon: Handshake, title: "Collaboration",
+    tagline: "We grow together.",
+    desc: "From Brookfield to KJ Somaiya, Fostride grows by bringing institutions, recyclers, and municipalities into a shared ecosystem — not a walled garden.",
+  },
+  {
+    n: "07", icon: Star, title: "Trustworthiness",
+    tagline: "Our data is real.",
+    desc: "Our pilots are real, our accuracy numbers are real, and our dashboards run live. Trust isn't claimed — it's earned through consistent, verifiable results.",
+  },
+  {
+    n: "08", icon: Zap, title: "Reliability",
+    tagline: "Infrastructure-grade uptime.",
+    desc: "W.I.S.E. operates silently in the background — sorting, logging, routing — without needing human babysitting. It just works, every time.",
+  },
+]
 
-    return (
-        <>
-            {/* About Company Section */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-[60px] py-16 lg:py-32 items-start">
-                <div className="space-y-[60px] lg:sticky lg:top-32">
-                    <h2 className="text-3xl md:text-[40px] font-bold text-white">
-                        About our Company
-                    </h2>
-                    <p className="text-white text-lg md:text-[24px] font-light leading-[1.5]">
-                        Let's get acquainted! At Fostride, we're passionate about sustainability and innovation. Our mission is to redefine waste, transforming it into opportunities for a greener tomorrow. From AI-powered solutions to grassroots initiatives, we're creating a cleaner planet—because sustainability isn't just a goal, it's an exciting journey. Join us as we revolutionize waste management and build a better future, one solution at a time.
-                    </p>
-                </div>
+/* ─────────────────────────────────────────────── */
+/*  HOOKS                                           */
+/* ─────────────────────────────────────────────── */
 
-                <div className="space-y-4 flex flex-col items-end">
-                    {/* About Content Data */}
-                    {[
-                                {
-                                    title: "01. Our History",
-                                    content: (
-                                        <div className="space-y-6 text-[15px] font-light leading-relaxed text-gray-300">
-                                            <p>
-                                                Fostride began in 2022 as a simple yet ambitious idea for a school competition, driven by the vision of tackling one of the world's most pressing problems: waste management. What started as a small concept has now evolved into a determined effort to develop groundbreaking technology that focuses on waste sorting and conversion for a sustainable future.
-                                            </p>
-                                            <p>
-                                                Over the years, our journey has been marked by several achievements, including winning competitions and organizing impactful small-scale waste management drives. These milestones fueled our passion and commitment, prompting us to dedicate ourselves to extensive research and development.
-                                            </p>
-                                            <p>
-                                                In 2024, we made significant strides, directing our focus entirely on expanding our R&D capabilities to create more effective and eco-friendly solutions. Today, Fostride stands at the prototyping stage, working tirelessly to bring our vision to life and to deliver innovative technology that not only addresses waste but also protects and preserves our environment for generations to come.
-                                            </p>
-                                        </div>
-                                    )
-                                },
-                                {
-                                    title: "02. Our Mission",
-                                    content: (
-                                        <div className="space-y-6 text-[15px] font-light leading-relaxed text-gray-300">
-                                            <p>
-                                                To revolutionize waste management through innovative technology, fostering a circular economy that minimizes environmental impact and creates sustainable value. By connecting waste generators, recyclers, and upcyclers, we aim to empower communities, reduce pollution, and promote a cleaner, greener future for generations to come.
-                                            </p>
-                                        </div>
-                                    )
-                                },
-                                {
-                                    title: "03. Our Vision",
-                                    content: (
-                                        <div className="space-y-6 text-[15px] font-light leading-relaxed text-gray-300">
-                                            <p>
-                                                To lead the global transition toward a zero waste future by transforming waste into opportunities, fostering sustainable practices, and creating a world where every resource is valued, reused, and repurposed for the benefit of people and the planet.
-                                            </p>
-                                        </div>
-                                    )
-                                }
-                            ].map((item, index) => {
-                                const isExpanded = activeAboutIndex === index;
-
-                                return (
-                                    <div
-                                        key={index}
-                                        onClick={() => setActiveAboutIndex(isExpanded ? null : index)}
-                                        className={`group flex flex-col w-full lg:w-[600px] bg-[#111111] border border-white/10 overflow-hidden transition-all duration-500 ease-in-out cursor-pointer
-                                            ${isExpanded ? 'rounded-[30px] border-transparent' : 'rounded-[37px] hover:border-transparent'}
-                                        `}
-                                    >
-                                        {/* Header Row */}
-                                        <div className="flex items-center justify-between px-6 flex-shrink-0 h-[74px] w-full">
-                                            <span
-                                                className={`text-[16px] transition-all duration-300 ease-in-out
-                                                    ${isExpanded
-                                                        ? 'text-[#0C8346] font-normal translate-x-0'
-                                                        : 'text-white font-normal group-hover:font-light group-hover:text-[#0C8346] group-hover:translate-x-3'
-                                                    }
-                                                `}
-                                            >
-                                                {item.title}
-                                            </span>
-
-                                            <div
-                                                className={`h-10 w-10 rounded-xl flex items-center justify-center transition-colors duration-300
-                                                    ${isExpanded
-                                                        ? 'bg-[#0C8346]'
-                                                        : 'bg-white/10 group-hover:bg-[#0C8346]'
-                                                    }
-                                                `}
-                                            >
-                                                {isExpanded ? (
-                                                    <X className="text-black w-5 h-5" />
-                                                ) : (
-                                                    <Plus className="text-white group-hover:text-black w-6 h-6 transition-colors duration-300" />
-                                                )}
-                                            </div>
-                                        </div>
-
-                                        {/* Expanded Content */}
-                                        <div
-                                            className={`px-8 transition-all duration-500 ease-in-out overflow-hidden
-                                                ${isExpanded ? 'max-h-[600px] opacity-100 pb-8' : 'max-h-0 opacity-0'}
-                                            `}
-                                        >
-                                            {item.content}
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </div>
-
-                    {/* Founder Section */}
-                    <div className="py-20 mb-20">
-                        <h2 className="text-3xl md:text-[40px] font-bold text-white mb-8 md:mb-12">
-                            Meet The Founder
-                        </h2>
-
-                        <p className="text-xl md:text-[24px] text-gray-400 font-light leading-relaxed mb-12 md:mb-20">
-                            <span className="text-white font-normal">Gavi Kothari</span>, the <span className="text-white font-normal">founder of Fostride</span>, is passionate about <span className="text-white font-normal">leveraging technology</span> for <span className="text-white font-normal">sustainability</span>. His <span className="text-white font-normal">innovative vision</span> and <span className="text-white font-normal">dedication</span> drive Fostride's mission to <span className="text-white font-normal">revolutionize waste management</span> and create a <span className="text-white font-normal">greener future</span>.
-                        </p>
-
-                        <div className="grid grid-cols-1 lg:grid-cols-[450px_1fr] gap-10 lg:gap-[60px] items-start">
-                            {/* Founder Image */}
-                            <div className="relative h-[604px] w-full max-w-md mx-auto lg:mx-0">
-                                {/* Green Shape Background */}
-                                <div className="absolute inset-x-8 bottom-0 top-20 bg-[#0C8346] rounded-t-full rounded-b-[40px]" />
-                                {/* Image - Using placeholder as actual asset is not available, tinted to match */}
-                                <Image
-                                    src="/images/founder.png"
-                                    alt="Gavi Kothari"
-                                    fill
-                                    className="object-cover object-top relative z-10 mix-blend-normal rounded-b-[40px]" // Rounded bottom to match shape
-                                />
-                                {/* Name Overlay */}
-                                <div className="absolute bottom-4 left-4 z-20 leading-none">
-                                    <span className="block text-[#0C8346] text-4xl font-bold">Gavi</span>
-                                    <span className="block text-white text-5xl font-black uppercase tracking-tighter">KOTHARI</span>
-                                </div>
-                            </div>
-
-                            {/* Founder Bio & Details */}
-                            <div className="space-y-8 pt-8">
-                                <p className="text-gray-300 leading-relaxed text-[16px] font-light">
-                                    Gavi Kothari is an accomplished professional who brings passion, innovation, and leadership to his endeavors. With a strong presence in the industry, Gavi has been instrumental in driving impactful initiatives. His expertise spans across various fields, combining technological innovation with sustainable practices to create value. Known for his strategic vision and dedication to excellence, Gavi has significantly influenced the trajectory of his projects, positioning himself as a respected figure and a mentor. His commitment to empowering teams and delivering exceptional results makes him a driving force in his domain.
-                                </p>
-
-                                {/* Tags */}
-                                <div className="flex gap-2 overflow-x-auto scrollbar-hide">
-                                    {[
-                                        { icon: <Atom size={16} className="text-[#0C8346]" />, text: "Visionary Thinker" },
-                                        { icon: <Users size={16} className="text-[#0C8346]" />, text: "Empathetic Leader" },
-                                        { icon: <Lightbulb size={16} className="text-[#0C8346]" />, text: "Creative Problem-Solver" },
-                                        { icon: <Heart size={16} className="text-[#0C8346]" />, text: "Passionate Mentor" }
-                                    ].map((tag, i) => (
-                                        <div key={i} className="flex items-center gap-2 px-3 py-2 bg-[#1a1a1a] rounded-full border border-white/5 whitespace-nowrap">
-                                            {tag.icon}
-                                            <span className="text-gray-300 text-xs font-medium">{tag.text}</span>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                {/* Socials */}
-                                <div className="space-y-3">
-                                    <h4 className="text-gray-400 font-medium">Socials:</h4>
-                                    <div className="flex gap-4">
-                                        {[
-                                            { label: "LINKEDIN", href: "https://in.linkedin.com/in/gavikothari" },
-                                            { label: "INSTAGRAM", href: "https://www.instagram.com/gavi.kothari/" },
-                                            { label: "MAIL", href: "mailto:gavi@fostride.com" }
-                                        ].map((item, i) => (
-                                            <a
-                                                key={i}
-                                                href={item.href}
-                                                target={item.label === 'MAIL' ? undefined : "_blank"}
-                                                rel={item.label === 'MAIL' ? undefined : "noopener noreferrer"}
-                                                className="group px-6 py-2 bg-[#0C8346] text-black font-light text-xs rounded-full flex items-center transition-colors"
-                                            >
-                                                {item.label}
-                                                <ArrowUpRight size={14} className="ml-1 transition-transform duration-300 group-hover:rotate-45" />
-                                            </a>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                {/* Featured In */}
-                                <div className="space-y-3 pt-4">
-                                    <h4 className="text-gray-400 font-medium">Featured In:</h4>
-                                    <div className="flex flex-wrap gap-4">
-                                        {[
-                                            { label: "THE HINDU IN SCHOOL", href: "https://drive.google.com/file/d/1QTAlZHICLFw7WFB1zexor9qMtQkkkqPl/view?usp=sharing" },
-                                            { label: "GUIDING YOUNG MINDS", href: "https://drive.google.com/file/d/1uQ9PFhs4yBvDeIlnDfK0SiUdbHSuVyU9/view?usp=sharing" },
-                                            { label: "SOMAIYA UNIVERSITY", href: "https://www.somaiya.edu/en/view-announcement/1018/" }
-                                        ].map((feature, i) => (
-                                            <a
-                                                key={i}
-                                                href={feature.href}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="px-6 py-2.5 border border-white/20 rounded-full text-xs font-light text-white tracking-wide uppercase hover:bg-[#0C8346] hover:text-white hover:border-transparent transition-colors cursor-pointer"
-                                            >
-                                                {feature.label}
-                                            </a>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    {/* Team Squad Section */}
-                    <div className="py-20 mb-20">
-                        {/* Header */}
-                        <div className="text-center mb-20 space-y-6">
-                            <div className="inline-block px-4 py-1.5 bg-[#111111] rounded-full border border-white/10">
-                                <span className="text-[#0C8346] text-[10px] font-bold tracking-widest uppercase">Team Members</span>
-                            </div>
-                            <h2 className="text-5xl md:text-7xl font-medium text-white tracking-tight leading-tight">
-                                Say Hello to Our<br />Squad
-                            </h2>
-                            <p className="text-gray-400 max-w-2xl mx-auto text-sm font-light leading-relaxed">
-                                Get ready to meet the faces behind the magic, the dreamers, the doers, and the unstoppable force driving our success.
-                            </p>
-                        </div>
-
-                        {/* Team Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {teamMembers.map((member, idx) => (
-                                <div
-                                    key={idx}
-                                    className="relative group h-[574px] w-full bg-white/5 backdrop-blur-[8px] rounded-[30px] overflow-hidden border border-white/5"
-                                >
-                                    {/* Text Background Layer */}
-                                    <div className={`absolute top-10 w-full z-10 leading-none select-none px-6 transition-transform duration-700 ease-out group-hover:-translate-y-6 ${member.align === 'split' ? '' :
-                                        member.align === 'right' ? 'text-right' :
-                                            member.align === 'left' ? 'text-left' : 'text-center'
-                                        }`}>
-                                        <h3 className={`font-bold text-[#0C8346] tracking-tighter mix-blend-screen ${member.align === 'split' ? 'text-left text-[50px] -ml-6' : 'scale-110 text-[60px]'}`}>
-                                            {member.bgText}
-                                        </h3>
-                                        <div
-                                            className={`text-white uppercase relative z-20 ${member.align === 'split' ? 'text-right mt-0 pr-0 -mr-6 font-light tracking-[-0.02em]' : '-mt-8 text-[13px] font-bold tracking-[0.2em]'}`}
-                                            style={member.align === 'split' ? { fontSize: '20px' } : undefined}
-                                        >
-                                            {member.smallText}
-                                        </div>
-                                    </div>
-
-                                    {/* Green Background Shape (Active State) */}
-                                    <div
-                                        className={`absolute bottom-0 left-0 right-0 h-[80%] bg-[#0C8346] rounded-t-[100%] z-15 transition-transform duration-700 ease-out ${activeMemberIndex === idx ? 'translate-y-0 scale-100' : 'translate-y-full scale-0'}`}
-                                        style={{ transformOrigin: 'bottom' }}
-                                    />
-
-                                    {/* Image Layer */}
-                                    <div className="absolute inset-0 z-20">
-                                        <Image
-                                            src={member.image}
-                                            alt={member.name}
-                                            fill
-                                            className={`object-cover object-bottom transition-all duration-700 ease-out 
-                                                ${activeMemberIndex === idx ? 'grayscale-0 translate-y-6' : 'grayscale contrast-125 group-hover:translate-y-14'}
-                                            `}
-                                        />
-                                    </div>
-
-                                    {/* Plus Button / Social Actions */}
-                                    <div className="absolute bottom-[76px] left-1/2 -translate-x-1/2 z-40 w-full flex justify-center">
-                                        {activeMemberIndex === idx ? (
-                                            <div className="flex items-center gap-3 animate-in fade-in zoom-in duration-300">
-                                                <button
-                                                    onClick={() => setActiveMemberIndex(null)}
-                                                    className="h-10 w-10 bg-[#e0e0e0] rounded-[14px] flex items-center justify-center hover:scale-110 transition-transform shadow-lg cursor-pointer text-black"
-                                                >
-                                                    <X size={20} />
-                                                </button>
-                                                <a
-                                                    href={member.linkedin}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="h-10 w-10 bg-[#e0e0e0] rounded-[14px] flex items-center justify-center hover:scale-110 transition-transform shadow-lg cursor-pointer text-black"
-                                                >
-                                                    <Linkedin size={20} />
-                                                </a>
-                                                <a
-                                                    href={member.mail}
-                                                    className="h-10 w-10 bg-[#e0e0e0] rounded-[14px] flex items-center justify-center hover:scale-110 transition-transform shadow-lg cursor-pointer text-black"
-                                                >
-                                                    <Mail size={20} />
-                                                </a>
-                                            </div>
-                                        ) : (
-                                            <button
-                                                onClick={() => setActiveMemberIndex(idx)}
-                                                className="h-10 w-10 bg-[#e0e0e0] rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-lg cursor-pointer"
-                                            >
-                                                <Plus className="text-black w-5 h-5" />
-                                            </button>
-                                        )}
-                                    </div>
-
-                                    {/* Name Card */}
-                                    <div className="absolute bottom-0 left-0 right-0 h-[96px] bg-[#111111] rounded-b-[30px] rounded-t-[20px] z-30 flex flex-col items-center justify-center border-t border-white/5">
-                                        <h4 className="text-white text-lg font-bold">{member.name}</h4>
-                                        <p className="text-gray-400 text-xs font-light tracking-wide">{member.role}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Values Section */}
-                    <div className="relative w-full py-40 mb-32 flex items-center justify-center overflow-hidden">
-                        <h2 className="text-[16.5vw] font-bold text-white tracking-widest leading-none select-none text-center">
-                            VALUES
-                        </h2>
-
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[366px] h-[366px] bg-white/5 backdrop-blur-[8px] rounded-full shadow-[0_0_50px_rgba(0,0,0,0.8)] flex items-center justify-center z-10 border border-white/5">
-                            <div className="relative w-full h-full flex flex-wrap items-center justify-center content-end gap-x-2 gap-y-3 pb-12 px-6 overflow-hidden">
-                                {[
-                                    { text: "Sustainability", r: "-rotate-6 translate-y-2" },
-                                    { text: "Impact", r: "rotate-12 translate-y-1" },
-                                    { text: "Positive Experience", r: "-rotate-3" },
-                                    { text: "Trustworthiness", r: "rotate-6" },
-                                    { text: "Circularity", r: "-rotate-12" },
-                                    { text: "Innovation", r: "rotate-3" },
-                                    { text: "Collaboration", r: "-rotate-3" },
-                                    { text: "Integrity", r: "rotate-6" },
-                                    { text: "Reliability", r: "-rotate-6" },
-                                    { text: "Quality", r: "rotate-2" }
-                                ].map((tag, i) => (
-                                    <div key={i} className={`flex items-center gap-1.5 px-3 py-1.5 bg-[#0C8346] text-black rounded-full shadow-lg transform ${tag.r} hover:scale-110 hover:z-20 transition-all duration-300 cursor-default border border-black/5`}>
-                                        <Atom size={12} className="text-black/70 mix-blend-multiply" />
-                                        <span className="font-light text-[10px] uppercase tracking-wide whitespace-nowrap">{tag.text}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-                    {/* FAQ Section */}
-                    <div className="py-20 mb-20">
-                        {/* Header */}
-                        <div className="text-center mb-16 space-y-6">
-                            <div className="inline-block px-4 py-1.5 bg-[#111111] rounded-full border border-white/10">
-                                <span className="text-[#0C8346] text-[10px] font-bold tracking-widest uppercase">Frequently Asked Questions</span>
-                            </div>
-                            <h2 className="text-5xl md:text-6xl font-medium text-white tracking-tight leading-tight">
-                                Got Questions?<br />We've Got Answers!
-                            </h2>
-                        </div>
-
-                        {/* FAQ List */}
-                        <div className="max-w-4xl mx-auto space-y-2">
-                            {[
-                                { q: "What is Fostride?", a: "Fostride is a sustainability-focused startup that leverages technology to revolutionize waste management. Our mission is to create a cleaner future by promoting recycling, upcycling, and waste-to-value initiatives." },
-                                { q: "How does Fostride work?", a: "Fostride connects individuals and businesses that generate waste with those who can recycle, repurpose, or upcycle it. Using AI-powered solutions, we track, analyze, and optimize waste management processes to ensure sustainability." },
-                                { q: "What phase is Fostride currently in?", a: "We are currently in the development and growth phase, focusing on refining our platform, onboarding partners, and expanding our reach in waste management ecosystems." },
-                                { q: "Who can join Fostride?", a: "Anyone can join Fostride! Whether you're a waste generator, recycler, environmental enthusiast, or an organization looking to manage waste sustainably, we have a role for you." },
-                                { q: "How can I get involved with Fostride?", a: "You can contribute by: - Registering as a waste generator or recycler on our platform.  - Partnering with us for sustainable waste management initiatives.  - Joining our team as a collaborator or volunteer." },
-                                { q: "What kind of waste does Fostride manage?", a: "Fostride manages a wide range of waste, including plastic, metal, organic waste, and e-waste. We focus on ensuring that every type of waste is handled responsibly and sustainably." },
-                                { q: "How does Fostride help the environment?", a: "By promoting recycling, upcycling, and reducing landfill usage, Fostride helps cut down pollution, conserve resources, and reduce the overall carbon footprint of waste management processes." },
-                                { q: "Is Fostride only for businesses, or can individuals join too?", a: "Fostride is open to both individuals and businesses. Whether you're an individual looking to responsibly dispose of waste or a business aiming to implement sustainable practices, we've got you covered." },
-                                { q: "How do I track the waste I contribute or recycle through Fostride?", a: "Our platform provides real-time analytics and dashboards to help you track the waste you generate, recycle, or repurpose. You'll see how your efforts are making a tangible impact on the environment." },
-                                { q: "Does Fostride offer partnerships or collaborations?", a: "Yes, we actively seek partnerships with businesses, NGOs, government organizations, and individuals to expand our waste management efforts and create innovative solutions." },
-                                { q: "Can I invest in Fostride?", a: "We welcome investors who believe in our vision of sustainable waste management. For more details, feel free to contact us through our website." },
-                                { q: "How can I contact the Fostride team?", a: "You can reach out to us via email at fostride@gmail.com. We'd be happy to answer your questions." }
-                            ].map((item, idx) => {
-                                const isExpanded = activeFaqIndex === idx;
-
-                                return (
-                                    <div
-                                        key={idx}
-                                        onClick={() => setActiveFaqIndex(isExpanded ? null : idx)}
-                                        className={`group flex flex-col w-full bg-[#111111] border border-white/10 overflow-hidden transition-all duration-500 ease-in-out cursor-pointer
-                                            ${isExpanded ? 'rounded-[30px] border-transparent' : 'rounded-[27px] hover:border-transparent'}
-                                        `}
-                                    >
-                                        <div className="flex items-center justify-between px-6 flex-shrink-0 h-[54px] w-full">
-                                            <span className={`text-sm transition-all duration-300 ease-in-out
-                                                ${isExpanded
-                                                    ? 'text-[#0C8346] font-normal translate-x-0'
-                                                    : 'text-white font-normal group-hover:font-light group-hover:text-[#0C8346] group-hover:translate-x-3'}
-                                            `}>
-                                                {item.q}
-                                            </span>
-                                            <div className={`h-8 w-8 rounded-lg flex items-center justify-center transition-colors duration-300
-                                                ${isExpanded
-                                                    ? 'bg-[#0C8346]'
-                                                    : 'bg-white/10 group-hover:bg-[#0C8346]'}
-                                            `}>
-                                                {isExpanded ? (
-                                                    <X className="text-black w-4 h-4" />
-                                                ) : (
-                                                    <Plus className="text-white group-hover:text-black w-4 h-4 transition-colors duration-300" />
-                                                )}
-                                            </div>
-                                        </div>
-
-                                        <div className={`px-6 transition-all duration-500 ease-in-out overflow-hidden ${isExpanded ? 'max-h-[200px] opacity-100 pb-6' : 'max-h-0 opacity-0'}`}>
-                                            <p className="text-gray-400 font-light text-sm leading-relaxed">{item.a}</p>
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </div>
-        </>
+function useReveal(threshold = 0.1) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true) },
+      { threshold }
     )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [threshold])
+  return { ref, visible }
 }
 
-function LinkButton({ icon }: { icon: React.ReactNode }) {
-    return (
-        <a href="#" className="p-3 bg-white/10 text-white rounded-full hover:bg-[#0C8346] hover:text-white transition-all hover:scale-110">
-            {icon}
-        </a>
-    )
+/* ─────────────────────────────────────────────── */
+/*  VALUES CARD                                     */
+/* ─────────────────────────────────────────────── */
+
+function ValueCard({
+  value,
+  active,
+  visible,
+  delay,
+  onClick,
+}: {
+  value: typeof VALUES[0]
+  active: boolean
+  visible: boolean
+  delay: number
+  onClick: () => void
+}) {
+  const Icon = value.icon
+  return (
+    <button
+      onClick={onClick}
+      className="group relative text-left w-full outline-none focus-visible:ring-2 focus-visible:ring-[#0C8346]"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(24px)",
+        transition: `opacity 0.6s ease ${delay}s, transform 0.6s ease ${delay}s`,
+      }}
+    >
+      <div
+        className={[
+          "relative rounded-2xl p-5 border transition-all duration-350 overflow-hidden h-full",
+          active
+            ? "border-[#0C8346]/70 bg-[#0C8346]/10 shadow-[0_0_32px_rgba(12,131,70,0.18)]"
+            : "border-white/8 bg-white/3 hover:border-[#0C8346]/35 hover:bg-[#0C8346]/5",
+        ].join(" ")}
+      >
+        {/* Active glow blob */}
+        {active && (
+          <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-[#0C8346]/20 blur-2xl pointer-events-none" />
+        )}
+
+        {/* Number */}
+        <span
+          className={[
+            "block text-[10px] font-bold uppercase tracking-widest mb-3 transition-colors duration-250",
+            active ? "text-[#0C8346]" : "text-gray-600 group-hover:text-[#0C8346]/70",
+          ].join(" ")}
+        >
+          {value.n}
+        </span>
+
+        {/* Icon */}
+        <div
+          className={[
+            "w-10 h-10 rounded-xl flex items-center justify-center mb-4 transition-all duration-250",
+            active
+              ? "bg-[#0C8346] shadow-[0_0_14px_rgba(12,131,70,0.5)]"
+              : "bg-white/8 group-hover:bg-[#0C8346]/20",
+          ].join(" ")}
+        >
+          <Icon
+            className={[
+              "w-5 h-5 transition-colors duration-250",
+              active ? "text-white" : "text-gray-400 group-hover:text-[#0C8346]",
+            ].join(" ")}
+          />
+        </div>
+
+        {/* Title */}
+        <h3
+          className={[
+            "font-bold text-base leading-tight mb-1 transition-colors duration-250",
+            active ? "text-[#22c55e]" : "text-white group-hover:text-[#22c55e]",
+          ].join(" ")}
+        >
+          {value.title}
+        </h3>
+
+        {/* Tagline */}
+        <p className="text-[11px] text-gray-500 font-medium uppercase tracking-widest mb-3">
+          {value.tagline}
+        </p>
+
+        {/* Description — visible when active */}
+        <div
+          className="overflow-hidden transition-all duration-400"
+          style={{ maxHeight: active ? "120px" : "0px", opacity: active ? 1 : 0 }}
+        >
+          <p className="text-gray-300 text-sm leading-relaxed">
+            {value.desc}
+          </p>
+        </div>
+
+        {/* Bottom indicator */}
+        <div
+          className={[
+            "absolute bottom-0 left-0 h-0.5 rounded-full transition-all duration-400",
+            active ? "w-full bg-gradient-to-r from-[#0C8346] to-[#22c55e]" : "w-0",
+          ].join(" ")}
+        />
+      </div>
+    </button>
+  )
+}
+
+/* ─────────────────────────────────────────────── */
+/*  MAIN                                            */
+/* ─────────────────────────────────────────────── */
+
+export function OurTeamBody() {
+  const [activeMemberIndex, setActiveMemberIndex]   = useState<number | null>(null)
+  const [activeAboutIndex, setActiveAboutIndex]     = useState<number | null>(null)
+  const [activeFaqIndex, setActiveFaqIndex]         = useState<number | null>(null)
+  const [activeValueIndex, setActiveValueIndex]     = useState<number | null>(null)
+
+  const aboutReveal  = useReveal()
+  const founderReveal = useReveal()
+  const teamReveal   = useReveal()
+  const valuesReveal = useReveal()
+  const faqReveal    = useReveal()
+
+  return (
+    <>
+      {/* ══════════════════════════════════════════ */}
+      {/*  ABOUT COMPANY                             */}
+      {/* ══════════════════════════════════════════ */}
+      <div
+        ref={aboutReveal.ref}
+        className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-[60px] py-16 lg:py-32 items-start"
+      >
+        {/* Left sticky */}
+        <div
+          className="space-y-6 lg:sticky lg:top-32"
+          style={{
+            opacity: aboutReveal.visible ? 1 : 0,
+            transform: aboutReveal.visible ? "translateX(0)" : "translateX(-24px)",
+            transition: "opacity 0.8s ease, transform 0.8s ease",
+          }}
+        >
+          <div className="inline-flex items-center gap-3 text-[#0C8346] text-xs font-semibold uppercase tracking-[0.2em]">
+            <div
+              className="h-px bg-[#0C8346]"
+              style={{ width: aboutReveal.visible ? "32px" : "0px", transition: "width 0.8s ease 0.3s" }}
+            />
+            Our Story
+          </div>
+          <h2 className="text-3xl md:text-[42px] font-bold text-white font-[family-name:var(--font-unbounded)] leading-tight">
+            About<br />
+            <span
+              style={{
+                background: "linear-gradient(135deg, #0C8346, #22c55e)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              Fostride
+            </span>
+          </h2>
+          <p className="text-gray-400 text-lg leading-relaxed">
+            We're passionate about sustainability and innovation — redefining waste as an opportunity for a greener tomorrow. From AI-powered sorting to grassroots initiatives, we're building infrastructure for a circular economy.
+          </p>
+        </div>
+
+        {/* Right accordion */}
+        <div
+          className="space-y-3"
+          style={{
+            opacity: aboutReveal.visible ? 1 : 0,
+            transform: aboutReveal.visible ? "translateX(0)" : "translateX(24px)",
+            transition: "opacity 0.8s ease 0.15s, transform 0.8s ease 0.15s",
+          }}
+        >
+          {[
+            {
+              title: "01. Our History",
+              content: "Fostride began in 2022 as a school competition idea. What started small has evolved into a full R&D effort focused on AI-powered waste sorting. In 2024 we directed focus entirely on expanding our capabilities — today Fostride is at the prototyping stage with two live pilots under our belt.",
+            },
+            {
+              title: "02. Our Mission",
+              content: "To revolutionize waste management through innovative technology, fostering a circular economy that minimizes environmental impact and creates sustainable value. We connect waste generators, recyclers, and upcyclers — empowering communities and reducing pollution.",
+            },
+            {
+              title: "03. Our Vision",
+              content: "To lead the global transition toward a zero-waste future — transforming waste into opportunities and creating a world where every resource is valued, reused, and repurposed for the benefit of people and the planet.",
+            },
+          ].map((item, index) => {
+            const isExpanded = activeAboutIndex === index
+            return (
+              <div
+                key={index}
+                onClick={() => setActiveAboutIndex(isExpanded ? null : index)}
+                className={[
+                  "group flex flex-col w-full border overflow-hidden transition-all duration-400 cursor-pointer",
+                  isExpanded
+                    ? "rounded-[24px] border-[#0C8346]/40 bg-[#0C8346]/8"
+                    : "rounded-[20px] border-white/8 bg-white/3 hover:border-[#0C8346]/25",
+                ].join(" ")}
+              >
+                <div className="flex items-center justify-between px-6 h-[68px] w-full">
+                  <span className={["text-[15px] transition-colors duration-250", isExpanded ? "text-[#22c55e] font-medium" : "text-white group-hover:text-[#0C8346]"].join(" ")}>
+                    {item.title}
+                  </span>
+                  <div className={["w-9 h-9 rounded-xl flex items-center justify-center transition-colors duration-250", isExpanded ? "bg-[#0C8346]" : "bg-white/8 group-hover:bg-[#0C8346]"].join(" ")}>
+                    {isExpanded
+                      ? <X className="text-white w-4 h-4" />
+                      : <Plus className="text-white group-hover:text-white w-4 h-4" />}
+                  </div>
+                </div>
+                <div className={["px-6 transition-all duration-400 overflow-hidden", isExpanded ? "max-h-[300px] opacity-100 pb-6" : "max-h-0 opacity-0"].join(" ")}>
+                  <p className="text-gray-300 text-sm leading-relaxed font-light">{item.content}</p>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* ══════════════════════════════════════════ */}
+      {/*  FOUNDER                                   */}
+      {/* ══════════════════════════════════════════ */}
+      <div ref={founderReveal.ref} className="py-20 mb-16">
+        <div
+          style={{
+            opacity: founderReveal.visible ? 1 : 0,
+            transform: founderReveal.visible ? "translateY(0)" : "translateY(28px)",
+            transition: "opacity 0.8s ease, transform 0.8s ease",
+          }}
+        >
+          <div className="inline-flex items-center gap-3 text-[#0C8346] text-xs font-semibold uppercase tracking-[0.2em] mb-5">
+            <div className="h-px bg-[#0C8346]" style={{ width: founderReveal.visible ? "32px" : "0px", transition: "width 0.8s ease 0.3s" }} />
+            Founder
+          </div>
+          <h2 className="text-3xl md:text-[42px] font-bold text-white font-[family-name:var(--font-unbounded)] leading-tight mb-4">
+            Meet The Founder
+          </h2>
+          <p className="text-gray-400 text-xl font-light leading-relaxed mb-12 max-w-2xl">
+            <span className="text-white font-normal">Gavi Kothari</span> — founder of Fostride — is passionate about{" "}
+            <span className="text-white font-normal">leveraging technology for sustainability</span>. His innovative vision drives our mission to{" "}
+            <span className="text-[#0C8346] font-semibold">revolutionize waste management</span>.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-10 lg:gap-[60px] items-start">
+          {/* Image */}
+          <div
+            className="relative h-[580px] w-full max-w-md mx-auto lg:mx-0"
+            style={{
+              opacity: founderReveal.visible ? 1 : 0,
+              transform: founderReveal.visible ? "translateX(0)" : "translateX(-28px)",
+              transition: "opacity 0.9s ease 0.2s, transform 0.9s ease 0.2s",
+            }}
+          >
+            <div className="absolute inset-x-8 bottom-0 top-20 bg-[#0C8346] rounded-t-full rounded-b-[40px]" />
+            <Image src="/images/founder.png" alt="Gavi Kothari" fill className="object-cover object-top relative z-10 mix-blend-normal rounded-b-[40px]" />
+            <div className="absolute bottom-4 left-4 z-20 leading-none">
+              <span className="block text-[#0C8346] text-4xl font-bold">Gavi</span>
+              <span className="block text-white text-5xl font-black uppercase tracking-tighter">KOTHARI</span>
+            </div>
+          </div>
+
+          {/* Details */}
+          <div
+            className="space-y-8 pt-4"
+            style={{
+              opacity: founderReveal.visible ? 1 : 0,
+              transform: founderReveal.visible ? "translateX(0)" : "translateX(28px)",
+              transition: "opacity 0.9s ease 0.35s, transform 0.9s ease 0.35s",
+            }}
+          >
+            <p className="text-gray-300 leading-relaxed text-[16px] font-light">
+              Gavi is an accomplished builder who combines technological innovation with sustainable practices to create genuine value. Known for his strategic vision and dedication to excellence, he's guided Fostride from a school project to a live AI system sorting waste in real campuses and commercial buildings.
+            </p>
+
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2">
+              {[
+                { icon: <Atom size={14} className="text-[#0C8346]" />, text: "Visionary Thinker" },
+                { icon: <Users size={14} className="text-[#0C8346]" />, text: "Empathetic Leader" },
+                { icon: <Lightbulb size={14} className="text-[#0C8346]" />, text: "Creative Problem-Solver" },
+                { icon: <Heart size={14} className="text-[#0C8346]" />, text: "Passionate Mentor" },
+              ].map((tag, i) => (
+                <div key={i} className="flex items-center gap-2 px-3 py-2 bg-[#0C8346]/10 border border-[#0C8346]/25 rounded-full">
+                  {tag.icon}
+                  <span className="text-gray-300 text-xs font-medium">{tag.text}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Socials */}
+            <div className="space-y-3">
+              <h4 className="text-gray-500 text-xs font-semibold uppercase tracking-widest">Connect</h4>
+              <div className="flex flex-wrap gap-3">
+                {[
+                  { label: "LinkedIn", href: "https://in.linkedin.com/in/gavikothari" },
+                  { label: "Instagram", href: "https://www.instagram.com/gavi.kothari/" },
+                  { label: "Mail", href: "mailto:gavi@fostride.com" },
+                ].map((item, i) => (
+                  <a
+                    key={i}
+                    href={item.href}
+                    target={item.label === "Mail" ? undefined : "_blank"}
+                    rel={item.label === "Mail" ? undefined : "noopener noreferrer"}
+                    className="group px-5 py-2 bg-[#0C8346] text-white font-medium text-xs rounded-full flex items-center gap-1.5 hover:bg-[#22c55e] transition-colors duration-200"
+                  >
+                    {item.label}
+                    <ArrowUpRight size={12} className="transition-transform duration-200 group-hover:rotate-45" />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Featured In */}
+            <div className="space-y-3">
+              <h4 className="text-gray-500 text-xs font-semibold uppercase tracking-widest">Featured In</h4>
+              <div className="flex flex-wrap gap-3">
+                {[
+                  { label: "The Hindu In School", href: "https://drive.google.com/file/d/1QTAlZHICLFw7WFB1zexor9qMtQkkkqPl/view?usp=sharing" },
+                  { label: "Guiding Young Minds", href: "https://drive.google.com/file/d/1uQ9PFhs4yBvDeIlnDfK0SiUdbHSuVyU9/view?usp=sharing" },
+                  { label: "Somaiya University", href: "https://www.somaiya.edu/en/view-announcement/1018/" },
+                ].map((feature, i) => (
+                  <a
+                    key={i}
+                    href={feature.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group px-5 py-2 border border-white/15 rounded-full text-xs font-medium text-gray-300 tracking-wide hover:bg-[#0C8346]/15 hover:border-[#0C8346]/40 hover:text-white transition-all duration-200 flex items-center gap-1.5"
+                  >
+                    {feature.label}
+                    <ArrowUpRight size={10} className="opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ══════════════════════════════════════════ */}
+      {/*  TEAM SQUAD                                */}
+      {/* ══════════════════════════════════════════ */}
+      <div ref={teamReveal.ref} className="py-20 mb-16">
+        <div
+          className="mb-16"
+          style={{
+            opacity: teamReveal.visible ? 1 : 0,
+            transform: teamReveal.visible ? "translateY(0)" : "translateY(24px)",
+            transition: "opacity 0.7s ease, transform 0.7s ease",
+          }}
+        >
+          <div className="inline-flex items-center gap-3 text-[#0C8346] text-xs font-semibold uppercase tracking-[0.2em] mb-5">
+            <div className="h-px bg-[#0C8346]" style={{ width: teamReveal.visible ? "32px" : "0px", transition: "width 0.8s ease 0.2s" }} />
+            Core Team
+            <div className="h-px bg-[#0C8346]" style={{ width: teamReveal.visible ? "32px" : "0px", transition: "width 0.8s ease 0.2s" }} />
+          </div>
+          <h2 className="text-5xl md:text-6xl font-bold font-[family-name:var(--font-unbounded)] text-white leading-tight mb-4">
+            Say Hello to Our{" "}
+            <span style={{ background: "linear-gradient(135deg, #0C8346, #22c55e)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              Squad
+            </span>
+          </h2>
+          <p className="text-gray-400 text-lg font-light max-w-xl">
+            The dreamers, the builders, and the relentless optimists behind W.I.S.E.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+          {teamMembers.map((member, idx) => (
+            <div
+              key={idx}
+              className="relative group h-[580px] w-full bg-white/4 backdrop-blur-sm rounded-[28px] overflow-hidden border border-white/6 hover:border-[#0C8346]/30 transition-colors duration-300"
+              style={{
+                opacity: teamReveal.visible ? 1 : 0,
+                transform: teamReveal.visible ? "translateY(0)" : "translateY(32px)",
+                transition: `opacity 0.6s ease ${0.1 + idx * 0.12}s, transform 0.6s ease ${0.1 + idx * 0.12}s`,
+              }}
+            >
+              {/* Background text */}
+              <div className="absolute top-8 w-full z-10 leading-none select-none px-6 transition-transform duration-700 ease-out group-hover:-translate-y-4">
+                <h3 className="font-bold text-[#0C8346] tracking-tighter mix-blend-screen text-left text-[48px] -ml-4">{member.bgText}</h3>
+                <div className="text-white uppercase text-right -mr-2 font-light tracking-[-0.01em]" style={{ fontSize: "18px" }}>{member.smallText}</div>
+              </div>
+
+              {/* Green bg shape (active) */}
+              <div
+                className={["absolute bottom-0 left-0 right-0 h-[80%] bg-[#0C8346] rounded-t-[100%] transition-all duration-700 ease-out z-[15]", activeMemberIndex === idx ? "translate-y-0 scale-100" : "translate-y-full scale-0"].join(" ")}
+                style={{ transformOrigin: "bottom" }}
+              />
+
+              {/* Photo */}
+              <div className="absolute inset-0 z-20">
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  fill
+                  className={["object-cover object-bottom transition-all duration-700 ease-out", activeMemberIndex === idx ? "grayscale-0 translate-y-6" : "grayscale contrast-125 group-hover:translate-y-12"].join(" ")}
+                />
+              </div>
+
+              {/* Social actions */}
+              <div className="absolute bottom-[100px] left-1/2 -translate-x-1/2 z-40 w-full flex justify-center">
+                {activeMemberIndex === idx ? (
+                  <div className="flex items-center gap-3 animate-in fade-in zoom-in duration-300">
+                    <button onClick={() => setActiveMemberIndex(null)} className="h-10 w-10 bg-white rounded-[14px] flex items-center justify-center hover:scale-110 transition-transform shadow-lg text-[#050505]"><X size={18} /></button>
+                    <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="h-10 w-10 bg-white rounded-[14px] flex items-center justify-center hover:scale-110 transition-transform shadow-lg text-[#050505]"><LinkedinIcon size={18} /></a>
+                    <a href={member.mail} className="h-10 w-10 bg-white rounded-[14px] flex items-center justify-center hover:scale-110 transition-transform shadow-lg text-[#050505]"><Mail size={18} /></a>
+                  </div>
+                ) : (
+                  <button onClick={() => setActiveMemberIndex(idx)} className="h-10 w-10 bg-white/90 rounded-full flex items-center justify-center hover:scale-110 hover:bg-[#0C8346] transition-all duration-200 shadow-lg group/btn">
+                    <Plus className="text-[#050505] group-hover/btn:text-white w-5 h-5 transition-colors duration-200" />
+                  </button>
+                )}
+              </div>
+
+              {/* Name card */}
+              <div className="absolute bottom-0 left-0 right-0 bg-[#0e0e0e] rounded-b-[28px] rounded-t-[18px] z-30 border-t border-white/5 px-5 py-4">
+                <h4 className="text-white text-base font-bold leading-tight">{member.name}</h4>
+                <p className="text-[#0C8346] text-[11px] font-semibold uppercase tracking-widest mt-0.5">{member.role}</p>
+                <p className="text-gray-500 text-xs font-light leading-snug mt-1.5 line-clamp-2">{member.bio}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ══════════════════════════════════════════ */}
+      {/*  VALUES — INTERACTIVE                      */}
+      {/* ══════════════════════════════════════════ */}
+      <div ref={valuesReveal.ref} className="py-24 mb-16">
+
+        {/* Header */}
+        <div
+          className="mb-12"
+          style={{
+            opacity: valuesReveal.visible ? 1 : 0,
+            transform: valuesReveal.visible ? "translateY(0)" : "translateY(24px)",
+            transition: "opacity 0.7s ease, transform 0.7s ease",
+          }}
+        >
+          <div className="inline-flex items-center gap-3 text-[#0C8346] text-xs font-semibold uppercase tracking-[0.2em] mb-5">
+            <div className="h-px bg-[#0C8346]" style={{ width: valuesReveal.visible ? "32px" : "0px", transition: "width 0.8s ease 0.2s" }} />
+            What We Stand For
+            <div className="h-px bg-[#0C8346]" style={{ width: valuesReveal.visible ? "32px" : "0px", transition: "width 0.8s ease 0.2s" }} />
+          </div>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <h2 className="text-4xl md:text-6xl font-bold font-[family-name:var(--font-unbounded)] text-white leading-tight">
+              Our{" "}
+              <span style={{ background: "linear-gradient(135deg, #0C8346, #22c55e)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                Values
+              </span>
+            </h2>
+            <p className="text-gray-500 text-sm max-w-xs leading-relaxed">
+              Click any value to explore what it means in practice at Fostride.
+            </p>
+          </div>
+        </div>
+
+        {/* Cards grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-4">
+          {VALUES.map((v, i) => (
+            <ValueCard
+              key={v.n}
+              value={v}
+              active={activeValueIndex === i}
+              visible={valuesReveal.visible}
+              delay={0.08 + i * 0.06}
+              onClick={() => setActiveValueIndex(activeValueIndex === i ? null : i)}
+            />
+          ))}
+        </div>
+
+        {/* Selected value detail panel */}
+        <div
+          className="mt-6 overflow-hidden transition-all duration-500"
+          style={{
+            maxHeight: activeValueIndex !== null ? "200px" : "0px",
+            opacity: activeValueIndex !== null ? 1 : 0,
+          }}
+        >
+          {activeValueIndex !== null && (
+            <div className="relative rounded-2xl border border-[#0C8346]/30 bg-[#0C8346]/6 px-6 py-5 flex gap-5 items-start">
+              <div className="w-10 h-10 rounded-xl bg-[#0C8346] flex-shrink-0 flex items-center justify-center shadow-[0_0_16px_rgba(12,131,70,0.4)]">
+                {(() => { const Icon = VALUES[activeValueIndex].icon; return <Icon className="text-white w-5 h-5" /> })()}
+              </div>
+              <div>
+                <div className="flex items-center gap-3 mb-2">
+                  <h3 className="text-white font-bold text-lg">{VALUES[activeValueIndex].title}</h3>
+                  <span className="text-[10px] text-[#0C8346] font-bold uppercase tracking-widest bg-[#0C8346]/15 px-2 py-0.5 rounded-full">
+                    {VALUES[activeValueIndex].tagline}
+                  </span>
+                </div>
+                <p className="text-gray-300 text-sm leading-relaxed max-w-2xl">{VALUES[activeValueIndex].desc}</p>
+              </div>
+              <button
+                onClick={() => setActiveValueIndex(null)}
+                className="ml-auto flex-shrink-0 w-7 h-7 rounded-lg bg-white/8 hover:bg-white/15 flex items-center justify-center transition-colors"
+              >
+                <X className="w-3.5 h-3.5 text-gray-400" />
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* ══════════════════════════════════════════ */}
+      {/*  FAQ                                       */}
+      {/* ══════════════════════════════════════════ */}
+      <div ref={faqReveal.ref} className="py-20 mb-20">
+        <div
+          className="text-center mb-14"
+          style={{
+            opacity: faqReveal.visible ? 1 : 0,
+            transform: faqReveal.visible ? "translateY(0)" : "translateY(24px)",
+            transition: "opacity 0.7s ease, transform 0.7s ease",
+          }}
+        >
+          <div className="inline-flex items-center gap-3 text-[#0C8346] text-xs font-semibold uppercase tracking-[0.2em] mb-5">
+            <div className="h-px bg-[#0C8346]" style={{ width: faqReveal.visible ? "32px" : "0px", transition: "width 0.8s ease" }} />
+            FAQ
+            <div className="h-px bg-[#0C8346]" style={{ width: faqReveal.visible ? "32px" : "0px", transition: "width 0.8s ease" }} />
+          </div>
+          <h2 className="text-4xl md:text-6xl font-bold font-[family-name:var(--font-unbounded)] text-white leading-tight">
+            Got Questions?<br />
+            <span style={{ background: "linear-gradient(135deg, #0C8346, #22c55e)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              We've Got Answers.
+            </span>
+          </h2>
+        </div>
+
+        <div className="max-w-4xl mx-auto space-y-2">
+          {[
+            { q: "What is Fostride?", a: "Fostride is a sustainability-focused startup that leverages AI to revolutionize waste management. Our flagship product, W.I.S.E., classifies and sorts waste in real time using computer vision, turning every disposed item into structured data." },
+            { q: "How does W.I.S.E. work?", a: "W.I.S.E. (Waste Intelligence & Sorting Engine) uses computer vision to identify waste items as they're disposed into R3Bin. It classifies each item, routes it to the correct compartment, logs the data, and sends it to your dashboard — all in milliseconds." },
+            { q: "What phase is Fostride currently in?", a: "We've completed two live pilots — Brookfield (Powai, Dec 2024) and KJ Somaiya College (Jan 2025) — and are currently achieving ~80% sorting accuracy. We're actively scaling to more deployments to hit our 95%+ target." },
+            { q: "Who can deploy Fostride?", a: "Anyone with waste. Campuses, corporate offices, airports, residential complexes, and municipalities are our primary targets. If you generate waste at scale and want actionable data, W.I.S.E. is for you." },
+            { q: "How can I get involved with Fostride?", a: "You can partner with us for a pilot deployment, invest in our mission, join our team, or simply reach out to explore how W.I.S.E. could work in your facility. Contact us at fostride@gmail.com." },
+            { q: "What types of waste does W.I.S.E. sort?", a: "Currently plastic, paper, metal, organic waste, and e-waste. Our model is continuously retrained on new data from each deployment, so the categories expand as the dataset grows." },
+            { q: "How does Fostride help the environment?", a: "By ensuring waste is correctly sorted at the source, W.I.S.E. increases recycling rates and reduces contamination — meaning more material actually gets recycled instead of ending up in landfill. Every deployment also generates carbon offset data." },
+            { q: "Can I invest in Fostride?", a: "Yes — we welcome investors who believe in the future of intelligent waste infrastructure. Reach out at gavi@fostride.com for a conversation." },
+          ].map((item, idx) => {
+            const isExpanded = activeFaqIndex === idx
+            return (
+              <div
+                key={idx}
+                onClick={() => setActiveFaqIndex(isExpanded ? null : idx)}
+                className={["group flex flex-col w-full border overflow-hidden transition-all duration-400 cursor-pointer", isExpanded ? "rounded-[22px] border-[#0C8346]/35 bg-[#0C8346]/6" : "rounded-[18px] border-white/8 bg-white/2 hover:border-[#0C8346]/20"].join(" ")}
+                style={{
+                  opacity: faqReveal.visible ? 1 : 0,
+                  transform: faqReveal.visible ? "translateY(0)" : "translateY(16px)",
+                  transition: `opacity 0.5s ease ${0.05 + idx * 0.04}s, transform 0.5s ease ${0.05 + idx * 0.04}s`,
+                }}
+              >
+                <div className="flex items-center justify-between px-6 h-[56px] w-full">
+                  <span className={["text-sm font-medium transition-colors duration-250", isExpanded ? "text-[#22c55e]" : "text-white group-hover:text-[#0C8346]"].join(" ")}>
+                    {item.q}
+                  </span>
+                  <div className={["w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 ml-4 transition-colors duration-250", isExpanded ? "bg-[#0C8346]" : "bg-white/8 group-hover:bg-[#0C8346]"].join(" ")}>
+                    {isExpanded ? <X className="text-white w-3.5 h-3.5" /> : <Plus className="text-white w-3.5 h-3.5" />}
+                  </div>
+                </div>
+                <div className={["px-6 transition-all duration-400 overflow-hidden", isExpanded ? "max-h-[200px] opacity-100 pb-5" : "max-h-0 opacity-0"].join(" ")}>
+                  <p className="text-gray-400 text-sm leading-relaxed font-light">{item.a}</p>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </>
+  )
 }
