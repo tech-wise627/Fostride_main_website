@@ -2,7 +2,6 @@ import { BackgroundPattern } from "@/components/landing/background-pattern"
 import { Navbar } from "@/components/landing/navbar"
 import { HomeLandingHero } from "@/components/landing/home-landing-hero"
 import { MarqueeStrip } from "@/components/landing/marquee-strip"
-import { ScrollGuide } from "@/components/landing/scroll-guide"
 import dynamic from "next/dynamic"
 
 const SectionLoader = () => (
@@ -78,7 +77,6 @@ export default function Home() {
         <CompaniesTicker />
         <div id="section-cta"><BoldCTA /></div>
         <Footer />
-        <ScrollGuide />
       </div>
     </main>
   )
