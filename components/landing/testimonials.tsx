@@ -1,105 +1,169 @@
 "use client"
 
-import { Star, Quote } from "lucide-react"
-import Image from "next/image"
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from "@/components/ui/carousel"
+import { Star } from "lucide-react"
 
 const testimonials = [
-    {
-        name: "Gaurang Shetty",
-        role: "CEO, RIIDL",
-        image: "/images/team/gaurang-shetty.png",
-        content: "Watching Fostride grow from an inspired idea into a purpose-driven organization has been nothing short of remarkable. The team’s dedication to reducing waste generation and transforming communities into cleaner, healthier spaces is a reflection of their deep sense of responsibility toward the planet. Fostride doesn’t just manage waste, it redefines how we think about sustainability and environmental care. I’m proud to have mentored such a passionate and forward-thinking team that is truly making the world a less wasteful and more livable place.",
-    },
-    {
-        name: "Michael Johnson",
-        role: "CEO, Brightsun",
-        image: "/images/team/aryan-nair.png",
-        content: "Fostride has been instrumental in transforming our sustainability goals. Their expertise across various waste processing channels, coupled with their data-driven approach, has significantly boosted our efficiency.",
-    },
-    {
-        name: "Sarah Williams",
-        role: "Director, EcoTech Solutions",
-        image: "/images/team/gobind-singh.png",
-        content: "The level of insight provided by Fostride's analytics platform is unmatched. We can now track our waste generation in real-time and make informed decisions that save costs and protect the environment.",
-    },
+  {
+    name: "Gaurang Shetty",
+    role: "CEO, RIIDL",
+    initials: "GS",
+    color: "#0C8346",
+    content:
+      "Watching Fostride grow from an inspired idea into a purpose-driven organization has been nothing short of remarkable. The team's dedication to reducing waste and transforming communities is truly inspiring.",
+  },
+  {
+    name: "Priya Mehta",
+    role: "Sustainability Director, GreenLoop",
+    initials: "PM",
+    color: "#16a34a",
+    content:
+      "Fostride's AI-powered sorting platform gave us real-time visibility we never had before. Our recycling efficiency jumped 40% within the first quarter of deployment.",
+  },
+  {
+    name: "Michael Johnson",
+    role: "CEO, Brightsun",
+    initials: "MJ",
+    color: "#0C8346",
+    content:
+      "Fostride has been instrumental in transforming our sustainability goals. Their expertise across waste processing channels, coupled with their data-driven approach, significantly boosted our efficiency.",
+  },
+  {
+    name: "Sarah Williams",
+    role: "Director, EcoTech Solutions",
+    initials: "SW",
+    color: "#15803d",
+    content:
+      "The level of insight provided by Fostride's analytics platform is unmatched. We can now track waste generation in real-time and make informed decisions that save costs and protect the environment.",
+  },
+  {
+    name: "Arjun Kapoor",
+    role: "Head of Operations, CircleWaste",
+    initials: "AK",
+    color: "#0C8346",
+    content:
+      "Integrating Fostride's W.I.S.E. system into our facility was seamless. The accuracy of the AI sorting blew us away — 99%+ precision on mixed waste streams.",
+  },
+  {
+    name: "Lena Braun",
+    role: "VP Sustainability, NovaPack",
+    initials: "LB",
+    color: "#16a34a",
+    content:
+      "We've tried several waste management solutions, but Fostride stands apart. Their technology is genuinely next-generation and the team is incredibly responsive and knowledgeable.",
+  },
 ]
 
+// Duplicate for seamless infinite loop
+const row1 = [...testimonials, ...testimonials]
+const row2 = [...testimonials.slice(3), ...testimonials.slice(0, 3), ...testimonials.slice(3), ...testimonials.slice(0, 3)]
+
+function TestimonialCard({ t }: { t: typeof testimonials[0] }) {
+  return (
+    <div
+      className="flex-shrink-0 w-[340px] md:w-[380px] rounded-[24px] p-6 flex flex-col gap-4 mx-3"
+      style={{
+        background: "rgba(255,255,255,0.03)",
+        border: "1px solid rgba(255,255,255,0.07)",
+      }}
+    >
+      {/* Stars */}
+      <div className="flex gap-0.5">
+        {[1, 2, 3, 4, 5].map((s) => (
+          <Star key={s} size={13} className="fill-[#0C8346] text-[#0C8346]" />
+        ))}
+      </div>
+
+      {/* Quote */}
+      <p className="text-[13.5px] leading-relaxed font-light text-gray-300 flex-1">
+        &ldquo;{t.content}&rdquo;
+      </p>
+
+      {/* Author */}
+      <div className="flex items-center gap-3 pt-3 border-t border-white/5">
+        <div
+          className="w-9 h-9 rounded-full flex items-center justify-center text-[11px] font-bold text-white flex-shrink-0"
+          style={{ background: `${t.color}30`, border: `1px solid ${t.color}50` }}
+        >
+          {t.initials}
+        </div>
+        <div>
+          <p className="text-white text-sm font-semibold leading-none mb-0.5">{t.name}</p>
+          <p className="text-gray-500 text-[11px] uppercase tracking-wider">{t.role}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export function Testimonials() {
-    return (
-        <section className="relative w-full min-h-[60vh] py-20 flex flex-col justify-center overflow-hidden">
-            <div className="text-center mb-16 z-10 relative px-4">
-                <h2 className="text-4xl md:text-6xl font-bold font-[family-name:var(--font-unbounded)] text-white tracking-tight">
-                    Testimonials
-                </h2>
-            </div>
+  return (
+    <section className="relative w-full py-24 overflow-hidden">
+      {/* Edge fades */}
+      <div className="absolute top-0 left-0 w-28 h-full bg-gradient-to-r from-[#070503] to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-28 h-full bg-gradient-to-l from-[#070503] to-transparent z-10 pointer-events-none" />
 
-            <div className="relative z-10 w-full px-4 md:px-0">
-                <Carousel
-                    opts={{
-                        align: "center",
-                        loop: true,
-                    }}
-                    className="w-full relative"
-                >
-                    {/* Navigation Arrows at Screen Edges - Outside the hidden content */}
-                    <CarouselPrevious className="absolute left-8 top-1/2 -translate-y-1/2 h-14 w-14 border-white/10 bg-black/20 hover:bg-[#0C8346] hover:border-[#0C8346] text-white transition-all hidden md:flex z-20" />
-                    <CarouselNext className="absolute right-8 top-1/2 -translate-y-1/2 h-14 w-14 border-white/10 bg-black/20 hover:bg-[#0C8346] hover:border-[#0C8346] text-white transition-all hidden md:flex z-20" />
+      {/* Header */}
+      <div className="text-center mb-14 px-4 relative z-10">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#0C8346]/25 bg-[#0C8346]/8 mb-5">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#0C8346]" style={{ animation: "dotBlink 1.6s ease-in-out infinite" }} />
+          <span className="text-[#0C8346] text-[11px] font-semibold tracking-widest uppercase">What People Say</span>
+        </div>
+        <h2 className="text-4xl md:text-6xl font-bold font-[family-name:var(--font-unbounded)] text-white tracking-tight leading-tight">
+          Trusted by<br />
+          <span
+            style={{
+              background: "linear-gradient(135deg, #0C8346 0%, #22c55e 50%, #0C8346 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            pioneers.
+          </span>
+        </h2>
+      </div>
 
-                    {/* Centered Constrained Wrapper for Content - Hides adjacent slides */}
-                    <div className="max-w-3xl mx-auto overflow-hidden">
-                        <CarouselContent className="-ml-0">
-                            {testimonials.map((testimonial, index) => (
-                                <CarouselItem key={index} className="basis-full pl-0">
-                                    <div className="bg-white/5 backdrop-blur-[10px] border border-white/10 p-8 md:p-10 rounded-[40px] relative group hover:border-[#0C8346]/50 transition-colors duration-300 mx-4">
-                                        {/* Green Quote Icon */}
-                                        <div className="absolute top-8 left-8 text-[#0C8346] opacity-50">
-                                            <Quote size={60} className="fill-[#0C8346]/20" />
-                                        </div>
+      {/* Row 1 — scroll left */}
+      <div className="flex overflow-hidden mb-4 group">
+        <div
+          className="flex items-stretch group-hover:[animation-play-state:paused]"
+          style={{ animation: "marqueeLeft 35s linear infinite" }}
+        >
+          {row1.map((t, i) => (
+            <TestimonialCard key={`r1a-${i}`} t={t} />
+          ))}
+        </div>
+        <div
+          className="flex items-stretch group-hover:[animation-play-state:paused]"
+          style={{ animation: "marqueeLeft 35s linear infinite" }}
+          aria-hidden
+        >
+          {row1.map((t, i) => (
+            <TestimonialCard key={`r1b-${i}`} t={t} />
+          ))}
+        </div>
+      </div>
 
-                                        <div className="relative z-10 space-y-6">
-                                            {/* Stars */}
-                                            <div className="flex gap-1">
-                                                {[1, 2, 3, 4, 5].map((star) => (
-                                                    <Star key={star} size={16} className="text-[#0C8346] fill-[#0C8346]" />
-                                                ))}
-                                            </div>
-
-                                            {/* Content */}
-                                            <p className="text-gray-300 text-lg leading-relaxed font-light">
-                                                "{testimonial.content}"
-                                            </p>
-
-                                            {/* User Profile */}
-                                            <div className="flex items-center gap-4 pt-4 border-t border-white/5">
-                                                <div className="relative h-12 w-12 rounded-full overflow-hidden border border-white/10">
-                                                    {/* Use a generic avatar if specific ones aren't suitable, but sticking to placeholders for now */}
-                                                    <Image
-                                                        src={testimonial.image}
-                                                        alt={testimonial.name}
-                                                        fill
-                                                        className="object-cover"
-                                                    />
-                                                </div>
-                                                <div>
-                                                    <h4 className="text-white font-bold text-base">{testimonial.name}</h4>
-                                                    <p className="text-gray-500 text-xs uppercase tracking-wider font-medium">{testimonial.role}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </CarouselItem>
-                            ))}
-                        </CarouselContent>
-                    </div>
-                </Carousel>
-            </div>
-        </section>
-    )
+      {/* Row 2 — scroll right */}
+      <div className="flex overflow-hidden group">
+        <div
+          className="flex items-stretch group-hover:[animation-play-state:paused]"
+          style={{ animation: "marqueeRight 40s linear infinite" }}
+        >
+          {row2.map((t, i) => (
+            <TestimonialCard key={`r2a-${i}`} t={t} />
+          ))}
+        </div>
+        <div
+          className="flex items-stretch group-hover:[animation-play-state:paused]"
+          style={{ animation: "marqueeRight 40s linear infinite" }}
+          aria-hidden
+        >
+          {row2.map((t, i) => (
+            <TestimonialCard key={`r2b-${i}`} t={t} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
 }
