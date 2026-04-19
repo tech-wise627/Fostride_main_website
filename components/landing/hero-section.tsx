@@ -14,32 +14,28 @@ const features = [
     label: "AI Vision",
     description: "50k+ Training Set",
     detail: "Computer vision classifies every item in under 500ms — on-device, no cloud needed.",
-    position: "top-8 -left-4 lg:-left-12",
-    lineDir: "right",
+    position: "top-8 -left-4 lg:-left-14",
   },
   {
     icon: Wifi,
     label: "IoT Sensors",
     description: "Real-time monitoring",
     detail: "Fill-level, weight, and temperature sensors stream live data every 15 minutes.",
-    position: "top-1/3 -right-4 lg:-right-16",
-    lineDir: "left",
+    position: "top-1/3 -right-4 lg:-right-14",
   },
   {
     icon: BarChart3,
     label: "Analytics",
     description: "Live dashboard",
     detail: "Every sort becomes a data point — trends, predictions, and ESG reports, automatically.",
-    position: "bottom-1/3 -left-4 lg:-left-16",
-    lineDir: "right",
+    position: "bottom-1/3 -left-4 lg:-left-14",
   },
   {
     icon: Leaf,
     label: "Eco Impact",
     description: "Track carbon savings",
     detail: "CO₂ offset, diversion rates, and recycler routing — measurable impact from day one.",
-    position: "bottom-16 -right-4 lg:-right-12",
-    lineDir: "left",
+    position: "bottom-20 -right-4 lg:-right-14",
   },
 ]
 
@@ -154,103 +150,107 @@ export function HeroSection() {
               </div>
             </div>
 
-            {/* ── RIGHT — original product showcase + interactive callouts ── */}
-            <div className="relative order-1 lg:order-2 flex items-center justify-center py-8 lg:py-0">
-              {/* Glowing backdrop */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-64 h-64 lg:w-96 lg:h-96 rounded-full bg-[#0C8346]/20 blur-[100px] animate-pulse" />
-              </div>
+            {/* ── RIGHT — product showcase ── */}
+            <div className="relative order-1 lg:order-2 flex flex-col items-center justify-center py-8 lg:py-0 gap-4">
 
-              {/* Product image container */}
-              <div className="relative z-10 group">
-                {/* Rotating rings */}
-                <div className="absolute inset-0 -m-8 lg:-m-12 rounded-full border border-[#0C8346]/20 animate-[spin_20s_linear_infinite]">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#0C8346]" />
-                </div>
-                <div className="absolute inset-0 -m-16 lg:-m-24 rounded-full border border-[#0C8346]/10 animate-[spin_30s_linear_infinite_reverse]">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#0C8346]/50" />
+              {/* Product + callouts wrapper */}
+              <div className="relative flex items-center justify-center w-full">
+
+                {/* Glowing backdrop */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="w-64 h-64 lg:w-96 lg:h-96 rounded-full bg-[#0C8346]/20 blur-[100px] animate-pulse" />
                 </div>
 
                 {/* Product image */}
-                <div className="relative w-64 h-80 sm:w-72 sm:h-96 lg:w-80 lg:h-[28rem] transition-transform duration-500 group-hover:scale-105">
-                  <Image
-                    src="/images/r3bin-product.svg"
-                    alt="R3Bin Smart Waste Management System"
-                    fill
-                    className="object-contain"
-                    priority
-                  />
-                </div>
+                <div className="relative z-10 group">
+                  {/* Rotating rings */}
+                  <div className="absolute inset-0 -m-8 lg:-m-12 rounded-full border border-[#0C8346]/20 animate-[spin_20s_linear_infinite]">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#0C8346]" />
+                  </div>
+                  <div className="absolute inset-0 -m-16 lg:-m-24 rounded-full border border-[#0C8346]/10 animate-[spin_30s_linear_infinite_reverse]">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#0C8346]/50" />
+                  </div>
 
-                {/* ── Interactive feature callouts ── */}
-                {features.map((feature, index) => {
-                  const Icon = feature.icon
-                  const isActive = activeFeature === index
-                  return (
-                    <button
-                      key={feature.label}
-                      className={cn(
-                        "absolute z-20 transition-all duration-300 text-left outline-none",
-                        feature.position
-                      )}
-                      onClick={() => setActiveFeature(isActive ? null : index)}
-                    >
-                      <div
-                        className={cn(
-                          "flex items-start gap-3 rounded-xl border backdrop-blur-md p-3 shadow-lg transition-all duration-300",
-                          isActive
-                            ? "bg-[#0a0a0a]/95 border-[#0C8346]/60 shadow-[0_0_20px_rgba(12,131,70,0.25)]"
-                            : "bg-[#0a0a0a]/80 border-[#0C8346]/20 hover:border-[#0C8346]/45"
-                        )}
+                  <div className="relative w-64 h-80 sm:w-72 sm:h-96 lg:w-80 lg:h-[28rem] transition-transform duration-500 group-hover:scale-105">
+                    <Image
+                      src="/images/r3bin-product.svg"
+                      alt="R3Bin Smart Waste Management System"
+                      fill
+                      className="object-contain"
+                      priority
+                    />
+                  </div>
+
+                  {/* ── Callout chips — compact, never expand ── */}
+                  {features.map((feature, index) => {
+                    const Icon = feature.icon
+                    const isActive = activeFeature === index
+                    return (
+                      <button
+                        key={feature.label}
+                        className={cn("absolute z-20 text-left outline-none transition-all duration-250", feature.position)}
+                        onClick={() => setActiveFeature(isActive ? null : index)}
                       >
                         <div
                           className={cn(
-                            "h-10 w-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-300",
-                            isActive ? "bg-[#0C8346]" : "bg-[#0C8346]/20"
+                            "flex items-center gap-2.5 rounded-xl border backdrop-blur-md px-3 py-2.5 shadow-lg transition-all duration-250 whitespace-nowrap",
+                            isActive
+                              ? "bg-[#0a0a0a]/95 border-[#0C8346]/60 shadow-[0_0_18px_rgba(12,131,70,0.3)]"
+                              : "bg-[#0a0a0a]/80 border-white/10 hover:border-[#0C8346]/40"
                           )}
                         >
-                          <Icon className={cn("h-5 w-5 transition-colors", isActive ? "text-white" : "text-[#0C8346]")} />
-                        </div>
-                        <div>
-                          <div className={cn("text-sm font-semibold whitespace-nowrap transition-colors duration-200", isActive ? "text-[#22c55e]" : "text-white")}>
-                            {feature.label}
+                          <div className={cn("h-8 w-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-250", isActive ? "bg-[#0C8346]" : "bg-[#0C8346]/20")}>
+                            <Icon className={cn("h-4 w-4 transition-colors", isActive ? "text-white" : "text-[#0C8346]")} />
                           </div>
-                          <div className="text-xs text-gray-500 whitespace-nowrap">{feature.description}</div>
-                          {/* Expanded detail */}
-                          <div
-                            className="overflow-hidden transition-all duration-350"
-                            style={{ maxHeight: isActive ? "60px" : "0px", opacity: isActive ? 1 : 0 }}
-                          >
-                            <p className="text-xs text-gray-300 leading-snug mt-1.5 max-w-[160px]">
-                              {feature.detail}
-                            </p>
+                          <div>
+                            <div className={cn("text-xs font-semibold transition-colors duration-200", isActive ? "text-[#22c55e]" : "text-white")}>
+                              {feature.label}
+                            </div>
+                            <div className="text-[10px] text-gray-500">{feature.description}</div>
                           </div>
                         </div>
-                      </div>
+                        {/* Connecting line */}
+                        <div
+                          className={cn(
+                            "absolute top-1/2 h-px transition-all duration-250",
+                            isActive ? "bg-[#0C8346]/50" : "bg-white/15",
+                            index % 2 === 0
+                              ? "right-0 translate-x-full w-4 lg:w-8"
+                              : "left-0 -translate-x-full w-4 lg:w-8 rotate-180"
+                          )}
+                        />
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
 
-                      {/* Connecting line */}
-                      <div
-                        className={cn(
-                          "absolute top-1/2 h-px transition-all duration-300",
-                          isActive ? "bg-gradient-to-r from-[#0C8346]/60 to-transparent" : "bg-gradient-to-r from-[#0C8346]/30 to-transparent",
-                          index % 2 === 0
-                            ? "right-0 translate-x-full w-4 lg:w-8"
-                            : "left-0 -translate-x-full w-4 lg:w-8 rotate-180"
-                        )}
-                      />
-                    </button>
-                  )
-                })}
+              {/* ── Detail panel — appears BELOW bin when a card is active ── */}
+              <div
+                className="w-full max-w-sm transition-all duration-350 overflow-hidden"
+                style={{
+                  maxHeight: activeFeature !== null ? "72px" : "0px",
+                  opacity: activeFeature !== null ? 1 : 0,
+                }}
+              >
+                {activeFeature !== null && (
+                  <div className="flex items-start gap-3 bg-[#0a0a0a]/90 border border-[#0C8346]/35 rounded-2xl px-4 py-3 backdrop-blur-md shadow-[0_4px_24px_rgba(12,131,70,0.18)]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#0C8346] flex-shrink-0 mt-1.5" style={{ animation: "dotBlink 1.6s ease-in-out infinite" }} />
+                    <p className="text-xs text-gray-300 leading-relaxed">
+                      {features[activeFeature].detail}
+                    </p>
+                  </div>
+                )}
               </div>
 
               {/* Bottom badges */}
-              <div className="absolute -bottom-4 sm:bottom-0 left-1/2 -translate-x-1/2 flex items-center gap-2 sm:gap-4 w-full justify-center px-2">
+              <div className="flex items-center gap-3 mt-1">
                 <div className="flex items-center gap-2 rounded-full border border-[#0C8346]/25 bg-[#0a0a0a]/80 backdrop-blur-md px-4 py-2">
-                  <Sparkles className="h-4 w-4 text-[#0C8346]" />
+                  <Sparkles className="h-3.5 w-3.5 text-[#0C8346]" />
                   <span className="text-xs text-gray-400">AI-Powered</span>
                 </div>
                 <div className="flex items-center gap-2 rounded-full border border-[#0C8346]/25 bg-[#0a0a0a]/80 backdrop-blur-md px-4 py-2">
-                  <Shield className="h-4 w-4 text-[#0C8346]" />
+                  <Shield className="h-3.5 w-3.5 text-[#0C8346]" />
                   <span className="text-xs text-gray-400">Enterprise Ready</span>
                 </div>
               </div>
