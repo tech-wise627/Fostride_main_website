@@ -1,6 +1,8 @@
 import { BackgroundPattern } from "@/components/landing/background-pattern"
 import { Navbar } from "@/components/landing/navbar"
 import { HomeLandingHero } from "@/components/landing/home-landing-hero"
+import { MarqueeStrip } from "@/components/landing/marquee-strip"
+import { ScrollGuide } from "@/components/landing/scroll-guide"
 import dynamic from "next/dynamic"
 
 const SectionLoader = () => (
@@ -56,25 +58,27 @@ const Footer = dynamic(
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#050505] text-foreground relative">
+    <main className="min-h-screen bg-[#070503] text-foreground relative">
       {/* Geometric Background Pattern */}
       <BackgroundPattern />
 
       {/* Dark overlay gradient */}
-      <div className="fixed inset-0 z-0 pointer-events-none bg-gradient-to-b from-[#050505]/90 via-[#050505]/60 to-[#050505]/90" />
+      <div className="fixed inset-0 z-0 pointer-events-none bg-gradient-to-b from-[#070503]/90 via-[#070503]/60 to-[#070503]/90" />
 
       <div className="relative z-10">
         <Navbar />
-        <HomeLandingHero />
-        <ImpactStatsStrip />
-        <HowItWorks />
-        <DataFlywheel />
-        <PilotsTimeline />
-        <WhatWeWorkFor />
+        <div id="section-hero"><HomeLandingHero /></div>
+        <MarqueeStrip />
+        <div id="section-impact"><ImpactStatsStrip /></div>
+        <div id="section-how"><HowItWorks /></div>
+        <div id="section-flywheel"><DataFlywheel /></div>
+        <div id="section-pilots"><PilotsTimeline /></div>
+        <div id="section-sectors"><WhatWeWorkFor /></div>
         <Testimonials />
         <CompaniesTicker />
-        <BoldCTA />
+        <div id="section-cta"><BoldCTA /></div>
         <Footer />
+        <ScrollGuide />
       </div>
     </main>
   )
