@@ -14,6 +14,11 @@ const ProblemSection = dynamic(
   { loading: () => <SectionLoader />, ssr: true }
 )
 
+const WhatFostrideDoes = dynamic(
+  () => import("@/components/landing/what-fostride-does").then((m) => m.WhatFostrideDoes),
+  { loading: () => <SectionLoader />, ssr: true }
+)
+
 const HowItWorks = dynamic(
   () => import("@/components/landing/how-it-works").then((m) => m.HowItWorks),
   { loading: () => <SectionLoader />, ssr: true }
@@ -67,6 +72,7 @@ export default function Home() {
         <Navbar />
         <div id="section-hero"><HomeLandingHero /></div>
         <div id="section-problem"><ProblemSection /></div>
+        <div id="section-what"><WhatFostrideDoes /></div>
         <div id="section-how"><HowItWorks /></div>
         <div id="section-flywheel"><DataFlywheel /></div>
         <div id="section-pilots"><PilotsTimeline /></div>
