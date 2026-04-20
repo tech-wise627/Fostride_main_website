@@ -4,6 +4,14 @@ import { Star } from "lucide-react"
 
 const testimonials = [
   {
+    name: "Amrit Om Nayak",
+    role: "Founder, Indra Waters",
+    initials: "AN",
+    color: "#0C8346",
+    content:
+      "Fostride's real strength goes well beyond hardware and lies in the intelligence layer it is building around waste. The smart bin is the hook that can shape behaviour and improve segregation. The deeper long-term value is in the data, analytics, and operating intelligence that can help cities, campuses, waste companies, machine manufacturers, and project sites understand waste composition, asset performance, and user behaviour far more clearly. That layer has the potential to become the real engine for better decisions, smarter operations, and more accountable waste management systems.",
+  },
+  {
     name: "Gaurang Shetty",
     role: "CEO, RIIDL",
     initials: "GS",
