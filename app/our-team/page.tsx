@@ -75,7 +75,7 @@ export default function OurTeam() {
             {/* Stats row */}
             <div className="flex flex-wrap justify-center gap-10 pt-10 border-t border-white/8">
               {[
-                { v: "2022", l: "Founded" },
+                { v: "2024", l: "Founded" },
                 { v: "5+",   l: "Core Team" },
                 { v: "2",    l: "Live Pilots" },
                 { v: "~80%", l: "AI Accuracy" },
