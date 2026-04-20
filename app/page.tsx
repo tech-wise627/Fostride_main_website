@@ -9,6 +9,11 @@ const SectionLoader = () => (
   </div>
 )
 
+const ProblemSection = dynamic(
+  () => import("@/components/landing/problem-section").then((m) => m.ProblemSection),
+  { loading: () => <SectionLoader />, ssr: true }
+)
+
 const HowItWorks = dynamic(
   () => import("@/components/landing/how-it-works").then((m) => m.HowItWorks),
   { loading: () => <SectionLoader />, ssr: true }
@@ -61,6 +66,7 @@ export default function Home() {
       <div className="relative z-10">
         <Navbar />
         <div id="section-hero"><HomeLandingHero /></div>
+        <div id="section-problem"><ProblemSection /></div>
         <div id="section-how"><HowItWorks /></div>
         <div id="section-flywheel"><DataFlywheel /></div>
         <div id="section-pilots"><PilotsTimeline /></div>
