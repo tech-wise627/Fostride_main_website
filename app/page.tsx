@@ -1,18 +1,12 @@
 import { BackgroundPattern } from "@/components/landing/background-pattern"
 import { Navbar } from "@/components/landing/navbar"
 import { HomeLandingHero } from "@/components/landing/home-landing-hero"
-import { MarqueeStrip } from "@/components/landing/marquee-strip"
 import dynamic from "next/dynamic"
 
 const SectionLoader = () => (
   <div className="w-full py-20 min-h-[30vh] flex flex-col items-center justify-center gap-4 text-[#0C8346]/40">
     <div className="w-8 h-8 border-[3px] border-[#0C8346]/20 border-t-[#0C8346] rounded-full animate-spin" />
   </div>
-)
-
-const ImpactStatsStrip = dynamic(
-  () => import("@/components/landing/impact-stats-strip").then((m) => m.ImpactStatsStrip),
-  { loading: () => <SectionLoader />, ssr: true }
 )
 
 const HowItWorks = dynamic(
@@ -67,8 +61,6 @@ export default function Home() {
       <div className="relative z-10">
         <Navbar />
         <div id="section-hero"><HomeLandingHero /></div>
-        <MarqueeStrip />
-        <div id="section-impact"><ImpactStatsStrip /></div>
         <div id="section-how"><HowItWorks /></div>
         <div id="section-flywheel"><DataFlywheel /></div>
         <div id="section-pilots"><PilotsTimeline /></div>
