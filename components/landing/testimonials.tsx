@@ -59,6 +59,14 @@ const testimonials = [
     content:
       "We've tried several waste management solutions, but Fostride stands apart. Their technology is genuinely next-generation and the team is incredibly responsive and knowledgeable.",
   },
+  {
+    name: "Kriti Gupta",
+    role: "Partner Relationship Manager, Nasscom",
+    initials: "KG",
+    color: "#16a34a",
+    content:
+      "Fostride brings clarity and intelligence to waste management. Its W.I.S.E. powered system enables accurate segregation and real time data, making sustainability measurable and actionable for organisations.",
+  },
 ]
 
 // Duplicate for seamless infinite loop
