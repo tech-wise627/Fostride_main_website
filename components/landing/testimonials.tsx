@@ -118,16 +118,18 @@ export function Testimonials() {
         </div>
         <h2 className="text-4xl md:text-6xl font-bold font-[family-name:var(--font-unbounded)] text-white tracking-tight leading-tight">
           Trusted by<br />
-          <span
-            style={{
-              background: "linear-gradient(135deg, #0C8346 0%, #22c55e 50%, #0C8346 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            pioneers.
-          </span>
+            <span
+              style={{
+                background: "linear-gradient(135deg, #0C8346 0%, #22c55e 50%, #0C8346 100%)",
+                backgroundSize: "200% auto",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                animation: "gradientShift 3s ease-in-out infinite",
+              }}
+            >
+              pioneers.
+            </span>
         </h2>
       </div>
 
