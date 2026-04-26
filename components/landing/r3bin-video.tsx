@@ -95,7 +95,7 @@ export function R3binVideo() {
           {/* Video */}
           <video
             ref={videoRef}
-            src="/videos/myvideo3.mov"
+            src="/videos/myvideo3.mp4"
             loop
             muted
             playsInline
