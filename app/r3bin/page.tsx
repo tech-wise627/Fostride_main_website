@@ -12,7 +12,7 @@ const SectionLoader = () => (
 
 const R3binVideo = dynamic(
   () => import("@/components/landing/r3bin-video").then((m) => m.R3binVideo),
-  { loading: () => <SectionLoader />, ssr: false }
+  { loading: () => <SectionLoader />, ssr: true }
 )
 
 const R3binProducts = dynamic(
