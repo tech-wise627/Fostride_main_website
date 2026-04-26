@@ -10,6 +10,11 @@ const SectionLoader = () => (
   </div>
 )
 
+const R3binVideo = dynamic(
+  () => import("@/components/landing/r3bin-video").then((m) => m.R3binVideo),
+  { loading: () => <SectionLoader />, ssr: false }
+)
+
 const R3binProducts = dynamic(
   () => import("@/components/landing/r3bin-products"),
   { loading: () => <SectionLoader />, ssr: true }
@@ -35,6 +40,7 @@ export default function ProductsPage() {
         <Navbar />
         <main>
           <HeroSection />
+          <R3binVideo />
           <R3binProducts />
           <R3binTechSpecs />
           <BoldCTA />
