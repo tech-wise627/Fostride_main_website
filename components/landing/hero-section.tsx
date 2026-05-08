@@ -12,7 +12,7 @@ const features = [
   {
     icon: Brain,
     label: "AI Vision",
-    description: "50k+ Training Set",
+    description: "65K+ Images Scanned",
     detail: "Computer vision classifies every item in under 500ms — on-device, no cloud needed.",
     position: "top-8 -left-4 lg:-left-14",
   },

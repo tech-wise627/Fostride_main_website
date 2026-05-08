@@ -23,7 +23,7 @@ const FEATURES = [
     icon: Cpu,
     title: "W.I.S.E. AI",
     tagline: "On-device computer vision.",
-    stat: "94%+",
+    stat: "85%",
     statLabel: "Sort accuracy",
     points: [
       "12MP camera + depth sensing, classifies in <500ms",
