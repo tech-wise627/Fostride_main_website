@@ -1,168 +1,288 @@
 "use client"
-import { BackgroundPattern } from "@/components/landing/background-pattern";
 
 import { useState } from "react"
 import { Navbar } from "@/components/landing/navbar"
 import { Footer } from "@/components/landing/footer"
-import { MessageCircle, Phone, Mail, Users, Instagram, Linkedin, Clock } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { ChatWidget } from "@/components/support/chat-widget"
+import { Mail, MapPin, Phone, Clock } from "lucide-react"
 
-export default function SupportPage() {
-  const [isChatOpen, setIsChatOpen] = useState(false)
+export default function ContactPage() {
+  const [form, setForm] = useState({ name: "", email: "", company: "", message: "" })
+  const [sent, setSent] = useState(false)
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    const subject = encodeURIComponent(`Enquiry from ${form.name}${form.company ? ` — ${form.company}` : ""}`)
+    const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\n\n${form.message}`)
+    window.location.href = `mailto:fostride@gmail.com?subject=${subject}&body=${body}`
+    setSent(true)
+  }
 
   return (
-    <div className="min-h-screen bg-[#050505] text-foreground relative">
-      {/* Geometric Background Pattern Component */}
-            <BackgroundPattern />
+    <div className="min-h-screen bg-[#050505] text-foreground">
+      <Navbar />
 
-      {/* Dark Overlay Gradient */}
-      <div className="fixed inset-0 z-0 pointer-events-none bg-gradient-to-b from-[#050505]/90 via-[#050505]/60 to-[#050505]/90" />
+      <main className="pt-[70px]">
 
-      <div className="relative z-10 flex flex-col min-h-screen">
-        <Navbar />
-
-        <main className="flex-1 pt-[110px] pb-20 px-4 lg:px-8">
-          {/* Hero Section */}
-          <section className="bg-transparent">
-            <div className="mx-auto max-w-4xl text-center">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 text-balance">
-                How can we help you?
-              </h1>
+        {/* Hero */}
+        <section className="relative py-20 px-6 overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none"
+            style={{ background: "radial-gradient(ellipse 70% 60% at 50% 0%, rgba(12,131,70,0.07) 0%, transparent 70%)" }} />
+          <div className="max-w-4xl mx-auto text-center relative z-10">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#0C8346]/25 bg-[#0C8346]/8 mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#0C8346]" />
+              <span className="text-[#0C8346] text-[11px] font-semibold tracking-widest uppercase">Get In Touch</span>
             </div>
-          </section>
+            <h1 className="font-extrabold leading-tight tracking-tight font-[family-name:var(--font-unbounded)] mb-4"
+              style={{ fontSize: "clamp(32px,5.5vw,64px)", color: "#EDE8E0" }}>
+              Let&apos;s Talk.
+            </h1>
+            <p className="text-[16px] font-light leading-relaxed max-w-lg mx-auto" style={{ color: "#6B6358" }}>
+              Whether you&apos;re interested in a pilot, a partnership, or just want to learn more — we&apos;re here.
+            </p>
+          </div>
+        </section>
 
-          {/* Support Options */}
-          <section className="py-12">
-            <div className="mx-auto max-w-7xl">
-              <div className="grid md:grid-cols-12 gap-6">
-                <Card className="md:col-span-4 bg-white/5 backdrop-blur-[8px] border-white/5 transition-all duration-300 cursor-pointer group relative overflow-hidden h-full flex flex-col">
-                  <CardContent className="p-6 text-center relative z-10 flex flex-col h-full">
-                    <div className="w-14 h-14 rounded-full bg-[#0C8346]/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                      <Users className="h-7 w-7 text-[#0C8346]" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-white mb-6">Follow Us</h3>
-                    <div className="flex items-center justify-center gap-4 mb-6">
-                      <a
-                        href="https://www.instagram.com/fostride/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-3 bg-white/10 rounded-full hover:bg-[#E1306C] hover:text-white transition-all hover:scale-110 group/insta"
-                        aria-label="Instagram"
-                      >
-                        <Instagram className="h-6 w-6 text-white group-hover/insta:text-white" />
-                      </a>
-                      <a
-                        href="https://www.linkedin.com/company/fostride/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-3 bg-white/10 rounded-full hover:bg-[#0077b5] hover:text-white transition-all hover:scale-110 group/linkedin"
-                        aria-label="LinkedIn"
-                      >
-                        <Linkedin className="h-6 w-6 text-white group-hover/linkedin:text-white" />
-                      </a>
-                    </div>
-                    <p className="text-[16px] text-gray-400 font-light mt-auto leading-tight">
-                      Stay updated with our latest news and updates
-                    </p>
-                  </CardContent>
-                </Card>
+        {/* Main grid */}
+        <section className="px-6 pb-24">
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-[1fr_420px] gap-8">
 
-                <Card className="md:col-span-4 bg-white/5 backdrop-blur-[8px] border-white/5 transition-colors cursor-pointer h-full flex flex-col">
-                  <CardContent className="p-6 text-center flex flex-col h-full">
-                    <div className="w-14 h-14 rounded-full bg-blue-500/10 flex items-center justify-center mx-auto mb-4">
-                      <Phone className="h-7 w-7 text-blue-400" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-white mb-6">Phone Support</h3>
-                    <div className="flex items-center justify-center mb-6">
-                      <a
-                        href="tel:+919818801050"
-                        className="px-6 py-3 bg-white/10 rounded-full hover:bg-white/20 transition-all hover:scale-105 active:scale-95"
-                      >
-                        <p className="text-lg text-white font-semibold">
-                          +91 9818801050
-                        </p>
-                      </a>
-                    </div>
-                    <p className="text-[16px] text-gray-400 font-light mt-auto leading-tight">
-                      Mon-Fri, 8AM-8PM IST
-                    </p>
-                  </CardContent>
-                </Card>
+            {/* Contact form */}
+            <div className="rounded-3xl p-8 md:p-10"
+              style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)" }}>
+              <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.2em] uppercase mb-6"
+                style={{ color: "#1A6B3C" }}>
+                <span className="w-5 h-px bg-current" />Send a Message
+              </span>
 
-                <Card className="md:col-span-4 bg-white/5 backdrop-blur-[8px] border-white/5 transition-colors cursor-pointer h-full flex flex-col">
-                  <CardContent className="p-6 text-center flex flex-col h-full">
-                    <div className="w-14 h-14 rounded-full bg-purple-500/10 flex items-center justify-center mx-auto mb-4">
-                      <Mail className="h-7 w-7 text-purple-400" />
+              {sent ? (
+                <div className="flex flex-col items-center justify-center py-16 text-center gap-4">
+                  <div className="w-14 h-14 rounded-full flex items-center justify-center"
+                    style={{ background: "rgba(26,107,60,0.15)", border: "1px solid rgba(26,107,60,0.3)" }}>
+                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                      <path d="M4 11l5 5L18 6" stroke="#1A6B3C" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <p className="text-white font-semibold text-lg">Your email client is opening.</p>
+                  <p className="text-[14px]" style={{ color: "#6B6358" }}>We&apos;ll get back to you within 24 hours.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                  <div className="grid md:grid-cols-2 gap-5">
+                    <div className="flex flex-col gap-2">
+                      <label className="text-[11px] uppercase tracking-widest font-medium" style={{ color: "#4A4540" }}>
+                        Full Name <span style={{ color: "#1A6B3C" }}>*</span>
+                      </label>
+                      <input
+                        required
+                        type="text"
+                        placeholder="Gavi Kothari"
+                        value={form.name}
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        className="rounded-xl px-4 py-3 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#1A6B3C]/50"
+                        style={{
+                          background: "rgba(255,255,255,0.03)",
+                          border: "1px solid rgba(255,255,255,0.08)",
+                        }}
+                      />
                     </div>
-                    <h3 className="text-lg font-semibold text-white mb-6">Email Support</h3>
-                    <div className="flex items-center justify-center mb-6">
-                      <a
-                        href="mailto:support@fostride.com"
-                        className="px-6 py-3 bg-white/10 rounded-full hover:bg-white/20 transition-all hover:scale-105 active:scale-95"
-                      >
-                        <p className="text-lg text-white font-semibold">
-                          support@fostride.com
-                        </p>
-                      </a>
+                    <div className="flex flex-col gap-2">
+                      <label className="text-[11px] uppercase tracking-widest font-medium" style={{ color: "#4A4540" }}>
+                        Email <span style={{ color: "#1A6B3C" }}>*</span>
+                      </label>
+                      <input
+                        required
+                        type="email"
+                        placeholder="you@company.com"
+                        value={form.email}
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        className="rounded-xl px-4 py-3 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#1A6B3C]/50"
+                        style={{
+                          background: "rgba(255,255,255,0.03)",
+                          border: "1px solid rgba(255,255,255,0.08)",
+                        }}
+                      />
                     </div>
-                    <p className="text-[16px] text-gray-400 font-light mt-auto leading-tight">
-                      Response within 4 hours
-                    </p>
-                  </CardContent>
-                </Card>
+                  </div>
 
-                {/* Map Tile */}
-                <Card className="md:col-span-7 bg-white/5 backdrop-blur-[8px] border-white/5 overflow-hidden h-[420px] p-0">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    loading="lazy"
-                    allowFullScreen
-                    referrerPolicy="no-referrer-when-downgrade"
-                    src="https://maps.google.com/maps?q=Riidl+520,+Bhaskaracharya+building,+Somaiya+Vidyavihar+Campus,+Vidyavihar,+Mumbai+400077&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                    title="Fostride Office Location"
-                  ></iframe>
-                </Card>
+                  <div className="flex flex-col gap-2">
+                    <label className="text-[11px] uppercase tracking-widest font-medium" style={{ color: "#4A4540" }}>
+                      Organisation
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Company / University / Municipality"
+                      value={form.company}
+                      onChange={(e) => setForm({ ...form, company: e.target.value })}
+                      className="rounded-xl px-4 py-3 text-[14px] text-white outline-none transition-all duration-200 focus:border-[#1A6B3C]/50"
+                      style={{
+                        background: "rgba(255,255,255,0.03)",
+                        border: "1px solid rgba(255,255,255,0.08)",
+                      }}
+                    />
+                  </div>
 
-                {/* Operational Hours Tile */}
-                <Card className="md:col-span-5 bg-white/5 backdrop-blur-[8px] border-white/5 transition-colors cursor-pointer h-[420px] flex flex-col justify-center items-center">
-                  <CardContent className="p-8 text-center flex flex-col h-full w-full justify-center">
-                    <div className="w-14 h-14 rounded-full bg-orange-500/10 flex items-center justify-center mx-auto mb-6">
-                      <Clock className="h-7 w-7 text-orange-400" />
-                    </div>
-                    <h3 className="text-2xl font-semibold text-white mb-8">Operational Hours</h3>
+                  <div className="flex flex-col gap-2">
+                    <label className="text-[11px] uppercase tracking-widest font-medium" style={{ color: "#4A4540" }}>
+                      Message <span style={{ color: "#1A6B3C" }}>*</span>
+                    </label>
+                    <textarea
+                      required
+                      rows={5}
+                      placeholder="Tell us about your project or what you're looking for..."
+                      value={form.message}
+                      onChange={(e) => setForm({ ...form, message: e.target.value })}
+                      className="rounded-xl px-4 py-3 text-[14px] text-white outline-none resize-none transition-all duration-200 focus:border-[#1A6B3C]/50"
+                      style={{
+                        background: "rgba(255,255,255,0.03)",
+                        border: "1px solid rgba(255,255,255,0.08)",
+                      }}
+                    />
+                  </div>
 
-                    <div className="space-y-4 w-full max-w-sm mx-auto">
-                      <div className="flex justify-between items-center border-b border-white/10 pb-3">
-                        <span className="text-gray-400 font-medium">Mon - Fri</span>
-                        <span className="text-white font-semibold">9:00 AM - 8:30 PM</span>
-                      </div>
-                      <div className="flex justify-between items-center border-b border-white/10 pb-3">
-                        <span className="text-gray-400 font-medium">Saturday</span>
-                        <span className="text-white font-semibold">10:00 AM - 6:30 PM</span>
-                      </div>
-                      <div className="flex justify-between items-center pt-1">
-                        <span className="text-gray-400 font-medium">Sunday</span>
-                        <span className="text-red-400 font-semibold">Closed</span>
-                      </div>
+                  <button
+                    type="submit"
+                    className="self-start font-semibold text-sm px-8 py-3.5 rounded-full transition-all duration-300 hover:opacity-90 hover:scale-[1.02]"
+                    style={{ background: "#1A6B3C", color: "#fff" }}
+                  >
+                    Send Message
+                  </button>
+                </form>
+              )}
+            </div>
+
+            {/* Right column */}
+            <div className="flex flex-col gap-5">
+
+              {/* Contact details */}
+              <div className="rounded-3xl p-7"
+                style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.2em] uppercase mb-6"
+                  style={{ color: "#1A6B3C" }}>
+                  <span className="w-5 h-px bg-current" />Contact Details
+                </span>
+
+                <div className="flex flex-col gap-5">
+                  <a href="mailto:fostride@gmail.com"
+                    className="flex items-start gap-4 group">
+                    <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                      style={{ background: "rgba(26,107,60,0.12)", border: "1px solid rgba(26,107,60,0.25)" }}>
+                      <Mail size={14} color="#1A6B3C" />
                     </div>
-                  </CardContent>
-                </Card>
+                    <div>
+                      <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: "#3A3830" }}>Email</p>
+                      <p className="text-[14px] text-white group-hover:text-[#1A6B3C] transition-colors">fostride@gmail.com</p>
+                    </div>
+                  </a>
+
+                  <a href="tel:+919818801050"
+                    className="flex items-start gap-4 group">
+                    <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                      style={{ background: "rgba(26,107,60,0.12)", border: "1px solid rgba(26,107,60,0.25)" }}>
+                      <Phone size={14} color="#1A6B3C" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: "#3A3830" }}>Phone</p>
+                      <p className="text-[14px] text-white group-hover:text-[#1A6B3C] transition-colors">+91 98188 01050</p>
+                    </div>
+                  </a>
+
+                  <div className="flex items-start gap-4">
+                    <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                      style={{ background: "rgba(26,107,60,0.12)", border: "1px solid rgba(26,107,60,0.25)" }}>
+                      <MapPin size={14} color="#1A6B3C" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: "#3A3830" }}>Address</p>
+                      <p className="text-[14px] leading-relaxed" style={{ color: "#6B6358" }}>
+                        RIIDL — Room 520, Bhaskaracharya Building<br />
+                        Somaiya Vidyavihar Campus<br />
+                        Vidyavihar, Mumbai — 400077
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </section>
-        </main>
 
-        <Footer />
-      </div>
-      <ChatWidget isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
+              {/* Hours */}
+              <div className="rounded-3xl p-7"
+                style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ background: "rgba(26,107,60,0.12)", border: "1px solid rgba(26,107,60,0.25)" }}>
+                    <Clock size={14} color="#1A6B3C" />
+                  </div>
+                  <span className="text-[11px] font-semibold tracking-[0.2em] uppercase" style={{ color: "#1A6B3C" }}>
+                    Office Hours
+                  </span>
+                </div>
+                <div className="flex flex-col gap-3">
+                  {[
+                    { day: "Monday – Friday", hours: "9:00 AM – 8:30 PM" },
+                    { day: "Saturday", hours: "10:00 AM – 6:30 PM" },
+                    { day: "Sunday", hours: "Closed", closed: true },
+                  ].map((row) => (
+                    <div key={row.day} className="flex justify-between items-center py-2.5"
+                      style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+                      <span className="text-[13px]" style={{ color: "#6B6358" }}>{row.day}</span>
+                      <span className="text-[13px] font-semibold"
+                        style={{ color: row.closed ? "#F87171" : "#EDE8E0" }}>
+                        {row.hours}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Social */}
+              <div className="rounded-3xl p-7"
+                style={{ background: "rgba(26,107,60,0.04)", border: "1px solid rgba(26,107,60,0.15)" }}>
+                <p className="text-[11px] font-semibold tracking-[0.2em] uppercase mb-4" style={{ color: "#1A6B3C" }}>
+                  Follow Fostride
+                </p>
+                <div className="flex gap-3">
+                  <a href="https://www.linkedin.com/company/fostride/" target="_blank" rel="noopener noreferrer"
+                    className="flex items-center gap-2.5 px-4 py-2.5 rounded-full text-[12px] font-medium transition-all duration-200 hover:opacity-80"
+                    style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)", color: "#EDE8E0" }}>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+                    </svg>
+                    LinkedIn
+                  </a>
+                  <a href="https://www.instagram.com/fostride/" target="_blank" rel="noopener noreferrer"
+                    className="flex items-center gap-2.5 px-4 py-2.5 rounded-full text-[12px] font-medium transition-all duration-200 hover:opacity-80"
+                    style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)", color: "#EDE8E0" }}>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    </svg>
+                    Instagram
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        {/* Map */}
+        <section className="px-6 pb-24">
+          <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden"
+            style={{ border: "1px solid rgba(255,255,255,0.07)", height: "380px" }}>
+            <iframe
+              width="100%"
+              height="100%"
+              style={{ border: 0, filter: "grayscale(30%) brightness(0.85)" }}
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+              src="https://maps.google.com/maps?q=Riidl+520,+Bhaskaracharya+building,+Somaiya+Vidyavihar+Campus,+Vidyavihar,+Mumbai+400077&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              title="Fostride Office Location"
+            />
+          </div>
+        </section>
+
+      </main>
+
+      <Footer />
     </div>
   )
-}
-
-function Loading() {
-  return null
 }

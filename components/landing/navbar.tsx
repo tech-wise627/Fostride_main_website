@@ -12,8 +12,8 @@ const navItems = [
   { label: "Home", href: "/" },
   { label: "R3Bin", href: "/r3bin" },
   { label: "Case Studies", href: "/case-studies" },
-  { label: "Contact Us", href: "/contact" },
   { label: "Our Team", href: "/our-team" },
+  { label: "Contact Us", href: "/contact" },
 ]
 
 export function Navbar() {
