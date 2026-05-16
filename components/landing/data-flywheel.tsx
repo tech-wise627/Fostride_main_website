@@ -2,402 +2,354 @@
 
 import { useEffect, useRef, useState } from "react"
 
-const NODES = [
-  { label: "Real-World", sub: "Waste Data" },
-  { label: "W.I.S.E.", sub: "Learns & Trains" },
-  { label: "Smarter", sub: "Sorting" },
-  { label: "More", sub: "Deployments" },
-  { label: "Proprietary", sub: "Data Moat" },
-]
-
 const STEPS = [
   {
+    num: "01",
     title: "Real-World Waste Data",
-    desc: "Captured at the source through R3Bin — structured, labelled, and timestamped.",
+    desc: "Every item sorted by R3Bin is captured, labelled, and timestamped at the source.",
+    angle: -90,
   },
   {
+    num: "02",
     title: "W.I.S.E. Learns & Trains",
-    desc: "Models continuously improve using real-world datasets — increasing accuracy over time.",
+    desc: "Models retrain continuously on real-world data — accuracy compounds over time.",
+    angle: -18,
   },
   {
+    num: "03",
     title: "Smarter Sorting",
-    desc: "Better models drive higher segregation accuracy and cleaner material streams.",
+    desc: "Higher accuracy means cleaner material streams and more reliable recycler outputs.",
+    angle: 54,
   },
   {
+    num: "04",
     title: "More Deployments",
-    desc: "Improved performance drives adoption across campuses, enterprises, and cities.",
+    desc: "Better performance drives adoption across campuses, enterprises, and cities.",
+    angle: 126,
   },
   {
+    num: "05",
     title: "Proprietary Data Moat",
-    desc: "Each deployment adds unique data — building a dataset competitors cannot replicate.",
+    desc: "Each new deployment adds unique data — building a dataset no competitor can buy.",
+    angle: 198,
   },
 ]
 
-const LOOP = ["More data", "Better models", "Higher accuracy", "More deployments"]
+const LOOP = ["More Data", "Better AI", "Higher Accuracy", "More Deployments"]
 
-function useReveal(threshold = 0.08) {
+const R = 130   // SVG circle radius
+const CX = 200  // SVG viewBox center X
+const CY = 200  // SVG viewBox center Y
+
+function nodePos(angle: number) {
+  const rad = (angle * Math.PI) / 180
+  return { x: CX + R * Math.cos(rad), y: CY + R * Math.sin(rad) }
+}
+
+function useReveal() {
   const ref = useRef<HTMLElement>(null)
   const [visible, setVisible] = useState(false)
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true) },
-      { threshold }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [threshold])
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true) }, { threshold: 0.08 })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
   return { ref, visible }
 }
 
 export function DataFlywheel() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const { ref: sectionRef, visible } = useReveal()
-  const rafRef = useRef<number>(0)
-
-  useEffect(() => {
-    if (!visible) return
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
-
-    let startTime: number | null = null
-    const N = NODES.length
-
-    const setSize = () => {
-      const dpr = window.devicePixelRatio || 1
-      const rect = canvas.getBoundingClientRect()
-      canvas.width = rect.width * dpr
-      canvas.height = rect.height * dpr
-      ctx.scale(dpr, dpr)
-    }
-    setSize()
-    window.addEventListener("resize", setSize)
-
-    const particles = Array.from({ length: 55 }, (_, idx) => ({
-      nodeIdx: idx % N,
-      t: Math.random(),
-      speed: 0.003 + Math.random() * 0.003,
-      size: 1.5 + Math.random() * 2,
-      alpha: 0.35 + Math.random() * 0.45,
-    }))
-
-    const draw = (ts: number) => {
-      if (!startTime) startTime = ts
-      const sec = (ts - startTime) / 1000
-
-      const rect = canvas.getBoundingClientRect()
-      const W = rect.width
-      const H = rect.height
-      const cx = W / 2
-      const cy = H / 2
-      // Slightly larger R to fill the dedicated column
-      const R = Math.min(W * 0.38, H * 0.34)
-      const rot = sec * 0.10
-
-      ctx.clearRect(0, 0, W, H)
-
-      // Moat rings — expand slowly
-      const moat = Math.min(sec / 90, 1)
-      for (let ring = 0; ring < 5; ring++) {
-        const rr = R + 30 + ring * 18 + moat * ring * 16
-        ctx.beginPath()
-        ctx.arc(cx, cy, rr, 0, Math.PI * 2)
-        ctx.setLineDash(ring % 2 === 0 ? [] : [5, 12])
-        ctx.strokeStyle = `rgba(12,131,70,${0.08 - ring * 0.012})`
-        ctx.lineWidth = 1
-        ctx.stroke()
-      }
-      ctx.setLineDash([])
-
-      // Node positions (rotate over time)
-      const positions = NODES.map((_, i) => {
-        const a = (i / N) * Math.PI * 2 - Math.PI / 2 + rot
-        return { x: cx + Math.cos(a) * R, y: cy + Math.sin(a) * R }
-      })
-
-      // Spokes from center
-      positions.forEach(({ x, y }) => {
-        ctx.beginPath()
-        ctx.moveTo(cx, cy)
-        ctx.lineTo(x, y)
-        ctx.strokeStyle = "rgba(12,131,70,0.06)"
-        ctx.lineWidth = 1
-        ctx.stroke()
-      })
-
-      // Curved directional arrows between nodes
-      for (let i = 0; i < N; i++) {
-        const from = positions[i]
-        const to = positions[(i + 1) % N]
-        const mx = (from.x + to.x) / 2
-        const my = (from.y + to.y) / 2
-        const dx = to.x - from.x
-        const dy = to.y - from.y
-        const len = Math.hypot(dx, dy) || 1
-        const cpx = mx - (dy / len) * R * 0.28
-        const cpy = my + (dx / len) * R * 0.28
-        const pulse = 0.22 + 0.2 * Math.sin(sec * 1.4 + i * 1.26)
-
-        ctx.beginPath()
-        ctx.moveTo(from.x, from.y)
-        ctx.quadraticCurveTo(cpx, cpy, to.x, to.y)
-        ctx.strokeStyle = `rgba(12,131,70,${pulse})`
-        ctx.lineWidth = 1.8
-        ctx.stroke()
-
-        // Arrowhead
-        const t = 0.82
-        const ax = (1 - t) ** 2 * from.x + 2 * (1 - t) * t * cpx + t * t * to.x
-        const ay = (1 - t) ** 2 * from.y + 2 * (1 - t) * t * cpy + t * t * to.y
-        const ha = Math.atan2(to.y - ay, to.x - ax)
-        const hl = 8
-        ctx.beginPath()
-        ctx.moveTo(to.x, to.y)
-        ctx.lineTo(to.x - hl * Math.cos(ha - 0.42), to.y - hl * Math.sin(ha - 0.42))
-        ctx.moveTo(to.x, to.y)
-        ctx.lineTo(to.x - hl * Math.cos(ha + 0.42), to.y - hl * Math.sin(ha + 0.42))
-        ctx.strokeStyle = `rgba(34,197,94,${pulse + 0.12})`
-        ctx.lineWidth = 1.8
-        ctx.stroke()
-      }
-
-      // Node glow + circle + pulsing dot + label
-      positions.forEach(({ x, y }, i) => {
-        const pulse = 0.28 + 0.18 * Math.sin(sec * 2.2 + i * 1.26)
-
-        // Glow halo
-        const grd = ctx.createRadialGradient(x, y, 0, x, y, 30)
-        grd.addColorStop(0, `rgba(12,131,70,${pulse})`)
-        grd.addColorStop(1, "rgba(12,131,70,0)")
-        ctx.beginPath()
-        ctx.arc(x, y, 30, 0, Math.PI * 2)
-        ctx.fillStyle = grd
-        ctx.fill()
-
-        // Circle border
-        ctx.beginPath()
-        ctx.arc(x, y, 14, 0, Math.PI * 2)
-        ctx.fillStyle = "#050505"
-        ctx.fill()
-        ctx.strokeStyle = "#0C8346"
-        ctx.lineWidth = 1.8
-        ctx.stroke()
-
-        // Inner pulsing dot
-        const pr = 5 + 2.5 * Math.sin(sec * 2.8 + i)
-        ctx.beginPath()
-        ctx.arc(x, y, pr, 0, Math.PI * 2)
-        ctx.fillStyle = "#0C8346"
-        ctx.fill()
-
-        // Labels — computed at current rotated angle, text itself stays upright
-        const labelAngle = (i / N) * Math.PI * 2 - Math.PI / 2 + rot
-        const labelR = R + 50
-        const lx = cx + Math.cos(labelAngle) * labelR
-        const ly = cy + Math.sin(labelAngle) * labelR
-
-        ctx.textAlign = "center"
-        ctx.font = "bold 12px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-        ctx.fillStyle = "rgba(255,255,255,0.9)"
-        ctx.fillText(NODES[i].label, lx, ly)
-        ctx.font = "10px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-        ctx.fillStyle = "rgba(12,131,70,0.9)"
-        ctx.fillText(NODES[i].sub, lx, ly + 14)
-      })
-
-      // Particles flowing from each node toward center
-      particles.forEach((p) => {
-        p.t += p.speed
-        if (p.t > 1) p.t = 0
-        const { x: nx, y: ny } = positions[p.nodeIdx]
-        const px = nx + (cx - nx) * p.t
-        const py = ny + (cy - ny) * p.t
-        ctx.beginPath()
-        ctx.arc(px, py, p.size, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(12,131,70,${p.alpha * (1 - p.t * 0.5)})`
-        ctx.fill()
-      })
-
-      // Center hub
-      const hubGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 50)
-      hubGrd.addColorStop(0, "rgba(12,131,70,0.6)")
-      hubGrd.addColorStop(0.5, "rgba(12,131,70,0.22)")
-      hubGrd.addColorStop(1, "rgba(12,131,70,0)")
-      ctx.beginPath()
-      ctx.arc(cx, cy, 50, 0, Math.PI * 2)
-      ctx.fillStyle = hubGrd
-      ctx.fill()
-
-      ctx.beginPath()
-      ctx.arc(cx, cy, 32, 0, Math.PI * 2)
-      ctx.fillStyle = "#0C8346"
-      ctx.fill()
-
-      ctx.textAlign = "center"
-      ctx.font = "bold 11px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-      ctx.fillStyle = "white"
-      ctx.fillText("W.I.S.E.", cx, cy - 2)
-      ctx.font = "8.5px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-      ctx.fillStyle = "rgba(255,255,255,0.65)"
-      ctx.fillText("AI CORE", cx, cy + 11)
-
-      rafRef.current = requestAnimationFrame(draw)
-    }
-
-    rafRef.current = requestAnimationFrame(draw)
-    return () => {
-      cancelAnimationFrame(rafRef.current)
-      window.removeEventListener("resize", setSize)
-    }
-  }, [visible])
+  const { ref, visible } = useReveal()
+  const [active, setActive] = useState<number | null>(null)
 
   return (
-    <section ref={sectionRef} className="py-24 relative overflow-hidden">
-      {/* Ambient glow */}
-      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#0C8346]/5 blur-[140px] pointer-events-none" />
+    <section ref={ref} className="relative py-28 px-6 overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse 80% 60% at 60% 50%, rgba(12,131,70,0.05) 0%, transparent 70%)" }} />
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <style>{`
+        @keyframes spinArc    { to { stroke-dashoffset: -628; } }
+        @keyframes hubPulse   { 0%,100%{r:28} 50%{r:31} }
+        @keyframes nodePop    { 0%{transform:scale(0.8);opacity:0} 100%{transform:scale(1);opacity:1} }
+        @keyframes dotBlink   { 0%,100%{opacity:1} 50%{opacity:0.3} }
+        @keyframes loopSlide  { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+      `}</style>
 
-          {/* ── LEFT — Text + vertical steps ── */}
-          <div
-            style={{
-              opacity: visible ? 1 : 0,
-              transform: visible ? "translateX(0)" : "translateX(-28px)",
-              transition: "opacity 0.9s ease 0.1s, transform 0.9s ease 0.1s",
-            }}
-          >
-            {/* Label */}
-            <div className="inline-flex items-center gap-3 text-[#0C8346] text-xs font-semibold uppercase tracking-[0.2em] mb-5">
-              <div
-                className="h-px bg-[#0C8346]"
-                style={{ width: visible ? "32px" : "0px", transition: "width 0.8s ease 0.3s" }}
-              />
-              Competitive Advantage
-            </div>
+      <div className="max-w-6xl mx-auto relative z-10">
 
-            {/* Headline */}
-            <h2 className="text-4xl md:text-5xl xl:text-6xl font-bold font-[family-name:var(--font-unbounded)] text-white leading-tight mb-4">
-              The Data{" "}
-              <span
-                style={{
-                  background: "linear-gradient(135deg, #0C8346, #22c55e)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                Flywheel
-              </span>
-            </h2>
+        {/* ── Header ── */}
+        <div className="text-center mb-16"
+          style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(24px)", transition: "opacity 0.8s ease, transform 0.8s ease" }}>
 
-            {/* Subtitle */}
-            <p className="text-gray-400 text-base md:text-lg leading-relaxed mb-10 max-w-md">
-              Every item processed by W.I.S.E. makes the system smarter. A self-reinforcing intelligence loop that compounds with every deployment.
-            </p>
+          <div className="inline-flex items-center gap-3 mb-5">
+            <span className="h-px bg-[#0C8346] block" style={{ width: visible ? 32 : 0, transition: "width 0.8s ease 0.3s" }} />
+            <span className="text-[11px] font-semibold uppercase tracking-[0.2em]" style={{ color: "#0C8346" }}>Competitive Advantage</span>
+            <span className="h-px bg-[#0C8346] block" style={{ width: visible ? 32 : 0, transition: "width 0.8s ease 0.3s" }} />
+          </div>
 
-            {/* Vertical steps with connecting line */}
-            <div className="relative pl-1">
-              {/* Growing vertical line */}
-              <div
-                className="absolute left-[9px] top-3 w-px pointer-events-none"
-                style={{
-                  height: visible ? "calc(100% - 32px)" : "0%",
-                  background: "linear-gradient(to bottom, #0C8346 60%, rgba(12,131,70,0.05) 100%)",
-                  transition: "height 1.6s ease 0.6s",
-                }}
-              />
+          <h2 className="font-bold font-[family-name:var(--font-unbounded)] text-white leading-tight"
+            style={{ fontSize: "clamp(32px,5vw,56px)" }}>
+            The Data{" "}
+            <span style={{
+              background: "linear-gradient(135deg, #0C8346 0%, #22c55e 50%, #0C8346 100%)",
+              backgroundSize: "200% auto",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}>Flywheel</span>
+          </h2>
+          <p className="mt-4 text-[15px] leading-relaxed max-w-lg mx-auto" style={{ color: "#6B6358" }}>
+            Every item W.I.S.E. processes makes it smarter. A self-reinforcing intelligence loop that compounds with every deployment.
+          </p>
+        </div>
 
-              {STEPS.map((step, i) => (
+        {/* ── Main grid ── */}
+        <div className="grid lg:grid-cols-[1fr_420px] gap-10 items-center">
+
+          {/* LEFT — step cards */}
+          <div className="flex flex-col gap-3">
+            {STEPS.map((s, i) => {
+              const isActive = active === i
+              return (
                 <div
-                  key={step.title}
-                  className="relative flex gap-5 mb-8 last:mb-0"
+                  key={s.num}
+                  onClick={() => setActive(active === i ? null : i)}
+                  className="group relative flex items-start gap-4 rounded-2xl p-5 cursor-pointer transition-all duration-300"
                   style={{
-                    opacity: visible ? 1 : 0,
-                    transform: visible ? "translateX(0)" : "translateX(-18px)",
-                    transition: `opacity 0.6s ease ${0.45 + i * 0.13}s, transform 0.6s ease ${0.45 + i * 0.13}s`,
+                    background: isActive ? "rgba(26,107,60,0.08)" : "rgba(255,255,255,0.02)",
+                    border: isActive ? "1px solid rgba(26,107,60,0.35)" : "1px solid rgba(255,255,255,0.06)",
+                    opacity: visible ? (active !== null && !isActive ? 0.4 : 1) : 0,
+                    transform: visible ? "translateX(0)" : "translateX(-24px)",
+                    transition: `opacity 0.6s ease ${0.2 + i * 0.1}s, transform 0.6s ease ${0.2 + i * 0.1}s, background 0.25s, border-color 0.25s`,
                   }}
                 >
-                  {/* Step dot */}
-                  <div className="relative z-10 flex-shrink-0 mt-1">
-                    <div
-                      className="w-[18px] h-[18px] rounded-full bg-[#0C8346] flex items-center justify-center"
-                      style={{ boxShadow: "0 0 8px rgba(12,131,70,0.5)" }}
-                    >
-                      <div className="w-[7px] h-[7px] rounded-full bg-white/85" />
-                    </div>
+                  {/* Number + vertical line */}
+                  <div className="flex flex-col items-center gap-1 flex-shrink-0">
+                    <span className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-bold font-mono transition-all duration-300"
+                      style={{
+                        background: isActive ? "rgba(12,131,70,0.25)" : "rgba(255,255,255,0.04)",
+                        border: isActive ? "1px solid rgba(12,131,70,0.5)" : "1px solid rgba(255,255,255,0.08)",
+                        color: isActive ? "#22c55e" : "#3A3830",
+                      }}>
+                      {s.num}
+                    </span>
+                    {i < STEPS.length - 1 && (
+                      <div className="w-px flex-1 min-h-[12px]"
+                        style={{ background: isActive ? "rgba(12,131,70,0.4)" : "rgba(255,255,255,0.05)" }} />
+                    )}
                   </div>
 
                   {/* Content */}
-                  <div className="group cursor-default">
-                    <h4 className="text-white font-semibold text-sm mb-1 group-hover:text-[#0C8346] transition-colors duration-200">
-                      {step.title}
+                  <div className="pt-1">
+                    <h4 className="font-semibold text-[14px] leading-snug mb-1 transition-colors duration-200"
+                      style={{ color: isActive ? "#EDE8E0" : "#9A9288" }}>
+                      {s.title}
                     </h4>
-                    <p className="text-gray-500 text-sm leading-relaxed">
-                      {step.desc}
+                    <p className="text-[12px] leading-relaxed transition-colors duration-200"
+                      style={{ color: isActive ? "#6B6358" : "#3A3830" }}>
+                      {s.desc}
                     </p>
                   </div>
-                </div>
-              ))}
-            </div>
 
-            {/* Loop outcome */}
-            <div
-              className="mt-8 pt-6 border-t border-white/8"
-              style={{
-                opacity: visible ? 1 : 0,
-                transition: "opacity 0.8s ease 1.4s",
-              }}
-            >
-              <p className="text-[11px] text-gray-600 uppercase tracking-widest mb-2 font-medium">
-                Loop Outcome
-              </p>
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                {LOOP.map((item, i) => (
-                  <span key={item} className="flex items-center gap-2">
-                    <span className="text-sm text-[#0C8346] font-semibold">{item}</span>
-                    {i < LOOP.length - 1 && (
-                      <span className="text-gray-600 text-sm">→</span>
-                    )}
-                  </span>
-                ))}
-              </div>
-            </div>
+                  {/* Active right-edge glow */}
+                  {isActive && (
+                    <div className="absolute right-0 top-1/4 bottom-1/4 w-0.5 rounded-full"
+                      style={{ background: "linear-gradient(to bottom, transparent, #0C8346, transparent)" }} />
+                  )}
+                </div>
+              )
+            })}
           </div>
 
-          {/* ── RIGHT — Canvas ── */}
+          {/* RIGHT — SVG flywheel */}
           <div
-            className="relative"
+            className="relative flex items-center justify-center"
             style={{
               opacity: visible ? 1 : 0,
-              transform: visible ? "translateX(0)" : "translateX(28px)",
-              transition: "opacity 1s ease 0.35s, transform 1s ease 0.35s",
+              transform: visible ? "scale(1)" : "scale(0.92)",
+              transition: "opacity 1s ease 0.4s, transform 1s ease 0.4s",
             }}
           >
-            {/* Subtle border/card wrap around the canvas */}
-            <div className="relative rounded-3xl overflow-hidden border border-white/5 bg-[#080808]/60">
-              <canvas
-                ref={canvasRef}
-                className="w-full block"
-                style={{ height: "580px" }}
-              />
-              {/* Bottom "callout" inside the card */}
-              <div className="absolute bottom-4 left-0 right-0 flex justify-center">
-                <div className="inline-flex items-center gap-2 bg-[#050505]/90 border border-[#0C8346]/20 rounded-full px-4 py-1.5 text-xs text-[#0C8346] font-medium backdrop-blur-sm">
-                  <span
-                    className="w-1.5 h-1.5 rounded-full bg-[#0C8346]"
-                    style={{ animation: "dotBlink 1.6s ease-in-out infinite" }}
+            <div className="relative w-full max-w-[420px] mx-auto rounded-3xl p-6"
+              style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)" }}>
+
+              <svg viewBox="0 0 400 400" className="w-full h-auto" style={{ overflow: "visible" }}>
+                <defs>
+                  {/* Rotating arc gradient */}
+                  <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#0C8346" stopOpacity="0.1" />
+                    <stop offset="50%" stopColor="#22c55e" stopOpacity="0.7" />
+                    <stop offset="100%" stopColor="#0C8346" stopOpacity="0.1" />
+                  </linearGradient>
+                  <filter id="glow">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                    <feMerge><feMergeNode in="coloredBlur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                  </filter>
+                </defs>
+
+                {/* Outer moat rings */}
+                {[175, 190, 205].map((r, i) => (
+                  <circle key={r} cx={CX} cy={CY} r={r}
+                    fill="none"
+                    stroke="rgba(12,131,70,0.06)"
+                    strokeWidth={1}
+                    strokeDasharray={i === 1 ? "4 10" : "none"}
                   />
-                  Proprietary dataset competitors cannot buy
-                </div>
+                ))}
+
+                {/* Spinning arc on the main orbit */}
+                <circle
+                  cx={CX} cy={CY} r={R}
+                  fill="none"
+                  stroke="url(#arcGrad)"
+                  strokeWidth={2}
+                  strokeDasharray="120 514"
+                  style={{ animation: "spinArc 6s linear infinite", transformOrigin: `${CX}px ${CY}px` }}
+                />
+
+                {/* Static orbit ring */}
+                <circle cx={CX} cy={CY} r={R}
+                  fill="none" stroke="rgba(26,107,60,0.15)" strokeWidth={1} />
+
+                {/* Spokes */}
+                {STEPS.map((s, i) => {
+                  const { x, y } = nodePos(s.angle)
+                  const isActive = active === i
+                  return (
+                    <line key={`spoke-${i}`}
+                      x1={CX} y1={CY} x2={x} y2={y}
+                      stroke={isActive ? "rgba(34,197,94,0.25)" : "rgba(12,131,70,0.06)"}
+                      strokeWidth={isActive ? 1.5 : 0.8}
+                      style={{ transition: "stroke 0.3s, stroke-width 0.3s" }}
+                    />
+                  )
+                })}
+
+                {/* Arcs between nodes */}
+                {STEPS.map((_, i) => {
+                  const from = nodePos(STEPS[i].angle)
+                  const to = nodePos(STEPS[(i + 1) % STEPS.length].angle)
+                  const mx = (from.x + to.x) / 2
+                  const my = (from.y + to.y) / 2
+                  const dx = to.x - from.x; const dy = to.y - from.y
+                  const len = Math.hypot(dx, dy) || 1
+                  const cpx = mx - (dy / len) * R * 0.3
+                  const cpy = my + (dx / len) * R * 0.3
+                  const isFromActive = active === i
+                  return (
+                    <path key={`arc-${i}`}
+                      d={`M ${from.x} ${from.y} Q ${cpx} ${cpy} ${to.x} ${to.y}`}
+                      fill="none"
+                      stroke={isFromActive ? "#22c55e" : "rgba(12,131,70,0.2)"}
+                      strokeWidth={isFromActive ? 2 : 1}
+                      filter={isFromActive ? "url(#glow)" : undefined}
+                      style={{ transition: "stroke 0.3s, stroke-width 0.3s" }}
+                    />
+                  )
+                })}
+
+                {/* Nodes */}
+                {STEPS.map((s, i) => {
+                  const { x, y } = nodePos(s.angle)
+                  const isActive = active === i
+                  const labelR = R + 36
+                  const rad = (s.angle * Math.PI) / 180
+                  const lx = CX + labelR * Math.cos(rad)
+                  const ly = CY + labelR * Math.sin(rad)
+
+                  return (
+                    <g key={`node-${i}`} onClick={() => setActive(active === i ? null : i)}
+                      style={{ cursor: "pointer" }}>
+                      {/* Glow halo */}
+                      {isActive && (
+                        <circle cx={x} cy={y} r={22}
+                          fill="rgba(12,131,70,0.15)"
+                          style={{ animation: "nodePop 0.3s ease" }}
+                        />
+                      )}
+                      {/* Pulse ring */}
+                      <circle cx={x} cy={y} r={isActive ? 16 : 12}
+                        fill={isActive ? "rgba(12,131,70,0.2)" : "#050505"}
+                        stroke={isActive ? "#22c55e" : "#0C8346"}
+                        strokeWidth={isActive ? 2 : 1.2}
+                        style={{ transition: "r 0.3s, fill 0.3s, stroke 0.3s" }}
+                      />
+                      {/* Inner dot */}
+                      <circle cx={x} cy={y} r={isActive ? 6 : 4}
+                        fill={isActive ? "#22c55e" : "#0C8346"}
+                        style={{ transition: "r 0.3s, fill 0.3s" }}
+                      />
+                      {/* Node label */}
+                      <text x={lx} y={ly - 6} textAnchor="middle"
+                        fontSize={10} fontWeight="600" fill={isActive ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.5)"}
+                        style={{ fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", transition: "fill 0.3s" }}>
+                        {s.title.split(" ").slice(0, 2).join(" ")}
+                      </text>
+                      <text x={lx} y={ly + 7} textAnchor="middle"
+                        fontSize={9} fill={isActive ? "rgba(34,197,94,0.9)" : "rgba(12,131,70,0.6)"}
+                        style={{ fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", transition: "fill 0.3s" }}>
+                        {s.num}
+                      </text>
+                    </g>
+                  )
+                })}
+
+                {/* Center hub */}
+                <circle cx={CX} cy={CY} r={38} fill="rgba(12,131,70,0.06)" />
+                <circle cx={CX} cy={CY} r={32} fill="#0a0a08" stroke="rgba(12,131,70,0.4)" strokeWidth={1.5} />
+                <circle cx={CX} cy={CY} r={28} fill="rgba(12,131,70,0.15)" />
+
+                <text x={CX} y={CY - 4} textAnchor="middle" fontSize={11} fontWeight="700"
+                  fill="white" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif" }}>
+                  W.I.S.E.
+                </text>
+                <text x={CX} y={CY + 9} textAnchor="middle" fontSize={8}
+                  fill="rgba(12,131,70,0.8)" style={{ fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", letterSpacing: "0.1em" }}>
+                  AI CORE
+                </text>
+              </svg>
+
+              {/* Active step detail callout */}
+              <div className="mt-2 text-center min-h-[44px] transition-all duration-300"
+                style={{ opacity: active !== null ? 1 : 0 }}>
+                {active !== null && (
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full"
+                    style={{ background: "rgba(12,131,70,0.1)", border: "1px solid rgba(12,131,70,0.25)" }}>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#0C8346]"
+                      style={{ animation: "dotBlink 1.2s infinite" }} />
+                    <span className="text-[12px] font-medium" style={{ color: "#22c55e" }}>
+                      {STEPS[active].title}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
-
         </div>
+
+        {/* ── Loop outcome strip ── */}
+        <div className="mt-16 overflow-hidden"
+          style={{ opacity: visible ? 1 : 0, transition: "opacity 0.8s ease 1s" }}>
+          <div className="flex items-center gap-0" style={{ animation: "loopSlide 12s linear infinite", width: "max-content" }}>
+            {[...LOOP, ...LOOP, ...LOOP, ...LOOP].map((item, i) => (
+              <span key={i} className="flex items-center gap-0">
+                <span className="px-6 py-2 text-[11px] font-semibold uppercase tracking-widest whitespace-nowrap"
+                  style={{ color: i % LOOP.length === 0 ? "#22c55e" : "#1A6B3C" }}>
+                  {item}
+                </span>
+                <span className="text-[#0C8346] text-xs opacity-40 mx-1">→</span>
+              </span>
+            ))}
+          </div>
+          <div className="mt-2 text-center">
+            <p className="text-[10px] uppercase tracking-widest" style={{ color: "#2A2820" }}>
+              A loop that never stops compounding
+            </p>
+          </div>
+        </div>
+
       </div>
     </section>
   )
