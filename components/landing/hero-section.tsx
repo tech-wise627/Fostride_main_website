@@ -100,6 +100,7 @@ export function HeroSection() {
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
+                    color: "transparent",
                     animation: "gradientShift 6s ease infinite",
                   }}
                 >

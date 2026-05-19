@@ -123,6 +123,7 @@ export function PilotsTimeline() {
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
+                color: "transparent",
               }}
             >
               Is Deployed

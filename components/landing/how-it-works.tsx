@@ -103,6 +103,7 @@ export function HowItWorks() {
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
+              color: "transparent",
             }}>
               Closed Loop.
             </span>

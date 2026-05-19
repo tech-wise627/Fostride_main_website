@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import {
-  LinkedinIcon, Mail, ArrowUpRight, Plus, X,
+  Mail, ArrowUpRight, Plus, X,
   Atom, Users, Lightbulb, Heart,
   Leaf, Cpu, TrendingUp, RefreshCw, Shield, Star, Zap, Handshake,
 } from "lucide-react"
@@ -272,6 +272,7 @@ export function OurTeamBody() {
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
+                color: "transparent",
               }}
             >
               Fostride
@@ -475,7 +476,7 @@ export function OurTeamBody() {
           </div>
           <h2 className="text-5xl md:text-6xl font-bold font-[family-name:var(--font-unbounded)] text-white leading-tight mb-4">
             Say Hello to Our{" "}
-            <span style={{ background: "linear-gradient(135deg, #0C8346, #22c55e)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+            <span style={{ background: "linear-gradient(135deg, #0C8346, #22c55e)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", color: "transparent" }}>
               Squad
             </span>
           </h2>
@@ -522,7 +523,7 @@ export function OurTeamBody() {
                 {activeMemberIndex === idx ? (
                   <div className="flex items-center gap-3 animate-in fade-in zoom-in duration-300">
                     <button onClick={() => setActiveMemberIndex(null)} className="h-10 w-10 bg-white rounded-[14px] flex items-center justify-center hover:scale-110 transition-transform shadow-lg text-[#050505]"><X size={18} /></button>
-                    <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="h-10 w-10 bg-white rounded-[14px] flex items-center justify-center hover:scale-110 transition-transform shadow-lg text-[#050505]"><LinkedinIcon size={18} /></a>
+                    <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="h-10 w-10 bg-white rounded-[14px] flex items-center justify-center hover:scale-110 transition-transform shadow-lg text-[#050505]"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
                     <a href={member.mail} className="h-10 w-10 bg-white rounded-[14px] flex items-center justify-center hover:scale-110 transition-transform shadow-lg text-[#050505]"><Mail size={18} /></a>
                   </div>
                 ) : (
@@ -565,7 +566,7 @@ export function OurTeamBody() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <h2 className="text-4xl md:text-6xl font-bold font-[family-name:var(--font-unbounded)] text-white leading-tight">
               Our{" "}
-              <span style={{ background: "linear-gradient(135deg, #0C8346, #22c55e)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              <span style={{ background: "linear-gradient(135deg, #0C8346, #22c55e)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", color: "transparent" }}>
                 Values
               </span>
             </h2>
@@ -641,7 +642,7 @@ export function OurTeamBody() {
           </div>
           <h2 className="text-4xl md:text-6xl font-bold font-[family-name:var(--font-unbounded)] text-white leading-tight">
             Got Questions?<br />
-            <span style={{ background: "linear-gradient(135deg, #0C8346, #22c55e)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+            <span style={{ background: "linear-gradient(135deg, #0C8346, #22c55e)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", color: "transparent" }}>
               We've Got Answers.
             </span>
           </h2>

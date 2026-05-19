@@ -101,6 +101,7 @@ export function WhatWeWorkFor() {
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
+                color: "transparent",
               }}
             >
               Work For

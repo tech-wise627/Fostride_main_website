@@ -83,6 +83,7 @@ export function WhoItsFor() {
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
+              color: "transparent",
             }}>that mean it.</span>
           </h2>
           <p className="mt-4 text-[15px] leading-relaxed max-w-lg mx-auto" style={{ color: "#6B6358" }}>

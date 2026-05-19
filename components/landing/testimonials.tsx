@@ -101,6 +101,7 @@ export function Testimonials() {
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
+                color: "transparent",
                 animation: "gradientShift 3s ease-in-out infinite",
               }}
             >
