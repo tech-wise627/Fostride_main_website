@@ -34,7 +34,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Navigation - Floating Pill Style */}
-        <div className="hidden xl:flex xl:absolute xl:left-1/2 xl:-translate-x-1/2 xl:items-center xl:gap-1 bg-[#0a0a0a] border border-white/10 rounded-full p-1.5 shadow-sm">
+        <div className="hidden xl:flex xl:absolute xl:left-1/2 xl:-translate-x-1/2 xl:items-center xl:gap-1 bg-[#111009] border border-white/10 rounded-full p-1.5 shadow-sm">
           {navItems.map((item) => {
             const isActive = pathname === item.href || pathname?.startsWith(item.href + "/")
 

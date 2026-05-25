@@ -79,48 +79,48 @@
 
 .dark {
   /* Hex fallbacks */
-  --background: #0a0c0a;
-  --foreground: #f8f9f8;
-  --card: #161a16;
-  --card-foreground: #f8f9f8;
-  --popover: #161a16;
-  --popover-foreground: #f8f9f8;
+  --background: #0e0c09;
+  --foreground: #d8e4de;
+  --card: #161410;
+  --card-foreground: #d8e4de;
+  --popover: #161410;
+  --popover-foreground: #d8e4de;
   --primary: #1a8c4f;
-  --primary-foreground: #0a0c0a;
-  --secondary: #1e221e;
-  --secondary-foreground: #f8f9f8;
-  --muted: #1e221e;
-  --muted-foreground: #7d857d;
+  --primary-foreground: #0e0c09;
+  --secondary: #1e1c14;
+  --secondary-foreground: #d8e4de;
+  --muted: #1e1c14;
+  --muted-foreground: #7d8a80;
   --accent: #1a8c4f;
-  --accent-foreground: #0a0c0a;
+  --accent-foreground: #0e0c09;
   --destructive: #d94020;
-  --destructive-foreground: #f8f9f8;
-  --border: #272c27;
-  --input: #272c27;
+  --destructive-foreground: #d8e4de;
+  --border: #272520;
+  --input: #272520;
   --ring: #1a8c4f;
   --chart-1: #1a8c4f;
   --chart-2: #4a70c8;
   --chart-3: #c4b840;
   --chart-4: #d07030;
   --chart-5: #7855a8;
-  --sidebar: #090b09;
-  --sidebar-foreground: #f8f9f8;
+  --sidebar: #0b0a07;
+  --sidebar-foreground: #d8e4de;
   --sidebar-primary: #1a8c4f;
-  --sidebar-primary-foreground: #0a0c0a;
-  --sidebar-accent: #1e221e;
-  --sidebar-accent-foreground: #f8f9f8;
-  --sidebar-border: #272c27;
+  --sidebar-primary-foreground: #0e0c09;
+  --sidebar-accent: #1e1c14;
+  --sidebar-accent-foreground: #d8e4de;
+  --sidebar-border: #272520;
   --sidebar-ring: #1a8c4f;
 }
 
 @supports (color: oklch(0 0 0)) {
   .dark {
-    --background: oklch(0.098 0.005 163);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.13 0.008 163);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.13 0.008 163);
-    --popover-foreground: oklch(0.985 0 0);
+    --background: oklch(0.092 0.008 70);
+    --foreground: oklch(0.87 0.018 163);
+    --card: oklch(0.13 0.008 70);
+    --card-foreground: oklch(0.87 0.018 163);
+    --popover: oklch(0.13 0.008 70);
+    --popover-foreground: oklch(0.87 0.018 163);
     --primary: oklch(0.696 0.17 162.48);
     --primary-foreground: oklch(0.098 0.005 163);
     --secondary: oklch(0.18 0.01 163);

@@ -198,8 +198,8 @@ export function HeroSection() {
                           className={cn(
                             "flex items-center gap-2.5 rounded-xl border backdrop-blur-md px-3 py-2.5 shadow-lg transition-all duration-250 whitespace-nowrap",
                             isActive
-                              ? "bg-[#0a0a0a]/95 border-[#0C8346]/60 shadow-[0_0_18px_rgba(12,131,70,0.3)]"
-                              : "bg-[#0a0a0a]/80 border-white/10 hover:border-[#0C8346]/40"
+                              ? "bg-[#111009]/95 border-[#0C8346]/60 shadow-[0_0_18px_rgba(12,131,70,0.3)]"
+                              : "bg-[#111009]/80 border-white/10 hover:border-[#0C8346]/40"
                           )}
                         >
                           <div className={cn("h-8 w-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-250", isActive ? "bg-[#0C8346]" : "bg-[#0C8346]/20")}>
@@ -237,7 +237,7 @@ export function HeroSection() {
                 }}
               >
                 {activeFeature !== null && (
-                  <div className="flex items-start gap-3 bg-[#0a0a0a]/90 border border-[#0C8346]/35 rounded-2xl px-4 py-3 backdrop-blur-md shadow-[0_4px_24px_rgba(12,131,70,0.18)]">
+                  <div className="flex items-start gap-3 bg-[#111009]/90 border border-[#0C8346]/35 rounded-2xl px-4 py-3 backdrop-blur-md shadow-[0_4px_24px_rgba(12,131,70,0.18)]">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#0C8346] flex-shrink-0 mt-1.5" style={{ animation: "dotBlink 1.6s ease-in-out infinite" }} />
                     <p className="text-xs text-gray-300 leading-relaxed">
                       {features[activeFeature].detail}
@@ -248,11 +248,11 @@ export function HeroSection() {
 
               {/* Bottom badges */}
               <div className="flex items-center gap-3 mt-1">
-                <div className="flex items-center gap-2 rounded-full border border-[#0C8346]/25 bg-[#0a0a0a]/80 backdrop-blur-md px-4 py-2">
+                <div className="flex items-center gap-2 rounded-full border border-[#0C8346]/25 bg-[#111009]/80 backdrop-blur-md px-4 py-2">
                   <Sparkles className="h-3.5 w-3.5 text-[#0C8346]" />
                   <span className="text-xs text-gray-400">AI-Powered</span>
                 </div>
-                <div className="flex items-center gap-2 rounded-full border border-[#0C8346]/25 bg-[#0a0a0a]/80 backdrop-blur-md px-4 py-2">
+                <div className="flex items-center gap-2 rounded-full border border-[#0C8346]/25 bg-[#111009]/80 backdrop-blur-md px-4 py-2">
                   <Shield className="h-3.5 w-3.5 text-[#0C8346]" />
                   <span className="text-xs text-gray-400">Enterprise Ready</span>
                 </div>

@@ -128,7 +128,7 @@ export function WhatWeWorkFor() {
                   style={{
                     background: `linear-gradient(135deg, ${sector.gradient.replace("from-", "").replace(" via-", ", ").replace(" to-transparent", ", transparent")})`.replace("linear-gradient(135deg, ", "linear-gradient(135deg, "),
                     backgroundImage: `radial-gradient(ellipse at 20% 50%, rgba(12,131,70,0.15) 0%, transparent 60%)`,
-                    backgroundColor: "#0a0a0a",
+                    backgroundColor: "#111009",
                     opacity: visible ? 1 : 0,
                     transform: visible ? "translateY(0) scale(1)" : "translateY(24px) scale(0.98)",
                     transition: `opacity 0.7s ease ${i * 0.1}s, transform 0.7s ease ${i * 0.1}s`,
@@ -166,7 +166,7 @@ export function WhatWeWorkFor() {
                     key={sector.title}
                     className="group relative rounded-3xl p-6 border border-white/8 overflow-hidden cursor-default flex-1 transition-all duration-500 hover:border-[#0C8346]/50 hover:shadow-[0_0_40px_rgba(12,131,70,0.08)]"
                     style={{
-                      backgroundColor: "#0a0a0a",
+                      backgroundColor: "#111009",
                       backgroundImage: "radial-gradient(ellipse at 80% 20%, rgba(12,131,70,0.06) 0%, transparent 60%)",
                       opacity: visible ? 1 : 0,
                       transform: visible ? "translateY(0) scale(1)" : "translateY(24px) scale(0.98)",
@@ -206,7 +206,7 @@ export function WhatWeWorkFor() {
                     key={sector.title}
                     className="group relative rounded-3xl p-6 border border-white/8 overflow-hidden cursor-default flex-1 h-full transition-all duration-500 hover:border-[#0C8346]/50"
                     style={{
-                      backgroundColor: "#0a0a0a",
+                      backgroundColor: "#111009",
                       backgroundImage: "radial-gradient(ellipse at 20% 80%, rgba(12,131,70,0.1) 0%, transparent 60%)",
                       opacity: visible ? 1 : 0,
                       transform: visible ? "translateY(0) scale(1)" : "translateY(24px) scale(0.98)",
@@ -241,7 +241,7 @@ export function WhatWeWorkFor() {
                   key={sector.title}
                   className="md:col-span-2 group relative rounded-3xl p-8 md:p-10 border border-white/8 overflow-hidden cursor-default transition-all duration-500 hover:border-[#0C8346]/50 hover:shadow-[0_0_60px_rgba(12,131,70,0.08)]"
                   style={{
-                    backgroundColor: "#0a0a0a",
+                    backgroundColor: "#111009",
                     backgroundImage: "radial-gradient(ellipse at 80% 50%, rgba(12,131,70,0.08) 0%, transparent 60%)",
                     opacity: visible ? 1 : 0,
                     transform: visible ? "translateY(0) scale(1)" : "translateY(24px) scale(0.98)",

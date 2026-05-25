@@ -18,7 +18,7 @@ const logos = [
 
 export function CompaniesTicker() {
     return (
-        <section className="w-full bg-[#0a0a0a] border-t border-white/5 pt-12 pb-0 overflow-hidden relative z-20">
+        <section className="w-full bg-[#111009] border-t border-white/5 pt-12 pb-0 overflow-hidden relative z-20">
             <div className="container mx-auto px-4 mb-8 text-center">
                 <h2 className="text-3xl md:text-5xl font-bold font-[family-name:var(--font-unbounded)] text-white text-center mb-4">
                     Companies We Have <span className="text-[#0C8346]">Worked</span> With
@@ -29,8 +29,8 @@ export function CompaniesTicker() {
             <div className="w-full bg-white/5 backdrop-blur-[10px] py-6">
                 <div className="relative w-full overflow-hidden mask-image-gradient-sides">
                     {/* Gradient Masks for edges */}
-                    <div className="absolute top-0 left-0 w-24 h-full bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
-                    <div className="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
+                    <div className="absolute top-0 left-0 w-24 h-full bg-gradient-to-r from-[#111009] to-transparent z-10 pointer-events-none" />
+                    <div className="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-[#111009] to-transparent z-10 pointer-events-none" />
 
                     {/* Seamless Loop Structure */}
                     <div className="flex overflow-hidden w-full group">
