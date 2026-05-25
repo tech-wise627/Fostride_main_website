@@ -55,7 +55,7 @@ function PartnerSlot({ p, last }: { p: typeof partners[0]; last: boolean }) {
           className="absolute inset-x-0 top-0 h-px"
           style={{
             background:
-              "linear-gradient(90deg, transparent, rgba(12,131,70,0.6), transparent)",
+              "linear-gradient(90deg, transparent, rgba(12,131,70,0.22), transparent)",
           }}
         />
       )}
@@ -64,7 +64,7 @@ function PartnerSlot({ p, last }: { p: typeof partners[0]; last: boolean }) {
       <span
         className="text-[10px] font-bold tracking-[0.2em] uppercase px-4 py-1.5 rounded-full whitespace-nowrap transition-all duration-300"
         style={{
-          color: hovered ? "#4ade80" : "#1A6B3C",
+          color: hovered ? "#86efac" : "#1A6B3C",
           background: hovered
             ? "rgba(12,131,70,0.2)"
             : "rgba(12,131,70,0.08)",
@@ -139,7 +139,7 @@ export function CredibilityStrip() {
           <div className="inline-flex items-center gap-3 mb-4">
             <span
               className="h-px block"
-              style={{ width: 48, background: "rgba(12,131,70,0.5)" }}
+              style={{ width: 48, background: "rgba(12,131,70,0.2)" }}
             />
             <span
               className="text-[11px] font-semibold tracking-[0.25em] uppercase"
@@ -149,7 +149,7 @@ export function CredibilityStrip() {
             </span>
             <span
               className="h-px block"
-              style={{ width: 48, background: "rgba(12,131,70,0.5)" }}
+              style={{ width: 48, background: "rgba(12,131,70,0.2)" }}
             />
           </div>
           <h2 className="text-2xl md:text-4xl font-bold font-[family-name:var(--font-unbounded)] text-white leading-tight">

@@ -31,7 +31,7 @@ export function HomeLandingHero() {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(circle, rgba(26,107,60,0.18) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, rgba(26,107,60,0.09) 1px, transparent 1px)",
           backgroundSize: "38px 38px",
           maskImage: "radial-gradient(ellipse 80% 80% at 60% 50%, black 30%, transparent 100%)",
           WebkitMaskImage: "radial-gradient(ellipse 80% 80% at 60% 50%, black 30%, transparent 100%)",

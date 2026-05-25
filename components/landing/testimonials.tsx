@@ -96,7 +96,7 @@ export function Testimonials() {
           Trusted by<br />
             <span
               style={{
-                background: "linear-gradient(135deg, #0C8346 0%, #4ade80 50%, #0C8346 100%)",
+                background: "linear-gradient(135deg, #0C8346 0%, #86efac 50%, #0C8346 100%)",
                 backgroundSize: "200% auto",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",

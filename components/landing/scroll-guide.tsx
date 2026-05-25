@@ -115,7 +115,7 @@ export function ScrollGuide() {
             "relative bg-[#0a0806]/95 border border-[#0C8346]/40 rounded-2xl px-4 py-3 backdrop-blur-md shadow-[0_4px_30px_rgba(12,131,70,0.22)]",
             isRight ? "rounded-tr-none" : "rounded-tl-none",
           ].join(" ")}>
-            <p className="text-xs font-semibold text-[#4ade80] leading-snug mb-0.5">{SECTIONS[activeIdx].line1}</p>
+            <p className="text-xs font-semibold text-[#86efac] leading-snug mb-0.5">{SECTIONS[activeIdx].line1}</p>
             <p className="text-xs text-white/65 leading-snug">{SECTIONS[activeIdx].line2}</p>
             <div className="flex gap-1 mt-2.5">
               {SECTIONS.map((_, i) => (
@@ -146,7 +146,7 @@ export function ScrollGuide() {
       >
         <div className="absolute inset-[-7px] rounded-full border border-[#0C8346]/30 pointer-events-none" style={{ animation: "glowPulse 2.5s ease-in-out infinite" }} />
         <div className="absolute inset-[-4px] rounded-full bg-[#0C8346]/15 blur-xl pointer-events-none" style={{ animation: "glowPulse 2.5s ease-in-out infinite 0.75s" }} />
-        <div className="relative w-full h-full rounded-full bg-[#080604]/90 border border-[#0C8346]/55 overflow-hidden shadow-[0_0_22px_rgba(12,131,70,0.4)] group-hover:border-[#0C8346] group-hover:shadow-[0_0_36px_rgba(12,131,70,0.65)] transition-all duration-200">
+        <div className="relative w-full h-full rounded-full bg-[#080604]/90 border border-[#0C8346]/55 overflow-hidden shadow-[0_0_22px_rgba(12,131,70,0.15)] group-hover:border-[#0C8346] group-hover:shadow-[0_0_36px_rgba(12,131,70,0.25)] transition-all duration-200">
           <div style={{ width: "100%", height: "100%", transform: scrollDir === "down" ? "rotate(-6deg)" : "rotate(6deg)", transition: "transform 0.55s ease" }}>
             <div style={{ width: "100%", height: "100%", animation: "floatY 3.5s ease-in-out infinite" }}>
               <Image src="/images/wise-robot.png" alt="W.I.S.E." fill className="object-contain" />

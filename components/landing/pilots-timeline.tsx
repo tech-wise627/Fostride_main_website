@@ -119,7 +119,7 @@ export function PilotsTimeline() {
             Where W.I.S.E.{" "}
             <span
               style={{
-                background: "linear-gradient(135deg, #0C8346, #4ade80)",
+                background: "linear-gradient(135deg, #0C8346, #86efac)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -150,8 +150,8 @@ export function PilotsTimeline() {
               style={{
                 top: `${RAIL_TOP}px`,
                 width: `${(railProgress / 100) * 66.66}%`,
-                background: "linear-gradient(90deg, #0C8346, #4ade80)",
-                boxShadow: "0 0 10px rgba(12,131,70,0.7)",
+                background: "linear-gradient(90deg, #0C8346, #86efac)",
+                boxShadow: "0 0 10px rgba(12,131,70,0.28)",
               }}
             />
 
@@ -178,7 +178,7 @@ export function PilotsTimeline() {
                       className={[
                         "px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest whitespace-nowrap",
                         isDone
-                          ? "bg-[#0C8346] text-white shadow-[0_0_12px_rgba(12,131,70,0.4)]"
+                          ? "bg-[#0C8346] text-white shadow-[0_0_12px_rgba(12,131,70,0.15)]"
                           : "bg-white/6 text-gray-400 border border-white/12",
                       ].join(" ")}
                     >
@@ -220,7 +220,7 @@ export function PilotsTimeline() {
                         width: DOT_SIZE,
                         height: DOT_SIZE,
                         ...(isDone
-                          ? { boxShadow: "0 0 28px rgba(12,131,70,0.45)" }
+                          ? { boxShadow: "0 0 28px rgba(12,131,70,0.18)" }
                           : undefined),
                       }}
                     >
@@ -267,7 +267,7 @@ export function PilotsTimeline() {
                         className={[
                           "text-sm font-bold rounded-full px-4 py-1.5 border",
                           isDone
-                            ? "text-[#4ade80] bg-[#4ade80]/10 border-[#4ade80]/25"
+                            ? "text-[#86efac] bg-[#86efac]/10 border-[#86efac]/25"
                             : "text-[#0C8346] bg-[#0C8346]/10 border-[#0C8346]/25",
                         ].join(" ")}
                       >
@@ -306,17 +306,17 @@ export function PilotsTimeline() {
               {/* Bar */}
               <div className="relative w-full h-3 bg-white/8 rounded-full overflow-visible">
                 <div
-                  className="h-full bg-gradient-to-r from-[#0C8346] to-[#4ade80] rounded-full relative"
+                  className="h-full bg-gradient-to-r from-[#0C8346] to-[#86efac] rounded-full relative"
                   style={{
                     width: `${accProgress}%`,
-                    boxShadow: "0 0 10px rgba(12,131,70,0.5)",
+                    boxShadow: "0 0 10px rgba(12,131,70,0.2)",
                   }}
                 >
                   {/* Live cursor */}
                   <div
-                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-5 h-5 rounded-full bg-[#4ade80] border-2 border-[#050505]"
+                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-5 h-5 rounded-full bg-[#86efac] border-2 border-[#050505]"
                     style={{
-                      boxShadow: "0 0 12px rgba(34,197,94,0.9)",
+                      boxShadow: "0 0 12px rgba(12,131,70,0.6)",
                       animation: "dotBlink 1.8s ease-in-out infinite",
                     }}
                   />

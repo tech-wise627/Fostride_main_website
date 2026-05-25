@@ -23,7 +23,7 @@ function MarqueeRow({ words, reverse, green }: { words: string[]; reverse?: bool
           <div key={i} className="flex items-center gap-0 flex-shrink-0">
             <span
               className="text-[11px] font-bold uppercase tracking-[0.25em] px-6 py-3 whitespace-nowrap"
-              style={{ color: green ? "rgba(12,131,70,0.7)" : "rgba(160,120,80,0.55)" }}
+              style={{ color: green ? "rgba(12,131,70,0.28)" : "rgba(160,120,80,0.55)" }}
             >
               {word}
             </span>

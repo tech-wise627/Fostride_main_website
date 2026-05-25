@@ -104,7 +104,7 @@ export default function R3binProducts() {
           </div>
           <h2 className="text-4xl md:text-6xl font-bold font-[family-name:var(--font-unbounded)] text-white leading-tight">
             One Bin.{" "}
-            <span style={{ background: "linear-gradient(135deg, #0C8346, #4ade80)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", color: "transparent" }}>
+            <span style={{ background: "linear-gradient(135deg, #0C8346, #86efac)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", color: "transparent" }}>
               Four Layers.
             </span>
           </h2>
@@ -138,7 +138,7 @@ export default function R3binProducts() {
                     <FIcon className={["w-4 h-4 transition-colors duration-250", isActive ? "text-white" : "text-gray-400"].join(" ")} />
                   </div>
                   <div>
-                    <div className={["text-sm font-semibold transition-colors duration-250", isActive ? "text-[#4ade80]" : "text-white"].join(" ")}>{f.title}</div>
+                    <div className={["text-sm font-semibold transition-colors duration-250", isActive ? "text-[#86efac]" : "text-white"].join(" ")}>{f.title}</div>
                     <div className="text-[10px] text-gray-500 font-medium uppercase tracking-widest hidden lg:block">{f.tagline}</div>
                   </div>
                 </button>
@@ -155,7 +155,7 @@ export default function R3binProducts() {
             {/* Left: info */}
             <div className="flex-1 space-y-6">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-2xl bg-[#0C8346] flex items-center justify-center shadow-[0_0_20px_rgba(12,131,70,0.4)]">
+                <div className="w-12 h-12 rounded-2xl bg-[#0C8346] flex items-center justify-center shadow-[0_0_20px_rgba(12,131,70,0.15)]">
                   <Icon className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -190,7 +190,7 @@ export default function R3binProducts() {
                 className="w-full h-1 rounded-full bg-white/8 overflow-hidden"
               >
                 <div
-                  className="h-full bg-gradient-to-r from-[#0C8346] to-[#4ade80] rounded-full"
+                  className="h-full bg-gradient-to-r from-[#0C8346] to-[#86efac] rounded-full"
                   style={{ width: "72%", animation: "lineGrow 0.8s ease 0.2s both" }}
                 />
               </div>

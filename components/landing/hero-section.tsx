@@ -53,7 +53,7 @@ export function HeroSection() {
         <div
           className="absolute inset-0 z-0 pointer-events-none"
           style={{
-            backgroundImage: "radial-gradient(circle, rgba(12,131,70,0.14) 1.5px, transparent 1.5px)",
+            backgroundImage: "radial-gradient(circle, rgba(12,131,70,0.07) 1.5px, transparent 1.5px)",
             backgroundSize: "44px 44px",
           }}
         />
@@ -67,7 +67,7 @@ export function HeroSection() {
           <div
             className="absolute left-0 right-0 h-px"
             style={{
-              background: "linear-gradient(90deg, transparent 0%, rgba(12,131,70,0.55) 50%, transparent 100%)",
+              background: "linear-gradient(90deg, transparent 0%, rgba(12,131,70,0.2) 50%, transparent 100%)",
               animation: "scanLine 10s ease-in-out infinite",
               top: 0,
             }}
@@ -95,7 +95,7 @@ export function HeroSection() {
                 <h1
                   className="text-5xl md:text-6xl lg:text-[70px] font-bold tracking-tight leading-[0.92] font-[family-name:var(--font-unbounded)]"
                   style={{
-                    background: "linear-gradient(135deg, #0C8346 0%, #4ade80 40%, #0C8346 80%)",
+                    background: "linear-gradient(135deg, #0C8346 0%, #86efac 40%, #0C8346 80%)",
                     backgroundSize: "200% 200%",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
@@ -116,7 +116,7 @@ export function HeroSection() {
               <div className="flex flex-col sm:flex-row gap-4 relative z-50">
                 <button
                   onClick={() => setIsDemoModalOpen(true)}
-                  className="group relative inline-flex items-center justify-center gap-2 bg-[#0C8346] text-white font-semibold px-8 py-4 rounded-full overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(12,131,70,0.55)] hover:scale-[1.04] active:scale-100 pointer-events-auto cursor-pointer"
+                  className="group relative inline-flex items-center justify-center gap-2 bg-[#0C8346] text-white font-semibold px-8 py-4 rounded-full overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(12,131,70,0.2)] hover:scale-[1.04] active:scale-100 pointer-events-auto cursor-pointer"
                 >
                   <span className="relative z-10">Schedule Demo</span>
                   <ArrowRight className="relative z-10 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
@@ -206,7 +206,7 @@ export function HeroSection() {
                             <Icon className={cn("h-4 w-4 transition-colors", isActive ? "text-white" : "text-[#0C8346]")} />
                           </div>
                           <div>
-                            <div className={cn("text-xs font-semibold transition-colors duration-200", isActive ? "text-[#4ade80]" : "text-white")}>
+                            <div className={cn("text-xs font-semibold transition-colors duration-200", isActive ? "text-[#86efac]" : "text-white")}>
                               {feature.label}
                             </div>
                             <div className="text-[10px] text-gray-500">{feature.description}</div>

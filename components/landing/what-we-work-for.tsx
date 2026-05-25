@@ -16,7 +16,7 @@ const sectors = [
     icon: Building2,
     description: "Streamline waste ops for modern workplaces with real-time bin tracking and ESG-ready carbon reports.",
     size: "small",
-    gradient: "from-[#4ade80]/15 via-[#4ade80]/5 to-transparent",
+    gradient: "from-[#86efac]/15 via-[#86efac]/5 to-transparent",
   },
   {
     title: "Agricultural Clusters",
@@ -37,7 +37,7 @@ const sectors = [
     icon: Plane,
     description: "Handle high-volume, mixed-waste streams efficiently in busy public venues with automated overflow alerts.",
     size: "large",
-    gradient: "from-[#4ade80]/20 via-[#4ade80]/8 to-transparent",
+    gradient: "from-[#86efac]/20 via-[#86efac]/8 to-transparent",
   },
 ]
 
@@ -97,7 +97,7 @@ export function WhatWeWorkFor() {
             What We{" "}
             <span
               style={{
-                background: "linear-gradient(135deg, #0C8346, #4ade80)",
+                background: "linear-gradient(135deg, #0C8346, #86efac)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -139,13 +139,13 @@ export function WhatWeWorkFor() {
 
                   <div className="relative z-10 h-full flex flex-col justify-between min-h-[220px]">
                     <div
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_24px_rgba(12,131,70,0.4)]"
+                      className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_24px_rgba(12,131,70,0.15)]"
                       style={{ background: "rgba(12,131,70,0.15)", border: "1px solid rgba(12,131,70,0.3)" }}
                     >
                       <Icon className="w-7 h-7 text-[#0C8346]" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-white mb-3 font-[family-name:var(--font-unbounded)] group-hover:text-[#4ade80] transition-colors duration-300">
+                      <h3 className="text-2xl font-bold text-white mb-3 font-[family-name:var(--font-unbounded)] group-hover:text-[#86efac] transition-colors duration-300">
                         {sector.title}
                       </h3>
                       <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
@@ -167,7 +167,7 @@ export function WhatWeWorkFor() {
                     className="group relative rounded-3xl p-6 border border-white/8 overflow-hidden cursor-default flex-1 transition-all duration-500 hover:border-[#0C8346]/50 hover:shadow-[0_0_40px_rgba(12,131,70,0.08)]"
                     style={{
                       backgroundColor: "#0a0a0a",
-                      backgroundImage: "radial-gradient(ellipse at 80% 20%, rgba(34,197,94,0.1) 0%, transparent 60%)",
+                      backgroundImage: "radial-gradient(ellipse at 80% 20%, rgba(12,131,70,0.06) 0%, transparent 60%)",
                       opacity: visible ? 1 : 0,
                       transform: visible ? "translateY(0) scale(1)" : "translateY(24px) scale(0.98)",
                       transition: `opacity 0.7s ease ${0.12 + i * 0.1}s, transform 0.7s ease ${0.12 + i * 0.1}s`,
@@ -181,7 +181,7 @@ export function WhatWeWorkFor() {
                       >
                         <Icon className="w-5 h-5 text-[#0C8346]" />
                       </div>
-                      <h3 className="text-base font-bold text-white mb-2 group-hover:text-[#4ade80] transition-colors duration-300">
+                      <h3 className="text-base font-bold text-white mb-2 group-hover:text-[#86efac] transition-colors duration-300">
                         {sector.title}
                       </h3>
                       <p className="text-gray-500 text-xs leading-relaxed">
@@ -221,7 +221,7 @@ export function WhatWeWorkFor() {
                       >
                         <Icon className="w-5 h-5 text-[#0C8346]" />
                       </div>
-                      <h3 className="text-base font-bold text-white mb-2 group-hover:text-[#4ade80] transition-colors duration-300">
+                      <h3 className="text-base font-bold text-white mb-2 group-hover:text-[#86efac] transition-colors duration-300">
                         {sector.title}
                       </h3>
                       <p className="text-gray-500 text-xs leading-relaxed">
@@ -242,7 +242,7 @@ export function WhatWeWorkFor() {
                   className="md:col-span-2 group relative rounded-3xl p-8 md:p-10 border border-white/8 overflow-hidden cursor-default transition-all duration-500 hover:border-[#0C8346]/50 hover:shadow-[0_0_60px_rgba(12,131,70,0.08)]"
                   style={{
                     backgroundColor: "#0a0a0a",
-                    backgroundImage: "radial-gradient(ellipse at 80% 50%, rgba(34,197,94,0.15) 0%, transparent 60%)",
+                    backgroundImage: "radial-gradient(ellipse at 80% 50%, rgba(12,131,70,0.08) 0%, transparent 60%)",
                     opacity: visible ? 1 : 0,
                     transform: visible ? "translateY(0) scale(1)" : "translateY(24px) scale(0.98)",
                     transition: `opacity 0.7s ease 0.42s, transform 0.7s ease 0.42s`,
@@ -251,13 +251,13 @@ export function WhatWeWorkFor() {
                   <div className="absolute inset-0 bg-[#0C8346]/0 group-hover:bg-[#0C8346]/5 transition-colors duration-500 pointer-events-none rounded-3xl" />
                   <div className="relative z-10 h-full flex flex-col justify-between min-h-[220px]">
                     <div
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_24px_rgba(12,131,70,0.4)]"
+                      className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_24px_rgba(12,131,70,0.15)]"
                       style={{ background: "rgba(12,131,70,0.15)", border: "1px solid rgba(12,131,70,0.3)" }}
                     >
                       <Icon className="w-7 h-7 text-[#0C8346]" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-white mb-3 font-[family-name:var(--font-unbounded)] group-hover:text-[#4ade80] transition-colors duration-300">
+                      <h3 className="text-2xl font-bold text-white mb-3 font-[family-name:var(--font-unbounded)] group-hover:text-[#86efac] transition-colors duration-300">
                         {sector.title}
                       </h3>
                       <p className="text-gray-400 text-sm leading-relaxed max-w-sm">

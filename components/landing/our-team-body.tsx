@@ -174,7 +174,7 @@ function ValueCard({
           className={[
             "w-10 h-10 rounded-xl flex items-center justify-center mb-4 transition-all duration-250",
             active
-              ? "bg-[#0C8346] shadow-[0_0_14px_rgba(12,131,70,0.5)]"
+              ? "bg-[#0C8346] shadow-[0_0_14px_rgba(12,131,70,0.2)]"
               : "bg-white/8 group-hover:bg-[#0C8346]/20",
           ].join(" ")}
         >
@@ -190,7 +190,7 @@ function ValueCard({
         <h3
           className={[
             "font-bold text-base leading-tight mb-1 transition-colors duration-250",
-            active ? "text-[#4ade80]" : "text-white group-hover:text-[#4ade80]",
+            active ? "text-[#86efac]" : "text-white group-hover:text-[#86efac]",
           ].join(" ")}
         >
           {value.title}
@@ -215,7 +215,7 @@ function ValueCard({
         <div
           className={[
             "absolute bottom-0 left-0 h-0.5 rounded-full transition-all duration-400",
-            active ? "w-full bg-gradient-to-r from-[#0C8346] to-[#4ade80]" : "w-0",
+            active ? "w-full bg-gradient-to-r from-[#0C8346] to-[#86efac]" : "w-0",
           ].join(" ")}
         />
       </div>
@@ -268,7 +268,7 @@ export function OurTeamBody() {
             About<br />
             <span
               style={{
-                background: "linear-gradient(135deg, #0C8346, #4ade80)",
+                background: "linear-gradient(135deg, #0C8346, #86efac)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -319,7 +319,7 @@ export function OurTeamBody() {
                 ].join(" ")}
               >
                 <div className="flex items-center justify-between px-6 h-[68px] w-full">
-                  <span className={["text-[15px] transition-colors duration-250", isExpanded ? "text-[#4ade80] font-medium" : "text-white group-hover:text-[#0C8346]"].join(" ")}>
+                  <span className={["text-[15px] transition-colors duration-250", isExpanded ? "text-[#86efac] font-medium" : "text-white group-hover:text-[#0C8346]"].join(" ")}>
                     {item.title}
                   </span>
                   <div className={["w-9 h-9 rounded-xl flex items-center justify-center transition-colors duration-250", isExpanded ? "bg-[#0C8346]" : "bg-white/8 group-hover:bg-[#0C8346]"].join(" ")}>
@@ -422,7 +422,7 @@ export function OurTeamBody() {
                     href={item.href}
                     target={item.label === "Mail" ? undefined : "_blank"}
                     rel={item.label === "Mail" ? undefined : "noopener noreferrer"}
-                    className="group px-5 py-2 bg-[#0C8346] text-white font-medium text-xs rounded-full flex items-center gap-1.5 hover:bg-[#4ade80] transition-colors duration-200"
+                    className="group px-5 py-2 bg-[#0C8346] text-white font-medium text-xs rounded-full flex items-center gap-1.5 hover:bg-[#86efac] transition-colors duration-200"
                   >
                     {item.label}
                     <ArrowUpRight size={12} className="transition-transform duration-200 group-hover:rotate-45" />
@@ -476,7 +476,7 @@ export function OurTeamBody() {
           </div>
           <h2 className="text-5xl md:text-6xl font-bold font-[family-name:var(--font-unbounded)] text-white leading-tight mb-4">
             Say Hello to Our{" "}
-            <span style={{ background: "linear-gradient(135deg, #0C8346, #4ade80)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", color: "transparent" }}>
+            <span style={{ background: "linear-gradient(135deg, #0C8346, #86efac)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", color: "transparent" }}>
               Squad
             </span>
           </h2>
@@ -566,7 +566,7 @@ export function OurTeamBody() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <h2 className="text-4xl md:text-6xl font-bold font-[family-name:var(--font-unbounded)] text-white leading-tight">
               Our{" "}
-              <span style={{ background: "linear-gradient(135deg, #0C8346, #4ade80)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", color: "transparent" }}>
+              <span style={{ background: "linear-gradient(135deg, #0C8346, #86efac)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", color: "transparent" }}>
                 Values
               </span>
             </h2>
@@ -600,7 +600,7 @@ export function OurTeamBody() {
         >
           {activeValueIndex !== null && (
             <div className="relative rounded-2xl border border-[#0C8346]/30 bg-[#0C8346]/6 px-6 py-5 flex gap-5 items-start">
-              <div className="w-10 h-10 rounded-xl bg-[#0C8346] flex-shrink-0 flex items-center justify-center shadow-[0_0_16px_rgba(12,131,70,0.4)]">
+              <div className="w-10 h-10 rounded-xl bg-[#0C8346] flex-shrink-0 flex items-center justify-center shadow-[0_0_16px_rgba(12,131,70,0.15)]">
                 {(() => { const Icon = VALUES[activeValueIndex].icon; return <Icon className="text-white w-5 h-5" /> })()}
               </div>
               <div>
@@ -642,7 +642,7 @@ export function OurTeamBody() {
           </div>
           <h2 className="text-4xl md:text-6xl font-bold font-[family-name:var(--font-unbounded)] text-white leading-tight">
             Got Questions?<br />
-            <span style={{ background: "linear-gradient(135deg, #0C8346, #4ade80)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", color: "transparent" }}>
+            <span style={{ background: "linear-gradient(135deg, #0C8346, #86efac)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", color: "transparent" }}>
               We've Got Answers.
             </span>
           </h2>
@@ -672,7 +672,7 @@ export function OurTeamBody() {
                 }}
               >
                 <div className="flex items-center justify-between px-6 h-[56px] w-full">
-                  <span className={["text-sm font-medium transition-colors duration-250", isExpanded ? "text-[#4ade80]" : "text-white group-hover:text-[#0C8346]"].join(" ")}>
+                  <span className={["text-sm font-medium transition-colors duration-250", isExpanded ? "text-[#86efac]" : "text-white group-hover:text-[#0C8346]"].join(" ")}>
                     {item.q}
                   </span>
                   <div className={["w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 ml-4 transition-colors duration-250", isExpanded ? "bg-[#0C8346]" : "bg-white/8 group-hover:bg-[#0C8346]"].join(" ")}>
