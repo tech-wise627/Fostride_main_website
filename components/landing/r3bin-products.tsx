@@ -179,7 +179,7 @@ export default function R3binProducts() {
             </div>
 
             {/* Right: stat card */}
-            <div className="lg:w-[200px] flex-shrink-0 flex flex-col items-center justify-center rounded-2xl border border-[#0C8346]/30 bg-[#050505]/60 p-6 text-center">
+            <div className="lg:w-[200px] flex-shrink-0 flex flex-col items-center justify-center rounded-2xl border border-[#0C8346]/30 bg-[#111009]/60 p-6 text-center">
               <div className="text-4xl font-bold text-[#0C8346] font-[family-name:var(--font-unbounded)] leading-none mb-2">
                 {feat.stat}
               </div>

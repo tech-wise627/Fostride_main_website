@@ -33,7 +33,7 @@ const cases = [
 
 export default function CaseStudiesPage() {
   return (
-    <div className="min-h-screen bg-[#050505] text-foreground">
+    <div className="min-h-screen bg-[#111009] text-foreground">
       <Navbar />
 
       <main className="pt-[70px]">

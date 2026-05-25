@@ -61,12 +61,12 @@ const Footer = dynamic(
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#070503] text-foreground relative">
+    <main className="min-h-screen bg-[#0e0c09] text-foreground relative">
       {/* Geometric Background Pattern */}
       <BackgroundPattern />
 
       {/* Dark overlay gradient */}
-      <div className="fixed inset-0 z-0 pointer-events-none bg-gradient-to-b from-[#070503]/90 via-[#070503]/60 to-[#070503]/90" />
+      <div className="fixed inset-0 z-0 pointer-events-none bg-gradient-to-b from-[#0e0c09]/90 via-[#0e0c09]/60 to-[#0e0c09]/90" />
 
       <div className="relative z-10">
         <Navbar />

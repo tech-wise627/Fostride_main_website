@@ -83,8 +83,8 @@ export function Testimonials() {
   return (
     <section className="relative w-full py-24 overflow-hidden">
       {/* Edge fades */}
-      <div className="absolute top-0 left-0 w-28 h-full bg-gradient-to-r from-[#070503] to-transparent z-10 pointer-events-none" />
-      <div className="absolute top-0 right-0 w-28 h-full bg-gradient-to-l from-[#070503] to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-28 h-full bg-gradient-to-r from-[#0e0c09] to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-28 h-full bg-gradient-to-l from-[#0e0c09] to-transparent z-10 pointer-events-none" />
 
       {/* Header */}
       <div className="text-center mb-14 px-4 relative z-10">

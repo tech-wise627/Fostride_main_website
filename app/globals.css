@@ -5,8 +5,8 @@
 
 :root {
   /* Hex fallbacks for browsers without oklch() support */
-  --background: #0a0c0a;
-  --foreground: #f8f9f8;
+  --background: #0e0c09;
+  --foreground: #d8e4de;
   --card: #161a16;
   --card-foreground: #f8f9f8;
   --popover: #161a16;
@@ -42,12 +42,12 @@
 
 @supports (color: oklch(0 0 0)) {
   :root {
-    --background: oklch(0.098 0.005 163);
-    --foreground: oklch(0.985 0 0);
+    --background: oklch(0.092 0.008 70);
+    --foreground: oklch(0.87 0.018 163);
     --card: oklch(0.13 0.008 163);
-    --card-foreground: oklch(0.985 0 0);
+    --card-foreground: oklch(0.87 0.018 163);
     --popover: oklch(0.13 0.008 163);
-    --popover-foreground: oklch(0.985 0 0);
+    --popover-foreground: oklch(0.87 0.018 163);
     --primary: oklch(0.696 0.17 162.48);
     --primary-foreground: oklch(0.098 0.005 163);
     --secondary: oklch(0.18 0.01 163);

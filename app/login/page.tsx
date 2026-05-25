@@ -14,7 +14,7 @@ import { Loader2 } from 'lucide-react'
 export default function LoginPage() {
     return (
         <Suspense fallback={
-            <div className="min-h-screen bg-[#050505] flex items-center justify-center p-4">
+            <div className="min-h-screen bg-[#111009] flex items-center justify-center p-4">
                 <Loader2 className="h-8 w-8 animate-spin text-green-500" />
             </div>
         }>
@@ -74,7 +74,7 @@ function LoginContent() {
     }
 
     return (
-        <div className="min-h-screen bg-[#050505] flex items-center justify-center p-4 relative">
+        <div className="min-h-screen bg-[#111009] flex items-center justify-center p-4 relative">
             {/* Geometric Background Pattern Component */}
             <div className="opacity-20">
                 <BackgroundPattern />

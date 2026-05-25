@@ -213,7 +213,7 @@ export function PilotsTimeline() {
                       className={[
                         "rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110 relative z-10",
                         isGoal
-                          ? "bg-[#050505] border-2 border-dashed border-[#0C8346]/35"
+                          ? "bg-[#111009] border-2 border-dashed border-[#0C8346]/35"
                           : "bg-[#0C8346] border-2 border-[#0C8346]",
                       ].join(" ")}
                       style={{
@@ -314,7 +314,7 @@ export function PilotsTimeline() {
                 >
                   {/* Live cursor */}
                   <div
-                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-5 h-5 rounded-full bg-[#86efac] border-2 border-[#050505]"
+                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-5 h-5 rounded-full bg-[#86efac] border-2 border-[#111009]"
                     style={{
                       boxShadow: "0 0 12px rgba(12,131,70,0.6)",
                       animation: "dotBlink 1.8s ease-in-out infinite",

@@ -21,7 +21,7 @@ export function Navbar() {
   const pathname = usePathname()
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/80 backdrop-blur-[10px] border-b border-white/10">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#111009]/80 backdrop-blur-[10px] border-b border-white/10">
       <nav className="relative mx-auto flex w-full max-w-7xl items-center justify-between px-4 xl:px-8 h-[70px]">
         <Link href="/" className="flex items-center">
           <Image
@@ -71,7 +71,7 @@ export function Navbar() {
       </nav>
 
       {mobileMenuOpen && (
-        <div className="xl:hidden bg-[#050505]/95 border-b border-white/10 absolute top-[70px] left-0 right-0 w-full z-40 px-4 py-4 space-y-4">
+        <div className="xl:hidden bg-[#111009]/95 border-b border-white/10 absolute top-[70px] left-0 right-0 w-full z-40 px-4 py-4 space-y-4">
           {navItems.map((item) => {
             const isActive = pathname === item.href || pathname?.startsWith(item.href + "/")
             return (

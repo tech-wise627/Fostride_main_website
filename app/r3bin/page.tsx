@@ -32,9 +32,9 @@ const BoldCTA = dynamic(
 
 export default function ProductsPage() {
   return (
-    <div className="min-h-screen bg-[#050505] text-foreground relative">
+    <div className="min-h-screen bg-[#111009] text-foreground relative">
       <BackgroundPattern />
-      <div className="fixed inset-0 z-0 pointer-events-none bg-gradient-to-b from-[#050505]/90 via-[#050505]/60 to-[#050505]/90" />
+      <div className="fixed inset-0 z-0 pointer-events-none bg-gradient-to-b from-[#111009]/90 via-[#111009]/60 to-[#111009]/90" />
 
       <div className="relative z-10">
         <Navbar />

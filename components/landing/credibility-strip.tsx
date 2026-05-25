@@ -119,7 +119,7 @@ export function CredibilityStrip() {
     <section
       className="relative w-full py-24 overflow-hidden"
       style={{
-        background: "#070503",
+        background: "#0e0c09",
         borderTop: "1px solid rgba(255,255,255,0.05)",
       }}
     >

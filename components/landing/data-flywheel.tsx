@@ -272,7 +272,7 @@ export function DataFlywheel() {
                       )}
                       {/* Pulse ring */}
                       <circle cx={x} cy={y} r={isActive ? 16 : 12}
-                        fill={isActive ? "rgba(12,131,70,0.2)" : "#050505"}
+                        fill={isActive ? "rgba(12,131,70,0.2)" : "#111009"}
                         stroke={isActive ? "#86efac" : "#0C8346"}
                         strokeWidth={isActive ? 2 : 1.2}
                         style={{ transition: "r 0.3s, fill 0.3s, stroke 0.3s" }}

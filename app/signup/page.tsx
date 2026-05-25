@@ -95,7 +95,7 @@ function SignupContent() {
     }
 
     return (
-        <div className="min-h-screen bg-[#050505] flex items-center justify-center p-4 relative">
+        <div className="min-h-screen bg-[#111009] flex items-center justify-center p-4 relative">
             {/* Geometric Background Pattern - Exact 9x3 Grid */}
             <div className="opacity-20">
                 <BackgroundPattern />
@@ -205,7 +205,7 @@ function SignupContent() {
 
 export default function SignupPage() {
     return (
-        <Suspense fallback={<div className="min-h-screen bg-[#050505] flex items-center justify-center text-white">Loading...</div>}>
+        <Suspense fallback={<div className="min-h-screen bg-[#111009] flex items-center justify-center text-white">Loading...</div>}>
             <SignupContent />
         </Suspense>
     )
