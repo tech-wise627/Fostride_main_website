@@ -78,7 +78,7 @@ export function WhoItsFor() {
           <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-unbounded)] text-white leading-tight">
             Built for organisations<br />
             <span style={{
-              background: "linear-gradient(135deg, #0C8346 0%, #22c55e 60%, #0C8346 100%)",
+              background: "linear-gradient(135deg, #0C8346 0%, #4ade80 60%, #0C8346 100%)",
               backgroundSize: "200% auto",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",

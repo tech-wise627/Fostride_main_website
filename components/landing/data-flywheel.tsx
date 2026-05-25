@@ -93,7 +93,7 @@ export function DataFlywheel() {
             style={{ fontSize: "clamp(32px,5vw,56px)" }}>
             The Data{" "}
             <span style={{
-              background: "linear-gradient(135deg, #0C8346 0%, #22c55e 50%, #0C8346 100%)",
+              background: "linear-gradient(135deg, #0C8346 0%, #4ade80 50%, #0C8346 100%)",
               backgroundSize: "200% auto",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -132,7 +132,7 @@ export function DataFlywheel() {
                       style={{
                         background: isActive ? "rgba(12,131,70,0.25)" : "rgba(255,255,255,0.04)",
                         border: isActive ? "1px solid rgba(12,131,70,0.5)" : "1px solid rgba(255,255,255,0.08)",
-                        color: isActive ? "#22c55e" : "#3A3830",
+                        color: isActive ? "#4ade80" : "#3A3830",
                       }}>
                       {s.num}
                     </span>
@@ -181,7 +181,7 @@ export function DataFlywheel() {
                   {/* Rotating arc gradient */}
                   <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stopColor="#0C8346" stopOpacity="0.1" />
-                    <stop offset="50%" stopColor="#22c55e" stopOpacity="0.7" />
+                    <stop offset="50%" stopColor="#4ade80" stopOpacity="0.7" />
                     <stop offset="100%" stopColor="#0C8346" stopOpacity="0.1" />
                   </linearGradient>
                   <filter id="glow">
@@ -243,7 +243,7 @@ export function DataFlywheel() {
                     <path key={`arc-${i}`}
                       d={`M ${from.x} ${from.y} Q ${cpx} ${cpy} ${to.x} ${to.y}`}
                       fill="none"
-                      stroke={isFromActive ? "#22c55e" : "rgba(12,131,70,0.2)"}
+                      stroke={isFromActive ? "#4ade80" : "rgba(12,131,70,0.2)"}
                       strokeWidth={isFromActive ? 2 : 1}
                       filter={isFromActive ? "url(#glow)" : undefined}
                       style={{ transition: "stroke 0.3s, stroke-width 0.3s" }}
@@ -273,13 +273,13 @@ export function DataFlywheel() {
                       {/* Pulse ring */}
                       <circle cx={x} cy={y} r={isActive ? 16 : 12}
                         fill={isActive ? "rgba(12,131,70,0.2)" : "#050505"}
-                        stroke={isActive ? "#22c55e" : "#0C8346"}
+                        stroke={isActive ? "#4ade80" : "#0C8346"}
                         strokeWidth={isActive ? 2 : 1.2}
                         style={{ transition: "r 0.3s, fill 0.3s, stroke 0.3s" }}
                       />
                       {/* Inner dot */}
                       <circle cx={x} cy={y} r={isActive ? 6 : 4}
-                        fill={isActive ? "#22c55e" : "#0C8346"}
+                        fill={isActive ? "#4ade80" : "#0C8346"}
                         style={{ transition: "r 0.3s, fill 0.3s" }}
                       />
                       {/* Node label */}
@@ -320,7 +320,7 @@ export function DataFlywheel() {
                     style={{ background: "rgba(12,131,70,0.1)", border: "1px solid rgba(12,131,70,0.25)" }}>
                     <span className="w-1.5 h-1.5 rounded-full bg-[#0C8346]"
                       style={{ animation: "dotBlink 1.2s infinite" }} />
-                    <span className="text-[12px] font-medium" style={{ color: "#22c55e" }}>
+                    <span className="text-[12px] font-medium" style={{ color: "#4ade80" }}>
                       {STEPS[active].title}
                     </span>
                   </div>
@@ -337,7 +337,7 @@ export function DataFlywheel() {
             {[...LOOP, ...LOOP, ...LOOP, ...LOOP].map((item, i) => (
               <span key={i} className="flex items-center gap-0">
                 <span className="px-6 py-2 text-[11px] font-semibold uppercase tracking-widest whitespace-nowrap"
-                  style={{ color: i % LOOP.length === 0 ? "#22c55e" : "#1A6B3C" }}>
+                  style={{ color: i % LOOP.length === 0 ? "#4ade80" : "#1A6B3C" }}>
                   {item}
                 </span>
                 <span className="text-[#0C8346] text-xs opacity-40 mx-1">→</span>

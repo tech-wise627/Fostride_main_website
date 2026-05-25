@@ -115,7 +115,7 @@ export function ScrollGuide() {
             "relative bg-[#0a0806]/95 border border-[#0C8346]/40 rounded-2xl px-4 py-3 backdrop-blur-md shadow-[0_4px_30px_rgba(12,131,70,0.22)]",
             isRight ? "rounded-tr-none" : "rounded-tl-none",
           ].join(" ")}>
-            <p className="text-xs font-semibold text-[#22c55e] leading-snug mb-0.5">{SECTIONS[activeIdx].line1}</p>
+            <p className="text-xs font-semibold text-[#4ade80] leading-snug mb-0.5">{SECTIONS[activeIdx].line1}</p>
             <p className="text-xs text-white/65 leading-snug">{SECTIONS[activeIdx].line2}</p>
             <div className="flex gap-1 mt-2.5">
               {SECTIONS.map((_, i) => (

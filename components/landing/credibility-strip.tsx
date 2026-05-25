@@ -64,7 +64,7 @@ function PartnerSlot({ p, last }: { p: typeof partners[0]; last: boolean }) {
       <span
         className="text-[10px] font-bold tracking-[0.2em] uppercase px-4 py-1.5 rounded-full whitespace-nowrap transition-all duration-300"
         style={{
-          color: hovered ? "#22c55e" : "#1A6B3C",
+          color: hovered ? "#4ade80" : "#1A6B3C",
           background: hovered
             ? "rgba(12,131,70,0.2)"
             : "rgba(12,131,70,0.08)",

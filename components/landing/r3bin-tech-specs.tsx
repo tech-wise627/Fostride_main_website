@@ -43,7 +43,7 @@ export default function R3binTechSpecs() {
           </div>
           <h2 className="text-3xl md:text-5xl font-bold font-[family-name:var(--font-unbounded)] text-white leading-tight">
             Built for{" "}
-            <span style={{ background: "linear-gradient(135deg, #0C8346, #22c55e)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", color: "transparent" }}>
+            <span style={{ background: "linear-gradient(135deg, #0C8346, #4ade80)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", color: "transparent" }}>
               Enterprise Scale
             </span>
           </h2>

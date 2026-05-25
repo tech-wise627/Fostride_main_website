@@ -104,7 +104,7 @@ export default function R3binProducts() {
           </div>
           <h2 className="text-4xl md:text-6xl font-bold font-[family-name:var(--font-unbounded)] text-white leading-tight">
             One Bin.{" "}
-            <span style={{ background: "linear-gradient(135deg, #0C8346, #22c55e)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", color: "transparent" }}>
+            <span style={{ background: "linear-gradient(135deg, #0C8346, #4ade80)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", color: "transparent" }}>
               Four Layers.
             </span>
           </h2>
@@ -138,7 +138,7 @@ export default function R3binProducts() {
                     <FIcon className={["w-4 h-4 transition-colors duration-250", isActive ? "text-white" : "text-gray-400"].join(" ")} />
                   </div>
                   <div>
-                    <div className={["text-sm font-semibold transition-colors duration-250", isActive ? "text-[#22c55e]" : "text-white"].join(" ")}>{f.title}</div>
+                    <div className={["text-sm font-semibold transition-colors duration-250", isActive ? "text-[#4ade80]" : "text-white"].join(" ")}>{f.title}</div>
                     <div className="text-[10px] text-gray-500 font-medium uppercase tracking-widest hidden lg:block">{f.tagline}</div>
                   </div>
                 </button>
@@ -190,7 +190,7 @@ export default function R3binProducts() {
                 className="w-full h-1 rounded-full bg-white/8 overflow-hidden"
               >
                 <div
-                  className="h-full bg-gradient-to-r from-[#0C8346] to-[#22c55e] rounded-full"
+                  className="h-full bg-gradient-to-r from-[#0C8346] to-[#4ade80] rounded-full"
                   style={{ width: "72%", animation: "lineGrow 0.8s ease 0.2s both" }}
                 />
               </div>

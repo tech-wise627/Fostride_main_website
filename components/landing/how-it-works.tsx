@@ -98,7 +98,7 @@ export function HowItWorks() {
             style={{ fontSize: "clamp(32px,5vw,56px)" }}>
             Four Steps.{" "}
             <span style={{
-              background: "linear-gradient(135deg, #0C8346 0%, #22c55e 50%, #0C8346 100%)",
+              background: "linear-gradient(135deg, #0C8346 0%, #4ade80 50%, #0C8346 100%)",
               backgroundSize: "200% auto",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -147,7 +147,7 @@ export function HowItWorks() {
             {/* Animated green fill */}
             <div style={{
               position: "absolute", inset: 0,
-              background: "linear-gradient(90deg, #0C8346 0%, #22c55e 50%, #0C8346 100%)",
+              background: "linear-gradient(90deg, #0C8346 0%, #4ade80 50%, #0C8346 100%)",
               transform: visible ? "scaleX(1)" : "scaleX(0)",
               transformOrigin: "left",
               transition: "transform 1.6s cubic-bezier(0.4,0,0.2,1) 0.8s",
@@ -158,8 +158,8 @@ export function HowItWorks() {
               <div style={{
                 position: "absolute", top: "50%", marginTop: -5,
                 width: 10, height: 10, borderRadius: "50%",
-                background: "#22c55e",
-                boxShadow: "0 0 10px #22c55e, 0 0 24px #22c55e90",
+                background: "#4ade80",
+                boxShadow: "0 0 10px #4ade80, 0 0 24px #4ade8090",
                 animation: "travelDot 3s ease-in-out 2.2s infinite",
               }} />
             )}
@@ -226,7 +226,7 @@ export function HowItWorks() {
                     <Icon
                       className="w-7 h-7"
                       style={{
-                        color: isActive ? "#22c55e" : "#0C8346",
+                        color: isActive ? "#4ade80" : "#0C8346",
                         animation: isActive ? "iconBounce 1.2s ease-in-out infinite" : "none",
                       }}
                     />

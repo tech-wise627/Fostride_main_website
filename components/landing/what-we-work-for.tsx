@@ -16,7 +16,7 @@ const sectors = [
     icon: Building2,
     description: "Streamline waste ops for modern workplaces with real-time bin tracking and ESG-ready carbon reports.",
     size: "small",
-    gradient: "from-[#22c55e]/15 via-[#22c55e]/5 to-transparent",
+    gradient: "from-[#4ade80]/15 via-[#4ade80]/5 to-transparent",
   },
   {
     title: "Agricultural Clusters",
@@ -37,7 +37,7 @@ const sectors = [
     icon: Plane,
     description: "Handle high-volume, mixed-waste streams efficiently in busy public venues with automated overflow alerts.",
     size: "large",
-    gradient: "from-[#22c55e]/20 via-[#22c55e]/8 to-transparent",
+    gradient: "from-[#4ade80]/20 via-[#4ade80]/8 to-transparent",
   },
 ]
 
@@ -97,7 +97,7 @@ export function WhatWeWorkFor() {
             What We{" "}
             <span
               style={{
-                background: "linear-gradient(135deg, #0C8346, #22c55e)",
+                background: "linear-gradient(135deg, #0C8346, #4ade80)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -145,7 +145,7 @@ export function WhatWeWorkFor() {
                       <Icon className="w-7 h-7 text-[#0C8346]" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-white mb-3 font-[family-name:var(--font-unbounded)] group-hover:text-[#22c55e] transition-colors duration-300">
+                      <h3 className="text-2xl font-bold text-white mb-3 font-[family-name:var(--font-unbounded)] group-hover:text-[#4ade80] transition-colors duration-300">
                         {sector.title}
                       </h3>
                       <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
@@ -181,7 +181,7 @@ export function WhatWeWorkFor() {
                       >
                         <Icon className="w-5 h-5 text-[#0C8346]" />
                       </div>
-                      <h3 className="text-base font-bold text-white mb-2 group-hover:text-[#22c55e] transition-colors duration-300">
+                      <h3 className="text-base font-bold text-white mb-2 group-hover:text-[#4ade80] transition-colors duration-300">
                         {sector.title}
                       </h3>
                       <p className="text-gray-500 text-xs leading-relaxed">
@@ -221,7 +221,7 @@ export function WhatWeWorkFor() {
                       >
                         <Icon className="w-5 h-5 text-[#0C8346]" />
                       </div>
-                      <h3 className="text-base font-bold text-white mb-2 group-hover:text-[#22c55e] transition-colors duration-300">
+                      <h3 className="text-base font-bold text-white mb-2 group-hover:text-[#4ade80] transition-colors duration-300">
                         {sector.title}
                       </h3>
                       <p className="text-gray-500 text-xs leading-relaxed">
@@ -257,7 +257,7 @@ export function WhatWeWorkFor() {
                       <Icon className="w-7 h-7 text-[#0C8346]" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-white mb-3 font-[family-name:var(--font-unbounded)] group-hover:text-[#22c55e] transition-colors duration-300">
+                      <h3 className="text-2xl font-bold text-white mb-3 font-[family-name:var(--font-unbounded)] group-hover:text-[#4ade80] transition-colors duration-300">
                         {sector.title}
                       </h3>
                       <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
